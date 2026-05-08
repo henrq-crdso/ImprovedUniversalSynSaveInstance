@@ -2436,7 +2436,9 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 
 		DecompileJobless = false,
 		DecompileIgnore = { -- * Clean these up (merged Old Syn and New Syn)
+			-- "Chat",
 			"TextChatService",
+			ModuleScript = nil,
 		},
 		IgnoreDefaultPlayerScripts = true,
 		SaveBytecode = false,
@@ -2781,21 +2783,11 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 	local IgnoreNotArchivable = not OPTIONS.IgnoreNotArchivable
 	local IgnorePropertiesOfNotScriptsOnScriptsMode = OPTIONS.IgnorePropertiesOfNotScriptsOnScriptsMode
 
-local gethiddenproperty_raw = global_container.gethiddenproperty
-
-local function safe_gethiddenproperty(instance, propertyName)
-	if OPTIONS.IgnoreSpecialProperties then
-		return nil
+	local old_gethiddenproperty
+	if OPTIONS and gethiddenproperty then
+		old_gethiddenproperty = gethiddenproperty
+		gethiddenproperty = nil
 	end
-	if gethiddenproperty_raw then
-		local ok, result = pcall(gethiddenproperty_raw, instance, propertyName)
-		if ok then
-			return result
-		end
-	end
-	return nil
-end
-end
 
 	local SaveNotCreatable = OPTIONS.SaveNotCreatable
 	local TreatUnionsAsParts = OPTIONS.TreatUnionsAsParts
@@ -3276,7 +3268,8 @@ end
 		end
 
 		if special then
-			local ok, result = pcall(safe_gethiddenproperty, instance, propertyName)
+			if gethiddenproperty then
+				local ok, result = pcall(gethiddenproperty, instance, propertyName)
 
 				if ok then
 					raw = result
@@ -3304,11 +3297,11 @@ end
 
 				if ok then
 					raw = result
-				elseif not OPTIONS.IgnoreSpecialProperties and gethiddenproperty_raw then
-					local ok, result = pcall(gethiddenproperty_raw, instance, propertyName)
+				elseif gethiddenproperty then -- ! Be careful with this 'and gethiddenproperty' logic
+					ok, result = pcall(gethiddenproperty, instance, propertyName)
+
 					if ok then
 						raw = result
-					end
 
 						property.Special = true
 					end
@@ -3942,7 +3935,7 @@ end
 						RecoveredScripts
 					) .. "\n" or "")
 					.. [[
-		Thank you for using ImprovedUniversalSynSaveInstance. -- Improved by henrq-crdso on GitHub.
+		Thank you for using ImprovedUniversalSynSaveInstance.
 
 		If you didn't save in Binary (rbxl) - it's recommended to save the game right away to take advantage of the binary format & to preserve values of certain properties if you used IgnoreDefaultProperties setting (as they might change in the future).
 		You can do that by going to FILE -> Save to File As -> Make sure File Name ends with .rbxl -> Save
@@ -4315,16 +4308,16 @@ end
 					return UGCValidationService:GetPropertyValue(instance, propertyName) -- TODO Sadly there's no way to tell whether value is actually nil or the function just couldn't read it (always returns nil for "Class" category properties)
 					-- TODO `category ~= "Class"` causes WeldConstraint Part1Internal to be read as nil and not get unfiltered. Currently, there are no properties of category "Class" that match the following: NotScriptable, can be read with gethiddenproperty_fallback accurately (it always outputs nil for "Class" category, making that check useless anyway) & don't have a NotScriptableFix.
 				end
-				if gethiddenproperty_raw then
-					local o, r = pcall(gethiddenproperty_raw, workspace, "StreamOutBehavior")
+				if gethiddenproperty then
+					local o, r = pcall(gethiddenproperty, workspace, "StreamOutBehavior")
 					if not o or r ~= nil and typeof(r) ~= "EnumItem" then -- * Tests if gethiddenproperty is broken
-						gethiddenproperty_raw = nil
+						gethiddenproperty = nil
 					else
 						o, r =
-							pcall(gethiddenproperty_raw, Instance.new("AnimationRigData", Instance.new("Folder")), "parent") -- * Tests how it reacts to property overlap (shadowing) due to AnimationRigData.parent; expected BinaryString
+							pcall(gethiddenproperty, Instance.new("AnimationRigData", Instance.new("Folder")), "parent") -- * Tests how it reacts to property overlap (shadowing) due to AnimationRigData.parent; expected BinaryString
 
 						if o and r ~= nil and type(r) ~= "string" then
-							gethiddenproperty_raw = nil
+							gethiddenproperty = nil
 						end
 					end
 				end

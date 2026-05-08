@@ -13,9 +13,7 @@ local Params = {
 }
 
 local synsaveinstance = loadstring(
-    game:HttpGet(Params.RepoURL .. Params.SSI .. ".luau", true),
-    Params.SSI
-)()
+    game:HttpGet(Params.RepoURL .. Params.SSI .. ".luau", true), Params.SSI)()
 
 local Options = {} -- Put your configs here
 synsaveinstance(Options)

@@ -201,6 +201,7 @@ synsaveinstance({
 ## Credits
 
 - **Original author:** [luau/UniversalSynSaveInstance](https://github.com/luau/UniversalSynSaveInstance) ❤️ — an incredible tool for the Roblox community
+- **Thank you plugiant5 to make an incredible decompiler for us too ❤️**
 - **This fork:** improved performance, cleaner option handling, and expanded documentation
 
 ---

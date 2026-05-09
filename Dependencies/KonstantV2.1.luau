@@ -3632,7 +3632,7 @@ local function v1121(v552)
         end;
     end;
     v565(v554, "");
-    table.insert(v561, 1, (("-- Disassembled with Konstant V%*'s disassembler\n\t\t-- Disassembled on %*\n\t\t-- Luau version %*%*\n\t\t-- Time taken: %* seconds\n\n"):format("2.1", os.date("%Y-%m-%d %H:%M:%S"), v556, if v557 then (", Types version %*"):format(v557) else "", (string.format("%.6f", l_clock_0() - v558)))));
+    table.insert(v561, 1, (("-- Disassembled with Konstant V%*'s disassembler, made by plusgiant5\n\t\t-- Disassembled on %*\n\t\t-- Luau version %*%*\n\t\t-- Time taken: %* seconds\n\n"):format("2.1", os.date("%Y-%m-%d %H:%M:%S"), v556, if v557 then (", Types version %*"):format(v557) else "", (string.format("%.6f", l_clock_0() - v558)))));
     v562 = "";
     local v1114 = 0;
     for _, v1116 in ipairs(v561) do
@@ -3694,7 +3694,7 @@ local function v4318(v1125, v1126)
     end;
     l_prefix_information_0 = l_prefix_information_1;
     if string.byte(v1125, 1, 1) == 0 then
-        local v1136 = ("-- Decompiled with Konstant%*, a fast Luau decompiler made in Luau\n"):format("2.1");
+        local v1136 = ("-- Decompiled with Konstant%*, a fast Luau decompiler made in Luau by plusgiant5\n"):format("2.1");
         if type(v1125) ~= "string" and l_getscripthash_0 then
             v1136 = v1136 .. ("-- Script hash: %*\n"):format((string.upper(l_getscripthash_0(v1125))));
         end;
@@ -13517,7 +13517,7 @@ local function v4318(v1125, v1126)
         end;
         v1128:end_benchmark("Smart Naming");
         v1128:start_benchmark("Global AST To String");
-        local v3915 = ("-- Decompiled with Konstant V%*, a fast Luau decompiler made in Luau\n"):format("2.1");
+        local v3915 = ("-- Decompiled with Konstant V%*, a fast Luau decompiler made in Luau by plusgiant5\n"):format("2.1");
         if type(v1125) ~= "string" and l_getscripthash_0 then
             v3915 = v3915 .. ("-- Script hash: %*\n"):format((string.upper(l_getscripthash_0(v1125))));
         end;

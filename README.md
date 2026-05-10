@@ -3,7 +3,6 @@
 > A passion-driven, faster fork of [UniversalSynSaveInstance](https://github.com/luau/UniversalSynSaveInstance) — the universal saveinstance revival, running smoother than ever. Also doubles as a fully editable Roblox Format File writer.
 
 [![USSI License](https://img.shields.io/badge/USSI-License-green)](https://github.com/luau/UniversalSynSaveInstance/blob/main/LICENSE)
-[![GitHub stars](https://shields.io)](https://github.com)
 ---
 
 ## Loadstring

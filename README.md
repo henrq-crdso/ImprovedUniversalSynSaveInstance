@@ -3,6 +3,7 @@
 > A passion-driven, faster fork of [UniversalSynSaveInstance](https://github.com/luau/UniversalSynSaveInstance) — the universal saveinstance revival, running smoother than ever. Also doubles as a fully editable Roblox Format File writer.
 
 [![USSI License](https://img.shields.io/badge/USSI-License-green)](https://github.com/luau/UniversalSynSaveInstance/blob/main/LICENSE)
+[![GitHub stars](https://shields.io)](https://github.com)
 ---
 
 ## Loadstring
@@ -172,7 +173,6 @@ local Options = { noscripts = true, SafeMode = false, BoostFPS = true, FilePath 
 - **Original author:** [luau/UniversalSynSaveInstance](https://github.com/luau/UniversalSynSaveInstance) ❤️ — an incredible tool for the Roblox community
 - **Thank you plugiant5 to make an incredible decompiler for us too ❤️**
 - **This fork:** improved performance, cleaner option handling, and expanded documentation
-- [henrq-crdso](https://github.com)
 
 ---
 

@@ -16,24 +16,7 @@ local Params = {
 local synsaveinstance = loadstring(
     game:HttpGet(Params.RepoURL .. Params.SSI .. ".luau", true), Params.SSI)()
 
-local Options = { SafeMode = false, Decompile = true }
-synsaveinstance(Options)
-```
-
----
-
-## Quick Start
-
-Minimal setup — just paste and run:
-
-```lua
-local Params = {
-    RepoURL = "https://raw.githubusercontent.com/henrq-crdso/ImprovedUniversalSynSaveInstance/main/",
-    SSI = "saveinstance",
-}
-local synsaveinstance = loadstring(game:HttpGet(Params.RepoURL .. Params.SSI .. ".luau", true), Params.SSI)()
-
-local Options = { SafeMode = true, Decompile = true, mode = "optimized" }
+local Options = { SafeMode = false, Decompile = true } -- You can set your own configurations! See henrq-crdso.github.io or "Options Reference" for more information.
 synsaveinstance(Options)
 ```
 

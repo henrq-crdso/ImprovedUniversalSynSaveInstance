@@ -172,8 +172,9 @@ local Options = { noscripts = true, SafeMode = false, BoostFPS = true, FilePath 
 
 ## Credits
 
-- **Original author:** [luau/UniversalSynSaveInstance](https://github.com/luau/UniversalSynSaveInstance) ❤️ — an incredible tool for the Roblox community
-- **This fork:** improved performance, cleaner option handling, and expanded documentation
+- **Original Project:** [luau/UniversalSynSaveInstance](https://github.com/luau/UniversalSynSaveInstance) — The foundation of this revival tool.
+- **Decompiler Support:** Special thanks to **plugiant5** for providing essential decompiler logic.
+- **Fork Maintainer:** henrq-crdso — Focused on performance optimization and API refinement.
 
 ---
 

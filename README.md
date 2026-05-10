@@ -1,7 +1,7 @@
 # ImprovedUniversalSynSaveInstance
 
 > A passion-driven, faster fork of [UniversalSynSaveInstance](https://github.com/luau/UniversalSynSaveInstance) — the universal saveinstance revival, running smoother than ever. Also doubles as a fully editable Roblox Format File writer.
-
+![GitHub license](https://shields.io)
 ---
 
 ## Loadstring

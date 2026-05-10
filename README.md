@@ -151,44 +151,34 @@ Aliases are resolved before options. Some invert boolean values.
 
 **Save the full game:**
 ```lua
-synsaveinstance({ mode = "full", SafeMode = true })
+local Options = { mode = "full", SafeMode = true }
 ```
 
 **Save only scripts:**
 ```lua
-synsaveinstance({ mode = "scripts", DecompileTimeout = 20 })
+local Options = { mode = "scripts", DecompileTimeout = 20 }
 ```
 
 **Save a specific object:**
 ```lua
-synsaveinstance(workspace, {
-    Object   = workspace,
-    IsModel  = true,
-    FilePath = "WorkspaceExport",
-    mode     = "full",
-})
+local Options = { Object = workspace, IsModel = true, FilePath = "WorkspaceExport", mode = "full" }
 ```
 
 **Save a specific list of instances:**
 ```lua
-synsaveinstance({
+local Options = {
     workspace.Map,
     game.ReplicatedStorage.Assets,
 }, {
     FilePath = "SelectedInstances",
-    mode     = "invalid", -- invalid mode = only ExtraInstances
-    IsModel  = true,
-})
+    mode = "invalid", -- invalid mode = only ExtraInstances
+    IsModel = true,
+}
 ```
 
 **Fast export with no decompile:**
 ```lua
-synsaveinstance({
-    noscripts        = true,
-    SafeMode         = false,
-    BoostFPS         = true,
-    FilePath         = "FastExport",
-})
+local Options = { noscripts = true, SafeMode = false, BoostFPS = true, FilePath = "FastExport" }
 ```
 
 ---

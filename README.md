@@ -32,13 +32,8 @@ local Params = {
 }
 local synsaveinstance = loadstring(game:HttpGet(Params.RepoURL .. Params.SSI .. ".luau", true), Params.SSI)()
 
-synsaveinstance({
-    SafeMode      = true,
-    Decompile     = true,
-    DecompileTimeout = 15,
-    FilePath      = "MyGame",
-    mode          = "optimized",
-})
+local Options = { SafeMode = true, Decompile = true, mode = "optimized" }
+synsaveinstance(Options)
 ```
 
 ---

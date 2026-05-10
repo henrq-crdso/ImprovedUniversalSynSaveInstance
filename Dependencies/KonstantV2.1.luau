@@ -35,8 +35,9 @@ local function v21()
     else
         error("Invalid opcode_encoding_type");
     end;
+    table.clear(v17);
     for v20 = 0, 255 do
-        v17[v15(v20)] = v20;
+        v17[bit32.band(v15(v20), 255)] = v20;
     end;
 end;
 local v22 = {
@@ -1022,7 +1023,7 @@ end;
 local function v296(v226)
     local v227 = nil;
     v227 = if type(v226) == "buffer" then v226 else buffer.fromstring(v226);
-    v27 = l_clock_0();
+    v27 = v26();
     local v228 = 0;
     local function _()
         local v229 = buffer.readu8(v227, v228);
@@ -1077,7 +1078,7 @@ local function v296(v226)
         v228 = v228 + 1;
         v245 = v247;
         if v245 > 3 then
-            error((("Types version %* not supported. Only version 1 is supported."):format(v245)));
+            error((("Types version %* not supported. Only versions 1 to 3 are supported."):format(v245)));
         end;
     end;
     local v248 = {};
@@ -1091,13 +1092,11 @@ local function v296(v226)
         v228 = v228 + 1;
         local l_v252_0 = v252;
         while l_v252_0 ~= 0 do
-            print("IN");
             local v254 = v235();
             local v255 = buffer.create(v254);
             buffer.copy(v255, 0, v227, v228, v254);
             v228 = v228 + v254;
             v252 = buffer.tostring(v255);
-            print(v252);
             v254 = buffer.readu8(v227, v228);
             v228 = v228 + 1;
             l_v252_0 = v254;
@@ -1192,7 +1191,7 @@ local function v296(v226)
                 v228 = v228 + 4;
                 v272 = {
                     type = 4, 
-                    value = nil
+                    value = v273
                 };
             elseif l_v273_0 == 1 then
                 v273 = {
@@ -1265,9 +1264,9 @@ local function v296(v226)
                 v228 = v228 + 4;
                 table.insert(v292, v294);
             end;
-            table.move(v287, 1, #v287, 0, v287);
-            table.remove(v287, #v287);
-            v259.line_info = v287;
+            table.move(v292, 1, #v292, 0, v292);
+            table.remove(v292, #v292);
+            v259.abs_line_info = v292;
         end;
         local v295 = buffer.readu8(v227, v228);
         v228 = v228 + 1;
@@ -1420,9 +1419,7 @@ local v460 = {
         for v340 = l_v335_0, v339 do
             table.insert(v337, v340);
         end;
-        for _ = 1, #v337 do
-            table.insert(v337, v334);
-        end;
+        table.insert(v337, v334);
         return v337, {};
     end, 
     GETUPVAL = function(v342)
@@ -1817,8 +1814,15 @@ local v460 = {
         }, {};
     end, 
     FORNLOOP = function(v446)
-        local _ = bit32.band(bit32.rshift(v446.inst, 8), 255);
-        return {}, {};
+        local v447 = bit32.band(bit32.rshift(v446.inst, 8), 255);
+        return {
+            v447, 
+            v447 + 1, 
+            v447 + 2
+        }, {
+            v447 + 2, 
+            v447 + 3
+        };
     end, 
     FORGPREP = function(v448)
         local v449 = bit32.band(bit32.rshift(v448.inst, 8), 255);
@@ -1845,15 +1849,21 @@ local v460 = {
         }, {};
     end, 
     FORGLOOP = function(v454)
-        local _ = bit32.band(bit32.rshift(v454.inst, 8), 255) + 2;
-        local v456 = {};
+        local v455 = bit32.band(bit32.rshift(v454.inst, 8), 255);
+        local v456 = {
+            v455 + 2
+        };
         local v457 = 1;
         local l_aux_7 = v454.aux;
         assert(l_aux_7);
-        for _ = v457, bit32.band(l_aux_7, 255) do
-
+        for v458 = v457, bit32.band(l_aux_7, 255) do
+            table.insert(v456, v455 + 2 + v458);
         end;
-        return {}, v456;
+        return {
+            v455, 
+            v455 + 1, 
+            v455 + 2
+        }, v456;
     end
 };
 local l_v460_0 = v460 --[[ copy: 86 -> 108 ]];
@@ -2088,7 +2098,7 @@ v460 = function(v475, v476, v477)
                 end;
                 if not v508 then
                     if v501 == v500 and v507 == string.byte(v500) then
-                        v506 = v506 .. "\\\"";
+                        v506 = v506 .. "\\" .. v500;
                     elseif v477 and v507 == 96 then
                         v506 = v506 .. "\\`";
                     elseif v502 and v507 == 92 then
@@ -2162,7 +2172,7 @@ local function v527(v524, v525)
             return "(-math.pi/2)";
         end;
     elseif v526 == 6.283185307179586 then
-        if v524 == 1.5707963267948966 then
+        if v524 == 6.283185307179586 then
             return "(math.pi*2)";
         else
             return "(-math.pi*2)";
@@ -2185,8 +2195,6 @@ local function v527(v524, v525)
         else
             return "(0/0)";
         end;
-    elseif v525 then
-        return (string.sub(tostring(v524), 1, 7));
     else
         return (tostring(v524));
     end;
@@ -2281,6 +2289,8 @@ end;
 local v551 = nil;
 local function v1121(v552)
     v551 = 0;
+    v297 = 0;
+    v298 = 0;
     local v553 = nil;
     v553 = if type(v552) == "buffer" then v552 else buffer.fromstring(v552);
     local v554, v555, v556, v557 = v296(v553);
@@ -2400,8 +2410,8 @@ local function v1121(v552)
                 end, 
                 LOADN = function(v611, _)
                     local v613 = bit32.band(bit32.rshift(v611, 8), 255);
-                    buffer.writeu32(v569, 0, (bit32.band(bit32.rshift(v611, 16), 65535)));
-                    local v614 = buffer.readi32(v569, 0);
+                    buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v611, 16), 65535)));
+                    local v614 = buffer.readi16(v569, 0);
                     v590("LOADN " .. v613 .. ", " .. v614, "var" .. v613 .. " = " .. v614);
                 end, 
                 LOADK = function(v615, _)
@@ -2661,7 +2671,8 @@ local function v1121(v552)
                 end, 
                 JUMPIF = function(v725, _)
                     local v727 = bit32.band(bit32.rshift(v725, 8), 255);
-                    local v728 = bit32.band(bit32.rshift(v725, 16), 65535);
+                    buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v725, 16), 65535)));
+                    local v728 = buffer.readi16(v569, 0);
                     local v729 = v574 + v728;
                     local v730 = v592[v729];
                     if v730 then
@@ -2675,7 +2686,8 @@ local function v1121(v552)
                 end, 
                 JUMPIFNOT = function(v731, _)
                     local v733 = bit32.band(bit32.rshift(v731, 8), 255);
-                    local v734 = bit32.band(bit32.rshift(v731, 16), 65535);
+                    buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v731, 16), 65535)));
+                    local v734 = buffer.readi16(v569, 0);
                     local v735 = v574 + v734;
                     local v736 = v592[v735];
                     if v736 then
@@ -2689,7 +2701,8 @@ local function v1121(v552)
                 end, 
                 JUMPIFEQ = function(v737, _)
                     local v739 = bit32.band(bit32.rshift(v737, 8), 255);
-                    local v740 = bit32.band(bit32.rshift(v737, 16), 65535);
+                    buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v737, 16), 65535)));
+                    local v740 = buffer.readi16(v569, 0);
                     local v741 = l_code_0[v574];
                     if v574 == v577 then
                         error("Corrupted aux");
@@ -2709,7 +2722,8 @@ local function v1121(v552)
                 end, 
                 JUMPIFLE = function(v744, _)
                     local v746 = bit32.band(bit32.rshift(v744, 8), 255);
-                    local v747 = bit32.band(bit32.rshift(v744, 16), 65535);
+                    buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v744, 16), 65535)));
+                    local v747 = buffer.readi16(v569, 0);
                     local v748 = l_code_0[v574];
                     if v574 == v577 then
                         error("Corrupted aux");
@@ -2729,7 +2743,8 @@ local function v1121(v552)
                 end, 
                 JUMPIFLT = function(v751, _)
                     local v753 = bit32.band(bit32.rshift(v751, 8), 255);
-                    local v754 = bit32.band(bit32.rshift(v751, 16), 65535);
+                    buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v751, 16), 65535)));
+                    local v754 = buffer.readi16(v569, 0);
                     local v755 = l_code_0[v574];
                     if v574 == v577 then
                         error("Corrupted aux");
@@ -2749,7 +2764,8 @@ local function v1121(v552)
                 end, 
                 JUMPIFNOTEQ = function(v758, _)
                     local v760 = bit32.band(bit32.rshift(v758, 8), 255);
-                    local v761 = bit32.band(bit32.rshift(v758, 16), 65535);
+                    buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v758, 16), 65535)));
+                    local v761 = buffer.readi16(v569, 0);
                     local v762 = l_code_0[v574];
                     if v574 == v577 then
                         error("Corrupted aux");
@@ -2769,7 +2785,8 @@ local function v1121(v552)
                 end, 
                 JUMPIFNOTLE = function(v765, _)
                     local v767 = bit32.band(bit32.rshift(v765, 8), 255);
-                    local v768 = bit32.band(bit32.rshift(v765, 16), 65535);
+                    buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v765, 16), 65535)));
+                    local v768 = buffer.readi16(v569, 0);
                     local v769 = l_code_0[v574];
                     if v574 == v577 then
                         error("Corrupted aux");
@@ -2789,7 +2806,8 @@ local function v1121(v552)
                 end, 
                 JUMPIFNOTLT = function(v772, _)
                     local v774 = bit32.band(bit32.rshift(v772, 8), 255);
-                    local v775 = bit32.band(bit32.rshift(v772, 16), 65535);
+                    buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v772, 16), 65535)));
+                    local v775 = buffer.readi16(v569, 0);
                     local v776 = l_code_0[v574];
                     if v574 == v577 then
                         error("Corrupted aux");
@@ -3318,11 +3336,10 @@ local function v1121(v552)
                     end;
                     v574 = v574 + 1;
                     local l_v983_0 = v983;
-                    v590("LOADK " .. v982 .. " [" .. l_v983_0 .. "]", "var" .. v982 .. " = " .. v550(l_constants_0[l_v983_0]));
+                    v590("LOADKX " .. v982 .. " [" .. l_v983_0 .. "]", "var" .. v982 .. " = " .. v550(l_constants_0[l_v983_0]));
                 end, 
                 JUMPX = function(v985, _)
-                    buffer.writeu32(v44, 0, (bit32.rshift(v985, 8)));
-                    local v987 = bit32.rshift(buffer.readi32(v44, 1), 16);
+                    local v987 = bit32.arshift(v985, 8);
                     local v988 = v574 + v987;
                     local v989 = v592[v988];
                     if v989 then
@@ -3352,7 +3369,7 @@ local function v1121(v552)
                     local v1003 = bit32.band(bit32.rshift(v1000, 16), 255);
                     local v1004 = bit32.band(bit32.rshift(v1000, 24), 255);
                     local v1005 = l_constants_0[v1003];
-                    v590("DIVRK " .. v1002 .. ", " .. v1003 .. ", " .. v1004, "var" .. v1002 .. " = " .. v550(v1005) .. " // var" .. v1004);
+                    v590("DIVRK " .. v1002 .. ", " .. v1003 .. ", " .. v1004, "var" .. v1002 .. " = " .. v550(v1005) .. " / var" .. v1004);
                 end, 
                 FASTCALL = function(v1006, _)
                     local v1008 = bit32.band(bit32.rshift(v1006, 8), 255);
@@ -3461,7 +3478,8 @@ local function v1121(v552)
                 end, 
                 JUMPXEQKNIL = function(v1056, _)
                     local v1058 = bit32.band(bit32.rshift(v1056, 8), 255);
-                    local v1059 = bit32.band(bit32.rshift(v1056, 16), 65535);
+                    buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v1056, 16), 65535)));
+                    local v1059 = buffer.readi16(v569, 0);
                     local v1060 = l_code_0[v574];
                     if v574 == v577 then
                         error("Corrupted aux");
@@ -3485,7 +3503,8 @@ local function v1121(v552)
                 end, 
                 JUMPXEQKB = function(v1064, _)
                     local v1066 = bit32.band(bit32.rshift(v1064, 8), 255);
-                    local v1067 = bit32.band(bit32.rshift(v1064, 16), 65535);
+                    buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v1064, 16), 65535)));
+                    local v1067 = buffer.readi16(v569, 0);
                     local v1068 = l_code_0[v574];
                     if v574 == v577 then
                         error("Corrupted aux");
@@ -3509,7 +3528,8 @@ local function v1121(v552)
                 end, 
                 JUMPXEQKN = function(v1072, _)
                     local v1074 = bit32.band(bit32.rshift(v1072, 8), 255);
-                    local v1075 = bit32.band(bit32.rshift(v1072, 16), 65535);
+                    buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v1072, 16), 65535)));
+                    local v1075 = buffer.readi16(v569, 0);
                     local v1076 = l_code_0[v574];
                     if v574 == v577 then
                         error("Corrupted aux");
@@ -3534,7 +3554,8 @@ local function v1121(v552)
                 end, 
                 JUMPXEQKS = function(v1081, _)
                     local v1083 = bit32.band(bit32.rshift(v1081, 8), 255);
-                    local v1084 = bit32.band(bit32.rshift(v1081, 16), 65535);
+                    buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v1081, 16), 65535)));
+                    local v1084 = buffer.readi16(v569, 0);
                     local v1085 = l_code_0[v574];
                     if v574 == v577 then
                         error("Corrupted aux");
@@ -3653,6 +3674,8 @@ local l_prefix_error_0 = v22.prefix_error;
 local l_prefix_warning_0 = v22.prefix_warning;
 local l_prefix_information_0 = v22.prefix_information;
 local function v4318(v1125, v1126)
+    v297 = 0;
+    v298 = 0;
     local v1127 = l_clock_0();
     v27 = v1127;
     local v1128 = v43();
@@ -3814,7 +3837,6 @@ local function v4318(v1125, v1126)
         local function _(v1197)
             local v1198 = bit32.band(v1197, 128) > 0;
             local v1199 = v1196[v1197];
-            print("Type info", v1197, "is", v1199);
             if v1199 then
                 return {
                     type = v1199, 
@@ -5581,8 +5603,8 @@ local function v4318(v1125, v1126)
                     local v1833 = v181[v1832];
                     if not v1833 then
                         local v1834 = ("Unknown opcode 0x%* (%* reversed: 0x%*)"):format(v64[bit32.band(v1831, 255)], v16, v64[v17[bit32.band(v1831, 255)]]);
-                        error(v1834);
                         v551 = v551 + 1;
+                        error(v1834);
                         local v1835 = v181[v1832];
                         if not v1835 then
                             v1358 = v1358 + 1;
@@ -5657,8 +5679,7 @@ local function v4318(v1125, v1126)
                             elseif not (l_opname_2 ~= "JUMP" and l_opname_2 ~= "JUMPBACK") or l_opname_2 == "JUMPX" then
                                 local v1845;
                                 if l_opname_2 == "JUMPX" then
-                                    buffer.writeu32(v44, 0, (bit32.rshift(v1831, 8)));
-                                    v1845 = bit32.rshift(buffer.readi32(v44, 1), 16);
+                                    v1845 = bit32.arshift(v1831, 8);
                                 else
                                     buffer.writeu16(v44, 0, (bit32.band(bit32.rshift(v1831, 16), 65535)));
                                     v1845 = buffer.readi16(v44, 0);
@@ -7878,7 +7899,6 @@ local function v4318(v1125, v1126)
                             end;
                         end;
                         if #v2403 > 0 then
-                            print(v2403);
                             error("Failed to handle forcedef");
                         end;
                     end;
@@ -8716,7 +8736,6 @@ local function v4318(v1125, v1126)
                             return;
                         else
                             if v2715.t == "name" then
-                                print(debug.traceback());
                             else
                                 local v2716 = {
                                     t = "call", 
@@ -10516,7 +10535,6 @@ local function v4318(v1125, v1126)
                     v3212(v3211);
                     return;
                 else
-                    print(v3211);
                     error((("Unknown expr type %*"):format(v3211.t)));
                     return;
                 end;
@@ -11311,7 +11329,6 @@ local function v4318(v1125, v1126)
                             v3405(v3404);
                             v3181 = v3181 + 1;
                         else
-                            print(v3404);
                             error((("Unknown line type %*"):format(v3404.t)));
                         end;
                     end;
@@ -14710,7 +14727,6 @@ local function v4318(v1125, v1126)
         for _, v4262 in ipairs(v3176) do
             if v4262.t ~= "nothing" then
                 if not v4262.t then
-                    print(v4262);
                 end;
                 table.insert(v4260, v4262);
             end;

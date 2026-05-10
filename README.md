@@ -180,4 +180,5 @@ local Options = { noscripts = true, SafeMode = false, BoostFPS = true, FilePath 
 
 ## License
 
-MIT — see [LICENSE](./LICENSE) for details.
+This project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0).
+This license ensures that the software remains free and that any modifications or network-based implementations are also shared with the community. See the [LICENSE](./LICENSE) file for the full legal text.

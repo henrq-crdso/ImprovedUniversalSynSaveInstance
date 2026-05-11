@@ -13498,6 +13498,14 @@ local function v4318(v1125, v1126)
                     l_name_16 = v3904 and v3904(v3899, l_init_expr_2, true) or nil or l_name_16;
                 end;
                 if l_name_16 ~= l_l_name_16_0 then
+                    function is_valid_identifier(name)
+                        return type(name) == "string" and name:match("^[a-zA-Z_][a-zA-Z0-9_]*$") ~= nil;
+                    end;
+
+                    if not is_valid_identifier(l_name_16) then
+                        l_name_16 = l_l_name_16_0;
+                    end;
+
                     local l_l_name_16_1 = l_name_16;
                     local v3906 = v1213[l_l_name_16_1];
                     local l_l_l_name_16_1_0 = l_l_name_16_1;
@@ -13505,9 +13513,16 @@ local function v4318(v1125, v1126)
                     while v1206[l_l_l_name_16_1_0] or v1141[l_l_l_name_16_1_0] do
                         v3908 = v3908 + 1;
                         l_l_l_name_16_1_0 = l_l_name_16_1 .. "_" .. v3908;
+                        if not is_valid_identifier(l_l_l_name_16_1_0) then
+                            break;
+                        end;
                     end;
-                    v1213[l_l_name_16_1] = v3908;
-                    l_name_16 = l_l_l_name_16_1_0;
+                    if is_valid_identifier(l_l_l_name_16_1_0) then
+                        v1213[l_l_name_16_1] = v3908;
+                        l_name_16 = l_l_l_name_16_1_0;
+                    else
+                        l_name_16 = l_l_name_16_0;
+                    end;
                 end;
                 if l_attributes_1.is_upvalue and v1129.mark_upvalues then
                     local v3909 = if v1129.mark_upvalues == "extra" then if l_attributes_1.is_upvalue == "read" then l_name_16 .. "_upvr" else l_name_16 .. "_upvw" else l_name_16 .. "_upv";

@@ -35,9 +35,9 @@ local function v21()
     else
         error("Invalid opcode_encoding_type");
     end;
-    table.clear(v17)
+    table.clear(v17);
     for v20 = 0, 255 do
-        v17[bit32.band(v15(v20), 255)] = v20
+        v17[bit32.band(v15(v20), 255)] = v20;
     end;
 end;
 local v22 = {

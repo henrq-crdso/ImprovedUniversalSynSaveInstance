@@ -35,9 +35,9 @@ local function v21()
     else
         error("Invalid opcode_encoding_type");
     end;
-    table.clear(v17);
+    table.clear(v17)
     for v20 = 0, 255 do
-        v17[bit32.band(v15(v20), 255)] = v20;
+        v17[bit32.band(v15(v20), 255)] = v20
     end;
 end;
 local v22 = {
@@ -13498,7 +13498,7 @@ local function v4318(v1125, v1126)
                     l_name_16 = v3904 and v3904(v3899, l_init_expr_2, true) or nil or l_name_16;
                 end;
                 if l_name_16 ~= l_l_name_16_0 then
-                    function is_valid_identifier(name)
+                    local function is_valid_identifier(name)
                         return type(name) == "string" and name:match("^[a-zA-Z_][a-zA-Z0-9_]*$") ~= nil;
                     end;
 

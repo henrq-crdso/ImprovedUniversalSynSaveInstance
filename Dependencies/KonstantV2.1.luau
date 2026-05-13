@@ -10,12 +10,12 @@ end;
 local l_getscriptbytecode_0 = getscriptbytecode;
 local l_getscripthash_0 = getscripthash;
 local _ = getgenv;
---local l_rconsoleprint_0 = rconsoleprint;
+
 local v14 = Vector3 or {
     new = function(v11, v12, v13)
         return {
-            X = v11, 
-            Y = v12, 
+            X = v11,
+            Y = v12,
             Z = v13
         };
     end
@@ -41,52 +41,52 @@ local function v21()
     end;
 end;
 local v22 = {
-    use_proto_debugnames = true, 
-    show_proto_line_defined = true, 
-    show_proto_upvalues = true, 
-    show_proto_constants = true, 
-    inline_table_initialization = true, 
-    table_string_key_shortening = true, 
-    table_dict_key_semicolons = true, 
-    table_array_value_semicolons = false, 
-    always_use_table_keys = false, 
-    use_compound_assignment = true, 
-    exact_argument_names = false, 
-    string_quotes_behavior = "single char, single quotes", 
-    do_tonumber_nan = true, 
-    do_while_1 = false, 
-    show_nil_definitions = true, 
-    smart_var_level = 3, 
-    smart_var_usage_analysis = true, 
-    smart_var_extensive_prefixes = false, 
-    mark_upvalues = "extra", 
-    mark_setglobal = true, 
-    mark_reads_and_writes = false, 
-    minify_if_statements = true, 
-    assume_if_else = true, 
-    prefix_error = "KONSTANTERROR", 
-    prefix_warning = "KONSTANTWARNING", 
+    use_proto_debugnames = true,
+    show_proto_line_defined = true,
+    show_proto_upvalues = true,
+    show_proto_constants = true,
+    inline_table_initialization = true,
+    table_string_key_shortening = true,
+    table_dict_key_semicolons = true,
+    table_array_value_semicolons = false,
+    always_use_table_keys = false,
+    use_compound_assignment = true,
+    exact_argument_names = false,
+    string_quotes_behavior = "single char, single quotes",
+    do_tonumber_nan = true,
+    do_while_1 = false,
+    show_nil_definitions = true,
+    smart_var_level = 3,
+    smart_var_usage_analysis = true,
+    smart_var_extensive_prefixes = false,
+    mark_upvalues = "extra",
+    mark_setglobal = true,
+    mark_reads_and_writes = false,
+    minify_if_statements = true,
+    assume_if_else = true,
+    prefix_error = "KONSTANTERROR",
+    prefix_warning = "KONSTANTWARNING",
     prefix_information = "KONSTANTINFO"
 };
 local v23 = if task then task.wait else nil;
 local v24 = {
-    [0] = "nil", 
-    [1] = "boolean", 
-    [2] = "number", 
-    [3] = "string", 
-    [4] = "import", 
-    [5] = "table", 
-    [6] = "function", 
+    [0] = "nil",
+    [1] = "boolean",
+    [2] = "number",
+    [3] = "string",
+    [4] = "import",
+    [5] = "table",
+    [6] = "function",
     [7] = "vector"
 };
 local l_clock_0 = os.clock;
 local v26 = elapsedTime or l_clock_0;
 local v27 = v26();
 local v28 = game ~= nil;
---local v29 = l_rconsoleprint_0 or print;
+
 local function v33(v30, v31, v32)
     if v26() - v27 >= 0.016666666666666666 then
-       -- v29("[" .. v30 .. "/" .. v31 .. "] " .. string.format("%.1f", math.floor(v30 / v31 * 1000 + 0.5) / 10) .. "% done with func `" .. (v32 or "<main>") .. "`");
+
         if v23 and v28 then
             v23();
         end;
@@ -95,21 +95,21 @@ local function v33(v30, v31, v32)
 end;
 local function v43()
     return {
-        start_times = {}, 
-        end_times = {}, 
-        completed_benchmarks = {}, 
+        start_times = {},
+        end_times = {},
+        completed_benchmarks = {},
         start_benchmark = function(_, _)
 
-        end, 
+        end,
         end_benchmark = function(_, _)
 
-        end, 
+        end,
         get_benchmark_time = function(_, _)
             return 0;
-        end, 
+        end,
         print_benchmark_time = function(_, _)
 
-        end, 
+        end,
         print_all_times = function(_)
 
         end
@@ -143,15 +143,15 @@ local function _(v59)
     return (bit32.band(v59, 255));
 end;
 local v61 = {
-    A = true, 
-    a = true, 
-    E = true, 
-    e = true, 
-    I = true, 
-    i = true, 
-    O = true, 
-    o = true, 
-    U = true, 
+    A = true,
+    a = true,
+    E = true,
+    e = true,
+    I = true,
+    i = true,
+    O = true,
+    o = true,
+    U = true,
     u = true
 };
 local function _(v62)
@@ -372,12 +372,12 @@ end;
 local function _(v157, v158)
     if v158 then
         return {
-            beginning = v157, 
+            beginning = v157,
             ending = v158
         };
     else
         return {
-            beginning = v157, 
+            beginning = v157,
             ending = v157
         };
     end;
@@ -425,30 +425,30 @@ local function _(v185)
     return v181[v185];
 end;
 local v187 = {
-    "LOADB", 
-    "JUMP", 
-    "JUMPBACK", 
-    "JUMPIF", 
-    "JUMPIFNOT", 
-    "JUMPIFEQ", 
-    "JUMPIFLE", 
-    "JUMPIFLT", 
-    "JUMPIFNOTEQ", 
-    "JUMPIFNOTLE", 
-    "JUMPIFNOTLT", 
-    "FORNPREP", 
-    "FORNLOOP", 
-    "FORGLOOP", 
-    "FORGPREP", 
-    "FORGPREP_INEXT", 
-    "DEP_FORGLOOP_INEXT", 
-    "FORGPREP_NEXT", 
-    "JUMPX", 
-    "JUMPXEQKNIL", 
-    "JUMPXEQKB", 
-    "JUMPXEQKN", 
-    "JUMPXEQKS", 
-    "DEP_JUMPIFEQK", 
+    "LOADB",
+    "JUMP",
+    "JUMPBACK",
+    "JUMPIF",
+    "JUMPIFNOT",
+    "JUMPIFEQ",
+    "JUMPIFLE",
+    "JUMPIFLT",
+    "JUMPIFNOTEQ",
+    "JUMPIFNOTLE",
+    "JUMPIFNOTLT",
+    "FORNPREP",
+    "FORNLOOP",
+    "FORGLOOP",
+    "FORGPREP",
+    "FORGPREP_INEXT",
+    "DEP_FORGLOOP_INEXT",
+    "FORGPREP_NEXT",
+    "JUMPX",
+    "JUMPXEQKNIL",
+    "JUMPXEQKB",
+    "JUMPXEQKN",
+    "JUMPXEQKS",
+    "DEP_JUMPIFEQK",
     "DEP_JUMPIFNOTEQK"
 };
 local v188 = nil;
@@ -458,355 +458,355 @@ local function v212(v190)
     local v191 = nil;
     if v190 >= 4 and v190 <= 6 then
         local v192 = {
-            opname = "DEP_JUMPIFEQK", 
+            opname = "DEP_JUMPIFEQK",
             aux = false
         };
         local v193 = {
-            opname = "SUBRK", 
+            opname = "SUBRK",
             aux = false
         };
         local v194 = {
-            opname = "DEP_JUMPIFNOTEQK", 
+            opname = "DEP_JUMPIFNOTEQK",
             aux = false
         };
         local v195 = {
-            opname = "DIVRK", 
+            opname = "DIVRK",
             aux = false
         };
         local v196 = {
-            opname = "DEP_FORGLOOP_INEXT", 
+            opname = "DEP_FORGLOOP_INEXT",
             aux = false
         };
         local v197 = {
-            opname = "FASTCALL3", 
+            opname = "FASTCALL3",
             aux = true
         };
         v191 = {
             {
-                opname = "NOP", 
+                opname = "NOP",
                 aux = false
-            }, 
+            },
             {
-                opname = "BREAK", 
+                opname = "BREAK",
                 aux = false
-            }, 
+            },
             {
-                opname = "LOADNIL", 
+                opname = "LOADNIL",
                 aux = false
-            }, 
+            },
             {
-                opname = "LOADB", 
+                opname = "LOADB",
                 aux = false
-            }, 
+            },
             {
-                opname = "LOADN", 
+                opname = "LOADN",
                 aux = false
-            }, 
+            },
             {
-                opname = "LOADK", 
+                opname = "LOADK",
                 aux = false
-            }, 
+            },
             {
-                opname = "MOVE", 
+                opname = "MOVE",
                 aux = false
-            }, 
+            },
             {
-                opname = "GETGLOBAL", 
+                opname = "GETGLOBAL",
                 aux = true
-            }, 
+            },
             {
-                opname = "SETGLOBAL", 
+                opname = "SETGLOBAL",
                 aux = true
-            }, 
+            },
             {
-                opname = "GETUPVAL", 
+                opname = "GETUPVAL",
                 aux = false
-            }, 
+            },
             {
-                opname = "SETUPVAL", 
+                opname = "SETUPVAL",
                 aux = false
-            }, 
+            },
             {
-                opname = "CLOSEUPVALS", 
+                opname = "CLOSEUPVALS",
                 aux = false
-            }, 
+            },
             {
-                opname = "GETIMPORT", 
+                opname = "GETIMPORT",
                 aux = true
-            }, 
+            },
             {
-                opname = "GETTABLE", 
+                opname = "GETTABLE",
                 aux = false
-            }, 
+            },
             {
-                opname = "SETTABLE", 
+                opname = "SETTABLE",
                 aux = false
-            }, 
+            },
             {
-                opname = "GETTABLEKS", 
+                opname = "GETTABLEKS",
                 aux = true
-            }, 
+            },
             {
-                opname = "SETTABLEKS", 
+                opname = "SETTABLEKS",
                 aux = true
-            }, 
+            },
             {
-                opname = "GETTABLEN", 
+                opname = "GETTABLEN",
                 aux = false
-            }, 
+            },
             {
-                opname = "SETTABLEN", 
+                opname = "SETTABLEN",
                 aux = false
-            }, 
+            },
             {
-                opname = "NEWCLOSURE", 
+                opname = "NEWCLOSURE",
                 aux = false
-            }, 
+            },
             {
-                opname = "NAMECALL", 
+                opname = "NAMECALL",
                 aux = true
-            }, 
+            },
             {
-                opname = "CALL", 
+                opname = "CALL",
                 aux = false
-            }, 
+            },
             {
-                opname = "RETURN", 
+                opname = "RETURN",
                 aux = false
-            }, 
+            },
             {
-                opname = "JUMP", 
+                opname = "JUMP",
                 aux = false
-            }, 
+            },
             {
-                opname = "JUMPBACK", 
+                opname = "JUMPBACK",
                 aux = false
-            }, 
+            },
             {
-                opname = "JUMPIF", 
+                opname = "JUMPIF",
                 aux = false
-            }, 
+            },
             {
-                opname = "JUMPIFNOT", 
+                opname = "JUMPIFNOT",
                 aux = false
-            }, 
+            },
             {
-                opname = "JUMPIFEQ", 
+                opname = "JUMPIFEQ",
                 aux = true
-            }, 
+            },
             {
-                opname = "JUMPIFLE", 
+                opname = "JUMPIFLE",
                 aux = true
-            }, 
+            },
             {
-                opname = "JUMPIFLT", 
+                opname = "JUMPIFLT",
                 aux = true
-            }, 
+            },
             {
-                opname = "JUMPIFNOTEQ", 
+                opname = "JUMPIFNOTEQ",
                 aux = true
-            }, 
+            },
             {
-                opname = "JUMPIFNOTLE", 
+                opname = "JUMPIFNOTLE",
                 aux = true
-            }, 
+            },
             {
-                opname = "JUMPIFNOTLT", 
+                opname = "JUMPIFNOTLT",
                 aux = true
-            }, 
+            },
             {
-                opname = "ADD", 
+                opname = "ADD",
                 aux = false
-            }, 
+            },
             {
-                opname = "SUB", 
+                opname = "SUB",
                 aux = false
-            }, 
+            },
             {
-                opname = "MUL", 
+                opname = "MUL",
                 aux = false
-            }, 
+            },
             {
-                opname = "DIV", 
+                opname = "DIV",
                 aux = false
-            }, 
+            },
             {
-                opname = "MOD", 
+                opname = "MOD",
                 aux = false
-            }, 
+            },
             {
-                opname = "POW", 
+                opname = "POW",
                 aux = false
-            }, 
+            },
             {
-                opname = "ADDK", 
+                opname = "ADDK",
                 aux = false
-            }, 
+            },
             {
-                opname = "SUBK", 
+                opname = "SUBK",
                 aux = false
-            }, 
+            },
             {
-                opname = "MULK", 
+                opname = "MULK",
                 aux = false
-            }, 
+            },
             {
-                opname = "DIVK", 
+                opname = "DIVK",
                 aux = false
-            }, 
+            },
             {
-                opname = "MODK", 
+                opname = "MODK",
                 aux = false
-            }, 
+            },
             {
-                opname = "POWK", 
+                opname = "POWK",
                 aux = false
-            }, 
+            },
             {
-                opname = "AND", 
+                opname = "AND",
                 aux = false
-            }, 
+            },
             {
-                opname = "OR", 
+                opname = "OR",
                 aux = false
-            }, 
+            },
             {
-                opname = "ANDK", 
+                opname = "ANDK",
                 aux = false
-            }, 
+            },
             {
-                opname = "ORK", 
+                opname = "ORK",
                 aux = false
-            }, 
+            },
             {
-                opname = "CONCAT", 
+                opname = "CONCAT",
                 aux = false
-            }, 
+            },
             {
-                opname = "NOT", 
+                opname = "NOT",
                 aux = false
-            }, 
+            },
             {
-                opname = "MINUS", 
+                opname = "MINUS",
                 aux = false
-            }, 
+            },
             {
-                opname = "LENGTH", 
+                opname = "LENGTH",
                 aux = false
-            }, 
+            },
             {
-                opname = "NEWTABLE", 
+                opname = "NEWTABLE",
                 aux = true
-            }, 
+            },
             {
-                opname = "DUPTABLE", 
+                opname = "DUPTABLE",
                 aux = false
-            }, 
+            },
             {
-                opname = "SETLIST", 
+                opname = "SETLIST",
                 aux = true
-            }, 
+            },
             {
-                opname = "FORNPREP", 
+                opname = "FORNPREP",
                 aux = false
-            }, 
+            },
             {
-                opname = "FORNLOOP", 
+                opname = "FORNLOOP",
                 aux = false
-            }, 
+            },
             {
-                opname = "FORGLOOP", 
+                opname = "FORGLOOP",
                 aux = true
-            }, 
+            },
             {
-                opname = "FORGPREP_INEXT", 
+                opname = "FORGPREP_INEXT",
                 aux = false
-            }, 
-            v196, 
+            },
+            v196,
             {
-                opname = "FORGPREP_NEXT", 
+                opname = "FORGPREP_NEXT",
                 aux = false
-            }, 
+            },
             {
-                opname = "NATIVECALL", 
+                opname = "NATIVECALL",
                 aux = false
-            }, 
+            },
             {
-                opname = "GETVARARGS", 
+                opname = "GETVARARGS",
                 aux = false
-            }, 
+            },
             {
-                opname = "DUPCLOSURE", 
+                opname = "DUPCLOSURE",
                 aux = false
-            }, 
+            },
             {
-                opname = "PREPVARARGS", 
+                opname = "PREPVARARGS",
                 aux = false
-            }, 
+            },
             {
-                opname = "LOADKX", 
+                opname = "LOADKX",
                 aux = false
-            }, 
+            },
             {
-                opname = "JUMPX", 
+                opname = "JUMPX",
                 aux = false
-            }, 
+            },
             {
-                opname = "FASTCALL", 
+                opname = "FASTCALL",
                 aux = false
-            }, 
+            },
             {
-                opname = "COVERAGE", 
+                opname = "COVERAGE",
                 aux = false
-            }, 
+            },
             {
-                opname = "CAPTURE", 
+                opname = "CAPTURE",
                 aux = false
-            }, 
-            v193, 
-            v195, 
+            },
+            v193,
+            v195,
             {
-                opname = "FASTCALL1", 
+                opname = "FASTCALL1",
                 aux = false
-            }, 
+            },
             {
-                opname = "FASTCALL2", 
+                opname = "FASTCALL2",
                 aux = true
-            }, 
+            },
             {
-                opname = "FASTCALL2K", 
+                opname = "FASTCALL2K",
                 aux = true
-            }, 
+            },
             {
-                opname = "FORGPREP", 
+                opname = "FORGPREP",
                 aux = false
-            }, 
+            },
             {
-                opname = "JUMPXEQKNIL", 
+                opname = "JUMPXEQKNIL",
                 aux = true
-            }, 
+            },
             {
-                opname = "JUMPXEQKB", 
+                opname = "JUMPXEQKB",
                 aux = true
-            }, 
+            },
             {
-                opname = "JUMPXEQKN", 
+                opname = "JUMPXEQKN",
                 aux = true
-            }, 
+            },
             {
-                opname = "JUMPXEQKS", 
+                opname = "JUMPXEQKS",
                 aux = true
-            }, 
+            },
             {
-                opname = "IDIV", 
+                opname = "IDIV",
                 aux = false
-            }, 
+            },
             {
-                opname = "IDIVK", 
+                opname = "IDIVK",
                 aux = false
-            }, 
+            },
             {
-                opname = "COUNT", 
+                opname = "COUNT",
                 aux = false
             }
         };
@@ -832,10 +832,10 @@ local function v212(v190)
     for v200, v201 in ipairs(v191) do
         local l_aux_0 = v201.aux;
         v179[v200] = {
-            opname = v201.opname, 
-            aux = l_aux_0, 
-            opcode = -1, 
-            real_opcode = -1, 
+            opname = v201.opname,
+            aux = l_aux_0,
+            opcode = -1,
+            real_opcode = -1,
             size = l_aux_0 and 2 or 1
         };
     end;
@@ -865,148 +865,148 @@ local function v212(v190)
     end;
 end;
 local _ = {
-    LOADB = true, 
-    JUMP = true, 
-    JUMPBACK = true, 
+    LOADB = true,
+    JUMP = true,
+    JUMPBACK = true,
     JUMPX = true
 };
 local v214 = {
-    addition = "+=", 
-    subtraction = "-=", 
-    multiplication = "*=", 
-    division = "/=", 
-    ["floor division"] = "//=", 
-    exponentiation = "^=", 
-    concatenation = "..=", 
+    addition = "+=",
+    subtraction = "-=",
+    multiplication = "*=",
+    division = "/=",
+    ["floor division"] = "//=",
+    exponentiation = "^=",
+    concatenation = "..=",
     modulus = "%="
 };
 local v215 = {
-    [">"] = "<=", 
-    ["<="] = ">", 
-    ["<"] = ">=", 
-    [">="] = "<", 
-    ["=="] = "~=", 
-    ["~="] = "==", 
-    exist = "not exist", 
+    [">"] = "<=",
+    ["<="] = ">",
+    ["<"] = ">=",
+    [">="] = "<",
+    ["=="] = "~=",
+    ["~="] = "==",
+    exist = "not exist",
     ["not exist"] = "exist"
 };
 local v216 = {
-    [">"] = "<", 
-    ["<"] = ">", 
-    ["<="] = ">=", 
-    [">="] = "<=", 
-    ["=="] = "==", 
-    ["~="] = "~=", 
-    exist = "not exist", 
+    [">"] = "<",
+    ["<"] = ">",
+    ["<="] = ">=",
+    [">="] = "<=",
+    ["=="] = "==",
+    ["~="] = "~=",
+    exist = "not exist",
     ["not exist"] = "exist"
 };
 local v217 = {
-    ["end"] = true, 
-    ["if"] = true, 
-    ["local"] = true, 
-    ["else"] = true, 
-    ["elseif"] = true, 
-    ["function"] = true, 
-    ["break"] = true, 
-    ["then"] = true, 
-    ["and"] = true, 
-    ["or"] = true, 
-    ["repeat"] = true, 
-    ["until"] = true, 
-    ["for"] = true, 
-    ["do"] = true, 
-    ["in"] = true, 
-    ["nil"] = true, 
-    ["true"] = true, 
-    ["false"] = true, 
-    ["not"] = true, 
+    ["end"] = true,
+    ["if"] = true,
+    ["local"] = true,
+    ["else"] = true,
+    ["elseif"] = true,
+    ["function"] = true,
+    ["break"] = true,
+    ["then"] = true,
+    ["and"] = true,
+    ["or"] = true,
+    ["repeat"] = true,
+    ["until"] = true,
+    ["for"] = true,
+    ["do"] = true,
+    ["in"] = true,
+    ["nil"] = true,
+    ["true"] = true,
+    ["false"] = true,
+    ["not"] = true,
     ["return"] = true
 };
 local v218 = {
     ["for"] = true
 };
 local v219 = {
-    call = true, 
+    call = true,
     varargs = true
 };
 local v220 = {
-    [0] = "<none>"; 
-    "assert", 
-    "math.abs", 
-    "math.acos", 
-    "math.asin", 
-    "math.atan2", 
-    "math.atan", 
-    "math.ceil", 
-    "math.cosh", 
-    "math.cos", 
-    "math.deg", 
-    "math.exp", 
-    "math.floor", 
-    "math.fmod", 
-    "math.frexp", 
-    "math.ldexp", 
-    "math.log10", 
-    "math.log", 
-    "math.max", 
-    "math.min", 
-    "math.modf", 
-    "math.pow", 
-    "math.rad", 
-    "math.sinh", 
-    "math.sin", 
-    "math.sqrt", 
-    "math.tanh", 
-    "math.tan", 
-    "bit32.arshift", 
-    "bit32.band", 
-    "bit32.bnot", 
-    "bit32.bor", 
-    "bit32.bxor", 
-    "bit32.btest", 
-    "bit32.extract", 
-    "bit32.lrotate", 
-    "bit32.lshift", 
-    "bit32.replace", 
-    "bit32.rrotate", 
-    "bit32.rshift", 
-    "type", 
-    "string.byte", 
-    "string.char", 
-    "string.len", 
-    "typeof", 
-    "string.sub", 
-    "math.clamp", 
-    "math.sign", 
-    "math.round", 
-    "rawset", 
-    "rawget", 
-    "rawequal", 
-    "table.insert", 
-    "table.unpack", 
-    "vector", 
-    "bit32.countlz", 
-    "bit32.countrz", 
-    "select.vararg", 
-    "rawlen", 
-    "bit32.extractk", 
-    "getmetatable", 
-    "setmetatable", 
-    "tonumber", 
-    "tostring", 
-    "bit32.byteswap", 
-    "buffer.readi8", 
-    "buffer.readu8", 
-    "buffer.writeu8", 
-    "buffer.readi16", 
-    "buffer.readu16", 
-    "buffer.writeu16", 
-    "buffer.readi32", 
-    "buffer.readu32", 
-    "buffer.writeu32", 
-    "buffer.readf32", 
-    "buffer.writef32", 
-    "buffer.readf64", 
+    [0] = "<none>";
+    "assert",
+    "math.abs",
+    "math.acos",
+    "math.asin",
+    "math.atan2",
+    "math.atan",
+    "math.ceil",
+    "math.cosh",
+    "math.cos",
+    "math.deg",
+    "math.exp",
+    "math.floor",
+    "math.fmod",
+    "math.frexp",
+    "math.ldexp",
+    "math.log10",
+    "math.log",
+    "math.max",
+    "math.min",
+    "math.modf",
+    "math.pow",
+    "math.rad",
+    "math.sinh",
+    "math.sin",
+    "math.sqrt",
+    "math.tanh",
+    "math.tan",
+    "bit32.arshift",
+    "bit32.band",
+    "bit32.bnot",
+    "bit32.bor",
+    "bit32.bxor",
+    "bit32.btest",
+    "bit32.extract",
+    "bit32.lrotate",
+    "bit32.lshift",
+    "bit32.replace",
+    "bit32.rrotate",
+    "bit32.rshift",
+    "type",
+    "string.byte",
+    "string.char",
+    "string.len",
+    "typeof",
+    "string.sub",
+    "math.clamp",
+    "math.sign",
+    "math.round",
+    "rawset",
+    "rawget",
+    "rawequal",
+    "table.insert",
+    "table.unpack",
+    "vector",
+    "bit32.countlz",
+    "bit32.countrz",
+    "select.vararg",
+    "rawlen",
+    "bit32.extractk",
+    "getmetatable",
+    "setmetatable",
+    "tonumber",
+    "tostring",
+    "bit32.byteswap",
+    "buffer.readi8",
+    "buffer.readu8",
+    "buffer.writeu8",
+    "buffer.readi16",
+    "buffer.readu16",
+    "buffer.writeu16",
+    "buffer.readi32",
+    "buffer.readu32",
+    "buffer.writeu32",
+    "buffer.readf32",
+    "buffer.writef32",
+    "buffer.readf64",
     "buffer.writef64"
 };
 local function _(v221)
@@ -1170,17 +1170,17 @@ local function v296(v226)
                 v272 = v273;
             elseif l_v273_0 == 3 then
                 v272 = {
-                    type = 3, 
+                    type = 3,
                     value = v249[v235()]
                 };
             elseif l_v273_0 == 6 then
                 v272 = {
-                    type = 6, 
+                    type = 6,
                     value = v235()
                 };
             elseif l_v273_0 == 5 then
                 v272 = {
-                    type = 5, 
+                    type = 5,
                     value = {}
                 };
                 for _ = 1, v235() do
@@ -1190,7 +1190,7 @@ local function v296(v226)
                 v273 = buffer.readu32(v227, v228);
                 v228 = v228 + 4;
                 v272 = {
-                    type = 4, 
+                    type = 4,
                     value = v273
                 };
             elseif l_v273_0 == 1 then
@@ -1203,7 +1203,7 @@ local function v296(v226)
                 v272 = v273;
             elseif l_v273_0 == 0 then
                 v272 = {
-                    type = 0, 
+                    type = 0,
                     value = nil
                 };
             elseif l_v273_0 == 7 and l_v245_0 >= 5 then
@@ -1293,17 +1293,17 @@ local function v304(_)
     return {}, {};
 end;
 local v460 = {
-    FASTCALL = v304, 
-    FASTCALL1 = v304, 
-    FASTCALL2 = v304, 
-    FASTCALL2K = v304, 
-    FASTCALL3 = v304, 
-    JUMP = v304, 
-    JUMPX = v304, 
-    JUMPBACK = v304, 
-    COVERAGE = v304, 
-    CLOSEUPVALS = v304, 
-    PREPVARARGS = v304, 
+    FASTCALL = v304,
+    FASTCALL1 = v304,
+    FASTCALL2 = v304,
+    FASTCALL2K = v304,
+    FASTCALL3 = v304,
+    JUMP = v304,
+    JUMPX = v304,
+    JUMPBACK = v304,
+    COVERAGE = v304,
+    CLOSEUPVALS = v304,
+    PREPVARARGS = v304,
     GETVARARGS = function(v305)
         local l_inst_0 = v305.inst;
         local v307 = bit32.band(bit32.rshift(l_inst_0, 8), 255);
@@ -1317,7 +1317,7 @@ local v460 = {
             table.insert(v308, v310);
         end;
         return {}, v308;
-    end, 
+    end,
     MOVE = function(v311)
         local l_inst_1 = v311.inst;
         return {
@@ -1325,73 +1325,73 @@ local v460 = {
         }, {
             (bit32.band(bit32.rshift(l_inst_1, 8), 255))
         }, "copies";
-    end, 
+    end,
     LOADK = function(v313)
         return {}, {
             (bit32.band(bit32.rshift(v313.inst, 8), 255))
         };
-    end, 
+    end,
     LOADKX = function(v314)
         return {}, {
             (bit32.band(bit32.rshift(v314.inst, 8), 255))
         };
-    end, 
+    end,
     LOADN = function(v315)
         return {}, {
             (bit32.band(bit32.rshift(v315.inst, 8), 255))
         };
-    end, 
+    end,
     LOADNIL = function(v316)
         return {}, {
             (bit32.band(bit32.rshift(v316.inst, 8), 255))
         };
-    end, 
+    end,
     LOADB = function(v317)
         return {}, {
             (bit32.band(bit32.rshift(v317.inst, 8), 255))
         };
-    end, 
+    end,
     NEWTABLE = function(v318)
         return {}, {
             (bit32.band(bit32.rshift(v318.inst, 8), 255))
         };
-    end, 
+    end,
     DUPTABLE = function(v319)
         return {}, {
             (bit32.band(bit32.rshift(v319.inst, 8), 255))
         };
-    end, 
+    end,
     SETTABLE = function(v320)
         local l_inst_2 = v320.inst;
         return {
-            bit32.band(bit32.rshift(l_inst_2, 24), 255), 
-            bit32.band(bit32.rshift(l_inst_2, 8), 255), 
+            bit32.band(bit32.rshift(l_inst_2, 24), 255),
+            bit32.band(bit32.rshift(l_inst_2, 8), 255),
             (bit32.band(bit32.rshift(l_inst_2, 16), 255))
         }, {};
-    end, 
+    end,
     SETTABLEKS = function(v322)
         local l_inst_3 = v322.inst;
         return {
-            bit32.band(bit32.rshift(l_inst_3, 8), 255), 
+            bit32.band(bit32.rshift(l_inst_3, 8), 255),
             (bit32.band(bit32.rshift(l_inst_3, 16), 255))
         }, {};
-    end, 
+    end,
     SETTABLEN = function(v324)
         local l_inst_4 = v324.inst;
         return {
-            bit32.band(bit32.rshift(l_inst_4, 8), 255), 
+            bit32.band(bit32.rshift(l_inst_4, 8), 255),
             (bit32.band(bit32.rshift(l_inst_4, 16), 255))
         }, {};
-    end, 
+    end,
     GETTABLE = function(v326)
         local l_inst_5 = v326.inst;
         return {
-            bit32.band(bit32.rshift(l_inst_5, 16), 255), 
+            bit32.band(bit32.rshift(l_inst_5, 16), 255),
             (bit32.band(bit32.rshift(l_inst_5, 24), 255))
         }, {
             (bit32.band(bit32.rshift(l_inst_5, 8), 255))
         };
-    end, 
+    end,
     GETTABLEKS = function(v328)
         local l_inst_6 = v328.inst;
         return {
@@ -1399,7 +1399,7 @@ local v460 = {
         }, {
             (bit32.band(bit32.rshift(l_inst_6, 8), 255))
         };
-    end, 
+    end,
     GETTABLEN = function(v330)
         local l_inst_7 = v330.inst;
         return {
@@ -1407,7 +1407,7 @@ local v460 = {
         }, {
             (bit32.band(bit32.rshift(l_inst_7, 8), 255))
         };
-    end, 
+    end,
     SETLIST = function(v332)
         local l_inst_8 = v332.inst;
         local v334 = bit32.band(bit32.rshift(l_inst_8, 8), 255);
@@ -1421,42 +1421,42 @@ local v460 = {
         end;
         table.insert(v337, v334);
         return v337, {};
-    end, 
+    end,
     GETUPVAL = function(v342)
         return {}, {
             (bit32.band(bit32.rshift(v342.inst, 8), 255))
         };
-    end, 
+    end,
     SETUPVAL = function(v343)
         return {
             (bit32.band(bit32.rshift(v343.inst, 8), 255))
         }, {};
-    end, 
+    end,
     GETIMPORT = function(v344)
         return {}, {
             (bit32.band(bit32.rshift(v344.inst, 8), 255))
         };
-    end, 
+    end,
     GETGLOBAL = function(v345)
         return {}, {
             (bit32.band(bit32.rshift(v345.inst, 8), 255))
         };
-    end, 
+    end,
     SETGLOBAL = function(v346)
         return {
             (bit32.band(bit32.rshift(v346.inst, 8), 255))
         }, {};
-    end, 
+    end,
     NAMECALL = function(v347)
         local l_inst_9 = v347.inst;
         local v349 = bit32.band(bit32.rshift(l_inst_9, 8), 255);
         return {
             (bit32.band(bit32.rshift(l_inst_9, 16), 255))
         }, {
-            v349, 
+            v349,
             v349 + 1
         };
-    end, 
+    end,
     RETURN = function(v350)
         local l_inst_10 = v350.inst;
         local v352 = bit32.band(bit32.rshift(l_inst_10, 8), 255);
@@ -1468,7 +1468,7 @@ local v460 = {
             table.insert(v354, v357);
         end;
         return v354, {};
-    end, 
+    end,
     CALL = function(v358)
         local l_inst_11 = v358.inst;
         local v360 = bit32.band(bit32.rshift(l_inst_11, 8), 255);
@@ -1492,26 +1492,26 @@ local v460 = {
             table.insert(v364, v366);
         end;
         return v363, v364;
-    end, 
+    end,
     DUPCLOSURE = function(v367)
         return {}, {
             (bit32.band(bit32.rshift(v367.inst, 8), 255))
         };
-    end, 
+    end,
     NEWCLOSURE = function(v368)
         return {}, {
             (bit32.band(bit32.rshift(v368.inst, 8), 255))
         };
-    end, 
+    end,
     ADD = function(v369)
         local l_inst_12 = v369.inst;
         return {
-            bit32.band(bit32.rshift(l_inst_12, 16), 255), 
+            bit32.band(bit32.rshift(l_inst_12, 16), 255),
             (bit32.band(bit32.rshift(l_inst_12, 24), 255))
         }, {
             (bit32.band(bit32.rshift(l_inst_12, 8), 255))
         };
-    end, 
+    end,
     ADDK = function(v371)
         local l_inst_13 = v371.inst;
         return {
@@ -1519,16 +1519,16 @@ local v460 = {
         }, {
             (bit32.band(bit32.rshift(l_inst_13, 8), 255))
         };
-    end, 
+    end,
     SUB = function(v373)
         local l_inst_14 = v373.inst;
         return {
-            bit32.band(bit32.rshift(l_inst_14, 16), 255), 
+            bit32.band(bit32.rshift(l_inst_14, 16), 255),
             (bit32.band(bit32.rshift(l_inst_14, 24), 255))
         }, {
             (bit32.band(bit32.rshift(l_inst_14, 8), 255))
         };
-    end, 
+    end,
     SUBK = function(v375)
         local l_inst_15 = v375.inst;
         return {
@@ -1536,16 +1536,16 @@ local v460 = {
         }, {
             (bit32.band(bit32.rshift(l_inst_15, 8), 255))
         };
-    end, 
+    end,
     MUL = function(v377)
         local l_inst_16 = v377.inst;
         return {
-            bit32.band(bit32.rshift(l_inst_16, 16), 255), 
+            bit32.band(bit32.rshift(l_inst_16, 16), 255),
             (bit32.band(bit32.rshift(l_inst_16, 24), 255))
         }, {
             (bit32.band(bit32.rshift(l_inst_16, 8), 255))
         };
-    end, 
+    end,
     MULK = function(v379)
         local l_inst_17 = v379.inst;
         return {
@@ -1553,16 +1553,16 @@ local v460 = {
         }, {
             (bit32.band(bit32.rshift(l_inst_17, 8), 255))
         };
-    end, 
+    end,
     DIV = function(v381)
         local l_inst_18 = v381.inst;
         return {
-            bit32.band(bit32.rshift(l_inst_18, 16), 255), 
+            bit32.band(bit32.rshift(l_inst_18, 16), 255),
             (bit32.band(bit32.rshift(l_inst_18, 24), 255))
         }, {
             (bit32.band(bit32.rshift(l_inst_18, 8), 255))
         };
-    end, 
+    end,
     DIVK = function(v383)
         local l_inst_19 = v383.inst;
         return {
@@ -1570,7 +1570,7 @@ local v460 = {
         }, {
             (bit32.band(bit32.rshift(l_inst_19, 8), 255))
         };
-    end, 
+    end,
     SUBRK = function(v385)
         local l_inst_20 = v385.inst;
         return {
@@ -1578,7 +1578,7 @@ local v460 = {
         }, {
             (bit32.band(bit32.rshift(l_inst_20, 8), 255))
         };
-    end, 
+    end,
     DIVRK = function(v387)
         local l_inst_21 = v387.inst;
         return {
@@ -1586,16 +1586,16 @@ local v460 = {
         }, {
             (bit32.band(bit32.rshift(l_inst_21, 8), 255))
         };
-    end, 
+    end,
     IDIV = function(v389)
         local l_inst_22 = v389.inst;
         return {
-            bit32.band(bit32.rshift(l_inst_22, 16), 255), 
+            bit32.band(bit32.rshift(l_inst_22, 16), 255),
             (bit32.band(bit32.rshift(l_inst_22, 24), 255))
         }, {
             (bit32.band(bit32.rshift(l_inst_22, 8), 255))
         };
-    end, 
+    end,
     IDIVK = function(v391)
         local l_inst_23 = v391.inst;
         return {
@@ -1603,16 +1603,16 @@ local v460 = {
         }, {
             (bit32.band(bit32.rshift(l_inst_23, 8), 255))
         };
-    end, 
+    end,
     POW = function(v393)
         local l_inst_24 = v393.inst;
         return {
-            bit32.band(bit32.rshift(l_inst_24, 16), 255), 
+            bit32.band(bit32.rshift(l_inst_24, 16), 255),
             (bit32.band(bit32.rshift(l_inst_24, 24), 255))
         }, {
             (bit32.band(bit32.rshift(l_inst_24, 8), 255))
         };
-    end, 
+    end,
     POWK = function(v395)
         local l_inst_25 = v395.inst;
         return {
@@ -1620,16 +1620,16 @@ local v460 = {
         }, {
             (bit32.band(bit32.rshift(l_inst_25, 8), 255))
         };
-    end, 
+    end,
     MOD = function(v397)
         local l_inst_26 = v397.inst;
         return {
-            bit32.band(bit32.rshift(l_inst_26, 16), 255), 
+            bit32.band(bit32.rshift(l_inst_26, 16), 255),
             (bit32.band(bit32.rshift(l_inst_26, 24), 255))
         }, {
             (bit32.band(bit32.rshift(l_inst_26, 8), 255))
         };
-    end, 
+    end,
     MODK = function(v399)
         local l_inst_27 = v399.inst;
         return {
@@ -1637,16 +1637,16 @@ local v460 = {
         }, {
             (bit32.band(bit32.rshift(l_inst_27, 8), 255))
         };
-    end, 
+    end,
     AND = function(v401)
         local l_inst_28 = v401.inst;
         return {
-            bit32.band(bit32.rshift(l_inst_28, 16), 255), 
+            bit32.band(bit32.rshift(l_inst_28, 16), 255),
             (bit32.band(bit32.rshift(l_inst_28, 24), 255))
         }, {
             (bit32.band(bit32.rshift(l_inst_28, 8), 255))
         };
-    end, 
+    end,
     ANDK = function(v403)
         local l_inst_29 = v403.inst;
         return {
@@ -1654,16 +1654,16 @@ local v460 = {
         }, {
             (bit32.band(bit32.rshift(l_inst_29, 8), 255))
         };
-    end, 
+    end,
     OR = function(v405)
         local l_inst_30 = v405.inst;
         return {
-            bit32.band(bit32.rshift(l_inst_30, 16), 255), 
+            bit32.band(bit32.rshift(l_inst_30, 16), 255),
             (bit32.band(bit32.rshift(l_inst_30, 24), 255))
         }, {
             (bit32.band(bit32.rshift(l_inst_30, 8), 255))
         };
-    end, 
+    end,
     ORK = function(v407)
         local l_inst_31 = v407.inst;
         return {
@@ -1671,7 +1671,7 @@ local v460 = {
         }, {
             (bit32.band(bit32.rshift(l_inst_31, 8), 255))
         };
-    end, 
+    end,
     CONCAT = function(v409)
         local l_inst_32 = v409.inst;
         local v411 = bit32.band(bit32.rshift(l_inst_32, 16), 255);
@@ -1683,7 +1683,7 @@ local v460 = {
         return v413, {
             (bit32.band(bit32.rshift(l_inst_32, 8), 255))
         };
-    end, 
+    end,
     NOT = function(v415)
         local l_inst_33 = v415.inst;
         return {
@@ -1691,7 +1691,7 @@ local v460 = {
         }, {
             (bit32.band(bit32.rshift(l_inst_33, 8), 255))
         };
-    end, 
+    end,
     MINUS = function(v417)
         local l_inst_34 = v417.inst;
         return {
@@ -1699,7 +1699,7 @@ local v460 = {
         }, {
             (bit32.band(bit32.rshift(l_inst_34, 8), 255))
         };
-    end, 
+    end,
     LENGTH = function(v419)
         local l_inst_35 = v419.inst;
         return {
@@ -1707,16 +1707,16 @@ local v460 = {
         }, {
             (bit32.band(bit32.rshift(l_inst_35, 8), 255))
         };
-    end, 
+    end,
     NATIVECALL = function(_)
         return {}, {};
-    end, 
+    end,
     BREAK = function(_)
         return {}, {};
-    end, 
+    end,
     NOP = function(_)
         return {}, {};
-    end, 
+    end,
     CAPTURE = function(v424)
         local l_inst_36 = v424.inst;
         if bit32.band(bit32.rshift(l_inst_36, 8), 255) ~= 2 then
@@ -1726,128 +1726,128 @@ local v460 = {
         else
             return {}, {};
         end;
-    end, 
+    end,
     JUMPIF = function(v426)
         return {
             (bit32.band(bit32.rshift(v426.inst, 8), 255))
         }, {};
-    end, 
+    end,
     JUMPIFNOT = function(v427)
         return {
             (bit32.band(bit32.rshift(v427.inst, 8), 255))
         }, {};
-    end, 
+    end,
     JUMPIFEQ = function(v428)
         local l_aux_1 = v428.aux;
         assert(l_aux_1);
         return {
-            bit32.band(bit32.rshift(v428.inst, 8), 255), 
+            bit32.band(bit32.rshift(v428.inst, 8), 255),
             l_aux_1
         }, {};
-    end, 
+    end,
     JUMPIFLE = function(v430)
         local l_aux_2 = v430.aux;
         assert(l_aux_2);
         return {
-            bit32.band(bit32.rshift(v430.inst, 8), 255), 
+            bit32.band(bit32.rshift(v430.inst, 8), 255),
             l_aux_2
         }, {};
-    end, 
+    end,
     JUMPIFLT = function(v432)
         local l_aux_3 = v432.aux;
         assert(l_aux_3);
         return {
-            bit32.band(bit32.rshift(v432.inst, 8), 255), 
+            bit32.band(bit32.rshift(v432.inst, 8), 255),
             l_aux_3
         }, {};
-    end, 
+    end,
     JUMPIFNOTEQ = function(v434)
         local l_aux_4 = v434.aux;
         assert(l_aux_4);
         return {
-            bit32.band(bit32.rshift(v434.inst, 8), 255), 
+            bit32.band(bit32.rshift(v434.inst, 8), 255),
             l_aux_4
         }, {};
-    end, 
+    end,
     JUMPIFNOTLE = function(v436)
         local l_aux_5 = v436.aux;
         assert(l_aux_5);
         return {
-            bit32.band(bit32.rshift(v436.inst, 8), 255), 
+            bit32.band(bit32.rshift(v436.inst, 8), 255),
             l_aux_5
         }, {};
-    end, 
+    end,
     JUMPIFNOTLT = function(v438)
         local l_aux_6 = v438.aux;
         assert(l_aux_6);
         return {
-            bit32.band(bit32.rshift(v438.inst, 8), 255), 
+            bit32.band(bit32.rshift(v438.inst, 8), 255),
             l_aux_6
         }, {};
-    end, 
+    end,
     JUMPXEQKNIL = function(v440)
         return {
             (bit32.band(bit32.rshift(v440.inst, 8), 255))
         }, {};
-    end, 
+    end,
     JUMPXEQKB = function(v441)
         return {
             (bit32.band(bit32.rshift(v441.inst, 8), 255))
         }, {};
-    end, 
+    end,
     JUMPXEQKN = function(v442)
         return {
             (bit32.band(bit32.rshift(v442.inst, 8), 255))
         }, {};
-    end, 
+    end,
     JUMPXEQKS = function(v443)
         return {
             (bit32.band(bit32.rshift(v443.inst, 8), 255))
         }, {};
-    end, 
+    end,
     FORNPREP = function(v444)
         local v445 = bit32.band(bit32.rshift(v444.inst, 8), 255);
         return {
-            v445, 
-            v445 + 1, 
+            v445,
+            v445 + 1,
             v445 + 2
         }, {};
-    end, 
+    end,
     FORNLOOP = function(v446)
         local v447 = bit32.band(bit32.rshift(v446.inst, 8), 255);
         return {
-            v447, 
-            v447 + 1, 
+            v447,
+            v447 + 1,
             v447 + 2
         }, {
-            v447 + 2, 
+            v447 + 2,
             v447 + 3
         };
-    end, 
+    end,
     FORGPREP = function(v448)
         local v449 = bit32.band(bit32.rshift(v448.inst, 8), 255);
         return {
-            v449, 
-            v449 + 1, 
+            v449,
+            v449 + 1,
             v449 + 2
         }, {};
-    end, 
+    end,
     FORGPREP_NEXT = function(v450)
         local v451 = bit32.band(bit32.rshift(v450.inst, 8), 255);
         return {
-            v451, 
-            v451 + 1, 
+            v451,
+            v451 + 1,
             v451 + 2
         }, {};
-    end, 
+    end,
     FORGPREP_INEXT = function(v452)
         local v453 = bit32.band(bit32.rshift(v452.inst, 8), 255);
         return {
-            v453, 
-            v453 + 1, 
+            v453,
+            v453 + 1,
             v453 + 2
         }, {};
-    end, 
+    end,
     FORGLOOP = function(v454)
         local v455 = bit32.band(bit32.rshift(v454.inst, 8), 255);
         local v456 = {
@@ -1860,13 +1860,13 @@ local v460 = {
             table.insert(v456, v455 + 2 + v458);
         end;
         return {
-            v455, 
-            v455 + 1, 
+            v455,
+            v455 + 1,
             v455 + 2
         }, v456;
     end
 };
-local l_v460_0 = v460 --[[ copy: 86 -> 108 ]];
+local l_v460_0 = v460 ;
 do
     local l_v302_0 = v302;
     v301 = function(v463)
@@ -2217,7 +2217,7 @@ for v534 = 48, 57 do
     v533[v534] = true;
 end;
 local _ = {
-    [" "] = true, 
+    [" "] = true,
     ["\t"] = true
 };
 local function v538(v536)
@@ -2379,14 +2379,14 @@ local function v1121(v552)
             local v1101 = {
                 NOP = function(_, _)
                     v590("NOP", "-- Do nothing");
-                end, 
+                end,
                 BREAK = function(_, _)
                     v590("BREAK", "-- Stop execution for debugger");
-                end, 
+                end,
                 LOADNIL = function(v601, _)
                     local v603 = bit32.band(bit32.rshift(v601, 8), 255);
                     v590("LOADNIL " .. v603, "var" .. v603 .. " = nil");
-                end, 
+                end,
                 LOADB = function(v604, _)
                     local v606 = bit32.band(bit32.rshift(v604, 8), 255);
                     local v607 = bit32.band(bit32.rshift(v604, 16), 255);
@@ -2407,23 +2407,23 @@ local function v1121(v552)
                         v590("LOADB " .. v606 .. ", " .. v607 .. ", " .. v608, "var" .. v606 .. " = " .. (v607 > 0 and "true" or "false") .. " -- goto [" .. v609 .. "]");
                         return;
                     end;
-                end, 
+                end,
                 LOADN = function(v611, _)
                     local v613 = bit32.band(bit32.rshift(v611, 8), 255);
                     buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v611, 16), 65535)));
                     local v614 = buffer.readi16(v569, 0);
                     v590("LOADN " .. v613 .. ", " .. v614, "var" .. v613 .. " = " .. v614);
-                end, 
+                end,
                 LOADK = function(v615, _)
                     local v617 = bit32.band(bit32.rshift(v615, 8), 255);
                     local v618 = bit32.band(bit32.rshift(v615, 16), 65535);
                     v590("LOADK " .. v617 .. ", " .. v618, "var" .. v617 .. " = " .. v550(l_constants_0[v618]));
-                end, 
+                end,
                 MOVE = function(v619, _)
                     local v621 = bit32.band(bit32.rshift(v619, 8), 255);
                     local v622 = bit32.band(bit32.rshift(v619, 16), 255);
                     v590("MOVE " .. v621 .. ", " .. v622, "var" .. v621 .. " = var" .. v622);
-                end, 
+                end,
                 GETGLOBAL = function(v623, _)
                     local v625 = bit32.band(bit32.rshift(v623, 8), 255);
                     local v626 = bit32.band(bit32.rshift(v623, 24), 255);
@@ -2441,7 +2441,7 @@ local function v1121(v552)
                         v590("GETGLOBAL " .. v625 .. ", " .. v626 .. " [" .. l_v627_0 .. "]", "var" .. v625 .. " = getfenv()[" .. v550(v627) .. "]");
                         return;
                     end;
-                end, 
+                end,
                 SETGLOBAL = function(v629, _)
                     local v631 = bit32.band(bit32.rshift(v629, 8), 255);
                     local v632 = bit32.band(bit32.rshift(v629, 24), 255);
@@ -2459,21 +2459,21 @@ local function v1121(v552)
                         v590("SETGLOBAL " .. v631 .. ", " .. v632 .. " [" .. l_v633_0 .. "]", "getfenv()[" .. v550(v633) .. "] = var" .. v631);
                         return;
                     end;
-                end, 
+                end,
                 GETUPVAL = function(v635, _)
                     local v637 = bit32.band(bit32.rshift(v635, 8), 255);
                     local v638 = bit32.band(bit32.rshift(v635, 16), 255);
                     v590("GETUPVAL " .. v637 .. ", " .. v638, "var" .. v637 .. " = " .. "up" .. v638);
-                end, 
+                end,
                 SETUPVAL = function(v639, _)
                     local v641 = bit32.band(bit32.rshift(v639, 8), 255);
                     local v642 = bit32.band(bit32.rshift(v639, 16), 255);
                     v590("SETUPVAL " .. v641 .. ", " .. v642, "up" .. v642 .. " = var" .. v641);
-                end, 
+                end,
                 CLOSEUPVALS = function(v643, _)
                     local v645 = bit32.band(bit32.rshift(v643, 8), 255);
                     v590("CLOSEUPVALS " .. v645, "move_upvalues_to_heap(var" .. v645 .. "->...)");
-                end, 
+                end,
                 GETIMPORT = function(v646, _)
                     local v648 = bit32.band(bit32.rshift(v646, 8), 255);
                     local v649 = bit32.band(bit32.rshift(v646, 16), 65535);
@@ -2508,19 +2508,19 @@ local function v1121(v552)
                         v590("GETIMPORT " .. v648 .. ", " .. v649 .. " [0x" .. (v64[bit32.rshift(l_v650_0, 24)] .. v64[bit32.band(bit32.rrotate(l_v650_0, 16), 255)] .. v64[bit32.band(bit32.rrotate(l_v650_0, 8), 255)] .. v64[bit32.band(l_v650_0, 255)]) .. "]", "var" .. v648 .. " = getfenv()[" .. v550(v652) .. "]");
                         return;
                     end;
-                end, 
+                end,
                 GETTABLE = function(v658, _)
                     local v660 = bit32.band(bit32.rshift(v658, 8), 255);
                     local v661 = bit32.band(bit32.rshift(v658, 16), 255);
                     local v662 = bit32.band(bit32.rshift(v658, 24), 255);
                     v590("GETTABLE " .. v660 .. ", " .. v661 .. ", " .. v662, "var" .. v660 .. " = var" .. v661 .. "[var" .. v662 .. "]");
-                end, 
+                end,
                 SETTABLE = function(v663, _)
                     local v665 = bit32.band(bit32.rshift(v663, 8), 255);
                     local v666 = bit32.band(bit32.rshift(v663, 16), 255);
                     local v667 = bit32.band(bit32.rshift(v663, 24), 255);
                     v590("SETTABLE " .. v665 .. ", " .. v666 .. ", " .. v667, "var" .. v666 .. "[var" .. v667 .. "] = var" .. v665);
-                end, 
+                end,
                 GETTABLEKS = function(v668, _)
                     local v670 = bit32.band(bit32.rshift(v668, 8), 255);
                     local v671 = bit32.band(bit32.rshift(v668, 16), 255);
@@ -2539,7 +2539,7 @@ local function v1121(v552)
                         v590("GETTABLEKS " .. v670 .. ", " .. v671 .. ", " .. v672 .. " [" .. l_v673_0 .. "]", "var" .. v670 .. " = var" .. v671 .. "[" .. v550(v673) .. "]");
                         return;
                     end;
-                end, 
+                end,
                 SETTABLEKS = function(v675, _)
                     local v677 = bit32.band(bit32.rshift(v675, 8), 255);
                     local v678 = bit32.band(bit32.rshift(v675, 16), 255);
@@ -2558,19 +2558,19 @@ local function v1121(v552)
                         v590("SETTABLEKS " .. v677 .. ", " .. v678 .. ", " .. v679 .. " [" .. l_v680_0 .. "]", "var" .. v678 .. "[" .. v550(v680) .. "] = var" .. v677);
                         return;
                     end;
-                end, 
+                end,
                 GETTABLEN = function(v682, _)
                     local v684 = bit32.band(bit32.rshift(v682, 8), 255);
                     local v685 = bit32.band(bit32.rshift(v682, 16), 255);
                     local v686 = bit32.band(bit32.rshift(v682, 24), 255);
                     v590("GETTABLEN " .. v684 .. ", " .. v685 .. ", " .. v686, "var" .. v684 .. " = var" .. v685 .. "[" .. v686 .. "]");
-                end, 
+                end,
                 SETTABLEN = function(v687, _)
                     local v689 = bit32.band(bit32.rshift(v687, 8), 255);
                     local v690 = bit32.band(bit32.rshift(v687, 16), 255);
                     local v691 = bit32.band(bit32.rshift(v687, 24), 255);
                     v590("SETTABLEN " .. v689 .. ", " .. v690 .. ", " .. v691, "var" .. v690 .. "[" .. v691 .. "] = var" .. v689);
-                end, 
+                end,
                 NAMECALL = function(v692, _)
                     local v694 = bit32.band(bit32.rshift(v692, 8), 255);
                     local v695 = bit32.band(bit32.rshift(v692, 16), 255);
@@ -2589,7 +2589,7 @@ local function v1121(v552)
                         v590("NAMECALL " .. v694 .. ", " .. v695 .. ", " .. v696 .. " [" .. l_v697_0 .. "]", "var" .. v694 + 1 .. " = var" .. v695 .. "; var" .. v694 .. " = var" .. v695 .. "[" .. v550(v697) .. "] -- Invokes __namecall");
                         return;
                     end;
-                end, 
+                end,
                 CALL = function(v699, _)
                     local v701 = bit32.band(bit32.rshift(v699, 8), 255);
                     local v702 = bit32.band(bit32.rshift(v699, 16), 255);
@@ -2625,7 +2625,7 @@ local function v1121(v552)
                         v590("CALL " .. v701 .. ", " .. v702 .. ", " .. v703, table.concat(v708, ", ") .. " = var" .. v701 .. "(" .. table.concat(v706, ", ") .. ")");
                         return;
                     end;
-                end, 
+                end,
                 RETURN = function(v710, _)
                     local v712 = bit32.band(bit32.rshift(v710, 8), 255);
                     local v713 = bit32.band(bit32.rshift(v710, 16), 255);
@@ -2640,7 +2640,7 @@ local function v1121(v552)
                         v590("RETURN " .. v712 .. ", " .. v713, "return var" .. v712 .. "->var" .. v712 + v714 - 1);
                         return;
                     end;
-                end, 
+                end,
                 JUMP = function(v715, _)
                     buffer.writeu16(v44, 0, (bit32.band(bit32.rshift(v715, 16), 65535)));
                     local v717 = buffer.readi16(v44, 0);
@@ -2654,7 +2654,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("JUMP " .. v717, "-- goto [" .. v718 .. "]");
-                end, 
+                end,
                 JUMPBACK = function(v720, _)
                     buffer.writeu16(v44, 0, (bit32.band(bit32.rshift(v720, 16), 65535)));
                     local v722 = buffer.readi16(v44, 0);
@@ -2668,7 +2668,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("JUMPBACK " .. v722, "-- goto [" .. v723 .. "] (likely while/repeat loop)");
-                end, 
+                end,
                 JUMPIF = function(v725, _)
                     local v727 = bit32.band(bit32.rshift(v725, 8), 255);
                     buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v725, 16), 65535)));
@@ -2683,7 +2683,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("JUMPIF " .. v727 .. ", " .. v728, "if var" .. v727 .. " then goto [" .. v729 .. "] end");
-                end, 
+                end,
                 JUMPIFNOT = function(v731, _)
                     local v733 = bit32.band(bit32.rshift(v731, 8), 255);
                     buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v731, 16), 65535)));
@@ -2698,7 +2698,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("JUMPIFNOT " .. v733 .. ", " .. v734, "if not var" .. v733 .. " then goto [" .. v735 .. "] end");
-                end, 
+                end,
                 JUMPIFEQ = function(v737, _)
                     local v739 = bit32.band(bit32.rshift(v737, 8), 255);
                     buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v737, 16), 65535)));
@@ -2719,7 +2719,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("JUMPIFEQ " .. v739 .. ", " .. v740 .. " [" .. l_v741_0 .. "]", "if var" .. v739 .. " == var" .. l_v741_0 .. " then goto [" .. v741 .. "] end");
-                end, 
+                end,
                 JUMPIFLE = function(v744, _)
                     local v746 = bit32.band(bit32.rshift(v744, 8), 255);
                     buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v744, 16), 65535)));
@@ -2740,7 +2740,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("JUMPIFLE " .. v746 .. ", " .. v747 .. " [" .. l_v748_0 .. "]", "if var" .. v746 .. " <= var" .. l_v748_0 .. " then goto [" .. v748 .. "] end");
-                end, 
+                end,
                 JUMPIFLT = function(v751, _)
                     local v753 = bit32.band(bit32.rshift(v751, 8), 255);
                     buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v751, 16), 65535)));
@@ -2761,7 +2761,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("JUMPIFLT " .. v753 .. ", " .. v754 .. " [" .. l_v755_0 .. "]", "if var" .. v753 .. " < var" .. l_v755_0 .. " then goto [" .. v755 .. "] end");
-                end, 
+                end,
                 JUMPIFNOTEQ = function(v758, _)
                     local v760 = bit32.band(bit32.rshift(v758, 8), 255);
                     buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v758, 16), 65535)));
@@ -2782,7 +2782,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("JUMPIFNOTEQ " .. v760 .. ", " .. v761 .. " [" .. l_v762_0 .. "]", "if var" .. v760 .. " ~= var" .. l_v762_0 .. " then goto [" .. v762 .. "] end");
-                end, 
+                end,
                 JUMPIFNOTLE = function(v765, _)
                     local v767 = bit32.band(bit32.rshift(v765, 8), 255);
                     buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v765, 16), 65535)));
@@ -2803,7 +2803,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("JUMPIFNOTLE " .. v767 .. ", " .. v768 .. " [" .. l_v769_0 .. "]", "if var" .. v767 .. " > var" .. l_v769_0 .. " then goto [" .. v769 .. "] end");
-                end, 
+                end,
                 JUMPIFNOTLT = function(v772, _)
                     local v774 = bit32.band(bit32.rshift(v772, 8), 255);
                     buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v772, 16), 65535)));
@@ -2824,7 +2824,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("JUMPIFNOTLT " .. v774 .. ", " .. v775 .. " [" .. l_v776_0 .. "]", "if var" .. v774 .. " >= var" .. l_v776_0 .. " then goto [" .. v776 .. "] end");
-                end, 
+                end,
                 ADD = function(v779, _)
                     local v781 = bit32.band(bit32.rshift(v779, 8), 255);
                     local v782 = bit32.band(bit32.rshift(v779, 16), 255);
@@ -2839,7 +2839,7 @@ local function v1121(v552)
                         v590("ADD " .. v781 .. ", " .. v782 .. ", " .. v783, "var" .. v781 .. " = var" .. v782 .. " + var" .. v783);
                         return;
                     end;
-                end, 
+                end,
                 SUB = function(v784, _)
                     local v786 = bit32.band(bit32.rshift(v784, 8), 255);
                     local v787 = bit32.band(bit32.rshift(v784, 16), 255);
@@ -2851,7 +2851,7 @@ local function v1121(v552)
                         v590("SUB " .. v786 .. ", " .. v787 .. ", " .. v788, "var" .. v786 .. " = var" .. v787 .. " - var" .. v788);
                         return;
                     end;
-                end, 
+                end,
                 MUL = function(v789, _)
                     local v791 = bit32.band(bit32.rshift(v789, 8), 255);
                     local v792 = bit32.band(bit32.rshift(v789, 16), 255);
@@ -2866,7 +2866,7 @@ local function v1121(v552)
                         v590("MUL " .. v791 .. ", " .. v792 .. ", " .. v793, "var" .. v791 .. " = var" .. v792 .. " * var" .. v793);
                         return;
                     end;
-                end, 
+                end,
                 DIV = function(v794, _)
                     local v796 = bit32.band(bit32.rshift(v794, 8), 255);
                     local v797 = bit32.band(bit32.rshift(v794, 16), 255);
@@ -2878,7 +2878,7 @@ local function v1121(v552)
                         v590("DIV " .. v796 .. ", " .. v797 .. ", " .. v798, "var" .. v796 .. " = var" .. v797 .. " / var" .. v798);
                         return;
                     end;
-                end, 
+                end,
                 MOD = function(v799, _)
                     local v801 = bit32.band(bit32.rshift(v799, 8), 255);
                     local v802 = bit32.band(bit32.rshift(v799, 16), 255);
@@ -2890,7 +2890,7 @@ local function v1121(v552)
                         v590("MOD " .. v801 .. ", " .. v802 .. ", " .. v803, "var" .. v801 .. " = var" .. v802 .. " % var" .. v803);
                         return;
                     end;
-                end, 
+                end,
                 POW = function(v804, _)
                     local v806 = bit32.band(bit32.rshift(v804, 8), 255);
                     local v807 = bit32.band(bit32.rshift(v804, 16), 255);
@@ -2902,7 +2902,7 @@ local function v1121(v552)
                         v590("POW " .. v806 .. ", " .. v807 .. ", " .. v808, "var" .. v806 .. " = var" .. v807 .. " ^ var" .. v808);
                         return;
                     end;
-                end, 
+                end,
                 ADDK = function(v809, _)
                     local v811 = bit32.band(bit32.rshift(v809, 8), 255);
                     local v812 = bit32.band(bit32.rshift(v809, 16), 255);
@@ -2915,7 +2915,7 @@ local function v1121(v552)
                         v590("ADDK " .. v811 .. ", " .. v812 .. ", " .. v813, "var" .. v811 .. " = var" .. v812 .. " + " .. v550(v814));
                         return;
                     end;
-                end, 
+                end,
                 SUBK = function(v815, _)
                     local v817 = bit32.band(bit32.rshift(v815, 8), 255);
                     local v818 = bit32.band(bit32.rshift(v815, 16), 255);
@@ -2928,7 +2928,7 @@ local function v1121(v552)
                         v590("SUBK " .. v817 .. ", " .. v818 .. ", " .. v819, "var" .. v817 .. " = var" .. v818 .. " - " .. v550(v820));
                         return;
                     end;
-                end, 
+                end,
                 MULK = function(v821, _)
                     local v823 = bit32.band(bit32.rshift(v821, 8), 255);
                     local v824 = bit32.band(bit32.rshift(v821, 16), 255);
@@ -2941,7 +2941,7 @@ local function v1121(v552)
                         v590("MULK " .. v823 .. ", " .. v824 .. ", " .. v825, "var" .. v823 .. " = var" .. v824 .. " * " .. v550(v826));
                         return;
                     end;
-                end, 
+                end,
                 DIVK = function(v827, _)
                     local v829 = bit32.band(bit32.rshift(v827, 8), 255);
                     local v830 = bit32.band(bit32.rshift(v827, 16), 255);
@@ -2954,7 +2954,7 @@ local function v1121(v552)
                         v590("DIVK " .. v829 .. ", " .. v830 .. ", " .. v831, "var" .. v829 .. " = var" .. v830 .. " / " .. v550(v832));
                         return;
                     end;
-                end, 
+                end,
                 MODK = function(v833, _)
                     local v835 = bit32.band(bit32.rshift(v833, 8), 255);
                     local v836 = bit32.band(bit32.rshift(v833, 16), 255);
@@ -2967,7 +2967,7 @@ local function v1121(v552)
                         v590("MODK " .. v835 .. ", " .. v836 .. ", " .. v837, "var" .. v835 .. " = var" .. v836 .. " % " .. v550(v838));
                         return;
                     end;
-                end, 
+                end,
                 POWK = function(v839, _)
                     local v841 = bit32.band(bit32.rshift(v839, 8), 255);
                     local v842 = bit32.band(bit32.rshift(v839, 16), 255);
@@ -2980,33 +2980,33 @@ local function v1121(v552)
                         v590("POWK " .. v841 .. ", " .. v842 .. ", " .. v843, "var" .. v841 .. " = var" .. v842 .. " ^ " .. v550(v844));
                         return;
                     end;
-                end, 
+                end,
                 AND = function(v845, _)
                     local v847 = bit32.band(bit32.rshift(v845, 8), 255);
                     local v848 = bit32.band(bit32.rshift(v845, 16), 255);
                     local v849 = bit32.band(bit32.rshift(v845, 24), 255);
                     v590("AND " .. v847 .. ", " .. v848 .. ", " .. v849, "var" .. v847 .. " = var" .. v848 .. " and var" .. v849);
-                end, 
+                end,
                 OR = function(v850, _)
                     local v852 = bit32.band(bit32.rshift(v850, 8), 255);
                     local v853 = bit32.band(bit32.rshift(v850, 16), 255);
                     local v854 = bit32.band(bit32.rshift(v850, 24), 255);
                     v590("OR " .. v852 .. ", " .. v853 .. ", " .. v854, "var" .. v852 .. " = var" .. v853 .. " or var" .. v854);
-                end, 
+                end,
                 ANDK = function(v855, _)
                     local v857 = bit32.band(bit32.rshift(v855, 8), 255);
                     local v858 = bit32.band(bit32.rshift(v855, 16), 255);
                     local v859 = bit32.band(bit32.rshift(v855, 24), 255);
                     local v860 = l_constants_0[v859];
                     v590("ANDK " .. v857 .. ", " .. v858 .. ", " .. v859, "var" .. v857 .. " = var" .. v858 .. " and " .. v550(v860));
-                end, 
+                end,
                 ORK = function(v861, _)
                     local v863 = bit32.band(bit32.rshift(v861, 8), 255);
                     local v864 = bit32.band(bit32.rshift(v861, 16), 255);
                     local v865 = bit32.band(bit32.rshift(v861, 24), 255);
                     local v866 = l_constants_0[v865];
                     v590("ORK " .. v863 .. ", " .. v864 .. ", " .. v865, "var" .. v863 .. " = var" .. v864 .. " or " .. v550(v866));
-                end, 
+                end,
                 CONCAT = function(v867, _)
                     local v869 = bit32.band(bit32.rshift(v867, 8), 255);
                     local v870 = bit32.band(bit32.rshift(v867, 16), 255);
@@ -3023,22 +3023,22 @@ local function v1121(v552)
                         v590("CONCAT " .. v869 .. ", " .. v870 .. ", " .. v871, "var" .. v869 .. " = " .. table.concat(v872, ".."));
                         return;
                     end;
-                end, 
+                end,
                 NOT = function(v874, _)
                     local v876 = bit32.band(bit32.rshift(v874, 8), 255);
                     local v877 = bit32.band(bit32.rshift(v874, 16), 255);
                     v590("NOT " .. v876 .. ", " .. v877, "var" .. v876 .. " = not var" .. v877);
-                end, 
+                end,
                 MINUS = function(v878, _)
                     local v880 = bit32.band(bit32.rshift(v878, 8), 255);
                     local v881 = bit32.band(bit32.rshift(v878, 16), 255);
                     v590("MINUS " .. v880 .. ", " .. v881, "var" .. v880 .. " = -var" .. v881);
-                end, 
+                end,
                 LENGTH = function(v882, _)
                     local v884 = bit32.band(bit32.rshift(v882, 8), 255);
                     local v885 = bit32.band(bit32.rshift(v882, 16), 255);
                     v590("LENGTH " .. v884 .. ", " .. v885, "var" .. v884 .. " = #var" .. v885);
-                end, 
+                end,
                 NEWTABLE = function(v886, _)
                     local v888 = bit32.band(bit32.rshift(v886, 8), 255);
                     local v889 = bit32.band(bit32.rshift(v886, 16), 255);
@@ -3056,11 +3056,11 @@ local function v1121(v552)
                         v590("NEWTABLE " .. v888 .. ", " .. v889 .. " [" .. l_v891_0 .. "]", "var" .. v888 .. " = {}");
                         return;
                     end;
-                end, 
+                end,
                 DUPTABLE = function(v893, _)
                     local v895 = bit32.band(bit32.rshift(v893, 8), 255);
                     v590("DUPTABLE " .. v895 .. ", " .. bit32.band(bit32.rshift(v893, 16), 65535), "var" .. v895 .. " = {}");
-                end, 
+                end,
                 SETLIST = function(v896, _)
                     local v898 = bit32.band(bit32.rshift(v896, 8), 255);
                     local v899 = bit32.band(bit32.rshift(v896, 16), 255);
@@ -3079,7 +3079,7 @@ local function v1121(v552)
                         v590("SETLIST " .. v898 .. ", " .. v899 .. ", " .. v900 .. " [" .. l_v902_0 .. "]", "var" .. v898 .. "[" .. l_v902_0 .. "->" .. l_v902_0 + v901 - 1 .. "] = var" .. v899 .. "->var" .. v899 + v901 - 1);
                         return;
                     end;
-                end, 
+                end,
                 FORNPREP = function(v904, _)
                     local v906 = bit32.band(bit32.rshift(v904, 8), 255);
                     buffer.writeu16(v44, 0, (bit32.band(bit32.rshift(v904, 16), 65535)));
@@ -3094,7 +3094,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("FORNPREP " .. v906 .. ", " .. v907, "for var" .. v906 + 2 .. " = var" .. v906 + 2 .. ", var" .. v906 .. ", var" .. v906 + 1 .. " do -- If loop shouldn't start (var" .. v906 + 2 .. " > var" .. v906 .. ") then goto [" .. v908 .. "]");
-                end, 
+                end,
                 FORNLOOP = function(v910, _)
                     local v912 = bit32.band(bit32.rshift(v910, 8), 255);
                     buffer.writeu16(v44, 0, (bit32.band(bit32.rshift(v910, 16), 65535)));
@@ -3109,7 +3109,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("FORNLOOP " .. v912 .. ", " .. v913, "var" .. v912 + 2 .. " += var" .. v912 + 1 .. "; if var" .. v912 + 2 .. " <= var" .. v912 .. " then goto [" .. v914 .. "] end");
-                end, 
+                end,
                 FORGLOOP = function(v916, _)
                     local v918 = bit32.band(bit32.rshift(v916, 8), 255);
                     buffer.writeu16(v44, 0, (bit32.band(bit32.rshift(v916, 16), 65535)));
@@ -3141,7 +3141,7 @@ local function v1121(v552)
                         v590("FORGLOOP " .. v918 .. ", " .. v919 .. " [0x" .. (v64[bit32.rshift(l_v920_0, 24)] .. v64[bit32.band(bit32.rrotate(l_v920_0, 16), 255)] .. v64[bit32.band(bit32.rrotate(l_v920_0, 8), 255)] .. v64[bit32.band(l_v920_0, 255)]) .. "]", table.concat(v922, ", ") .. " = var" .. v918 .. "(var" .. v918 + 1 .. ", var" .. v918 + 2 .. "); if var" .. v918 + 3 .. " ~= nil then goto [" .. v924 .. "]");
                         return;
                     end;
-                end, 
+                end,
                 FORGPREP = function(v926, _)
                     local v928 = bit32.band(bit32.rshift(v926, 8), 255);
                     buffer.writeu16(v44, 0, (bit32.band(bit32.rshift(v926, 16), 65535)));
@@ -3156,7 +3156,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("FORGPREP " .. v928 .. ", " .. v929, "for var" .. v928 + 3 .. "->... in var" .. v928 .. ", var" .. v928 + 1 .. ", var" .. v928 + 2 .. " do -- If loop shouldn't start then goto [" .. v930 .. "]");
-                end, 
+                end,
                 FORGPREP_INEXT = function(v932, _)
                     local v934 = bit32.band(bit32.rshift(v932, 8), 255);
                     buffer.writeu16(v44, 0, (bit32.band(bit32.rshift(v932, 16), 65535)));
@@ -3171,10 +3171,10 @@ local function v1121(v552)
                         };
                     end;
                     v590("FORGPREP_INEXT " .. v934 .. ", " .. v935, "for var" .. v934 + 3 .. "->... in var" .. v934 .. ", var" .. v934 + 1 .. ", var" .. v934 + 2 .. " do -- If loop shouldn't start then goto [" .. v936 .. "]");
-                end, 
+                end,
                 DEP_FORGLOOP_INEXT = function(_, _)
                     v590("DEP_FORGLOOP_INEXT", "-- Deprecated instruction, send me some bytecode that has this and I'll support it");
-                end, 
+                end,
                 FORGPREP_NEXT = function(v940, _)
                     local v942 = bit32.band(bit32.rshift(v940, 8), 255);
                     buffer.writeu16(v44, 0, (bit32.band(bit32.rshift(v940, 16), 65535)));
@@ -3189,10 +3189,10 @@ local function v1121(v552)
                         };
                     end;
                     v590("FORGPREP_NEXT " .. v942 .. ", " .. v943, "for var" .. v942 + 3 .. "->... in var" .. v942 .. ", var" .. v942 + 1 .. ", var" .. v942 + 2 .. " do -- If loop shouldn't start then goto [" .. v944 .. "]");
-                end, 
+                end,
                 NATIVECALL = function(_, _)
                     v590("NATIVECALL", "-- Call to native code");
-                end, 
+                end,
                 GETVARARGS = function(v948, _)
                     local v950 = bit32.band(bit32.rshift(v948, 8), 255);
                     local v951 = bit32.band(bit32.rshift(v948, 16), 255);
@@ -3212,7 +3212,7 @@ local function v1121(v552)
                         v590("GETVARARGS " .. v950 .. ", " .. v951, "var" .. v950 .. " = ... -- Load " .. v952 .. " variable" .. (v952 == 1 and "" or "s"));
                         return;
                     end;
-                end, 
+                end,
                 NEWCLOSURE = function(v953, v954)
                     local v955 = bit32.band(bit32.rshift(v953, 8), 255);
                     local v956 = bit32.band(bit32.rshift(v953, 16), 65535);
@@ -3252,25 +3252,25 @@ local function v1121(v552)
                             break;
                         end;
                     end;
-                end, 
+                end,
                 DUPCLOSURE = function(v964, v965)
                     local v966 = false;
                     local v967 = bit32.band(bit32.rshift(v964, 8), 255);
                     local v968 = bit32.band(bit32.rshift(v964, 16), 65535);
                     local v969 = l_constants_0[v968];
                     local v970 = v555[v969.value] or {
-                        debug_name = ("INVALIDPROTO<%*>%*"):format(v24[v969.type] or "NONE", v969.value), 
-                        params_count = 0, 
-                        line_defined = -1, 
-                        stack_size = 0, 
-                        type_info = {}, 
-                        upvalues_count = 0, 
-                        is_vararg = false, 
-                        protos = {}, 
-                        constants = {}, 
-                        flags = 0, 
-                        code = {}, 
-                        line_info = {}, 
+                        debug_name = ("INVALIDPROTO<%*>%*"):format(v24[v969.type] or "NONE", v969.value),
+                        params_count = 0,
+                        line_defined = -1,
+                        stack_size = 0,
+                        type_info = {},
+                        upvalues_count = 0,
+                        is_vararg = false,
+                        protos = {},
+                        constants = {},
+                        flags = 0,
+                        code = {},
+                        line_info = {},
                         abs_line_info = {}
                     };
                     local _ = v562;
@@ -3313,7 +3313,7 @@ local function v1121(v552)
                             break;
                         end;
                     end;
-                end, 
+                end,
                 PREPVARARGS = function(v976, _)
                     local v978 = bit32.band(bit32.rshift(v976, 8), 255);
                     local v979 = v978 - 1;
@@ -3327,7 +3327,7 @@ local function v1121(v552)
                         v590("PREPVARARGS " .. v978, "-- Prepare for " .. v979 .. " variables as ...");
                         return;
                     end;
-                end, 
+                end,
                 LOADKX = function(v980, _)
                     local v982 = bit32.band(bit32.rshift(v980, 8), 255);
                     local v983 = l_code_0[v574];
@@ -3337,7 +3337,7 @@ local function v1121(v552)
                     v574 = v574 + 1;
                     local l_v983_0 = v983;
                     v590("LOADKX " .. v982 .. " [" .. l_v983_0 .. "]", "var" .. v982 .. " = " .. v550(l_constants_0[l_v983_0]));
-                end, 
+                end,
                 JUMPX = function(v985, _)
                     local v987 = bit32.arshift(v985, 8);
                     local v988 = v574 + v987;
@@ -3350,27 +3350,27 @@ local function v1121(v552)
                         };
                     end;
                     v590("JUMPX " .. v987, "-- goto [" .. v988 .. "]");
-                end, 
+                end,
                 COVERAGE = function(v990, _)
                     v590("COVERAGE " .. bit32.rshift(v990, 8), "instruction_hits[" .. v573 .. "] += 1");
-                end, 
+                end,
                 CAPTURE = function(v992, _)
                     v590("CAPTURE " .. bit32.band(bit32.rshift(v992, 8), 255) .. ", " .. bit32.band(bit32.rshift(v992, 16), 255), "-- Should not exist here, but equivelant to NOP");
-                end, 
+                end,
                 SUBRK = function(v994, _)
                     local v996 = bit32.band(bit32.rshift(v994, 8), 255);
                     local v997 = bit32.band(bit32.rshift(v994, 16), 255);
                     local v998 = bit32.band(bit32.rshift(v994, 24), 255);
                     local v999 = l_constants_0[v997];
                     v590("SUBRK " .. v996 .. ", " .. v997 .. ", " .. v998, "var" .. v996 .. " = " .. v550(v999) .. " - var" .. v998);
-                end, 
+                end,
                 DIVRK = function(v1000, _)
                     local v1002 = bit32.band(bit32.rshift(v1000, 8), 255);
                     local v1003 = bit32.band(bit32.rshift(v1000, 16), 255);
                     local v1004 = bit32.band(bit32.rshift(v1000, 24), 255);
                     local v1005 = l_constants_0[v1003];
                     v590("DIVRK " .. v1002 .. ", " .. v1003 .. ", " .. v1004, "var" .. v1002 .. " = " .. v550(v1005) .. " / var" .. v1004);
-                end, 
+                end,
                 FASTCALL = function(v1006, _)
                     local v1008 = bit32.band(bit32.rshift(v1006, 8), 255);
                     local v1009 = bit32.band(bit32.rshift(v1006, 24), 255);
@@ -3386,7 +3386,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("FASTCALL " .. v1008 .. ", " .. v1009, "... = " .. v1010 .. "(...) -- Uses args and results from call at [" .. v1011 .. "]. If successful, goto [" .. v1011 + 1 .. "]");
-                end, 
+                end,
                 FASTCALL1 = function(v1014, _)
                     local v1016 = bit32.band(bit32.rshift(v1014, 8), 255);
                     local v1017 = bit32.band(bit32.rshift(v1014, 16), 255);
@@ -3403,7 +3403,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("FASTCALL1 " .. v1016 .. ", " .. v1017 .. ", " .. v1018, "... = " .. v1019 .. "(var" .. v1017 .. ") -- Uses results from call at [" .. v1020 .. "]. If successful, goto [" .. v1020 + 1 .. "]");
-                end, 
+                end,
                 FASTCALL2 = function(v1023, _)
                     local v1025 = bit32.band(bit32.rshift(v1023, 8), 255);
                     local v1026 = bit32.band(bit32.rshift(v1023, 16), 255);
@@ -3426,7 +3426,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("FASTCALL2 " .. v1025 .. ", " .. v1026 .. ", " .. v1027, "... = " .. v1029 .. "(var" .. v1026 .. ", var" .. v1028 .. ") -- Uses results from call at [" .. v1030 .. "]. If successful, goto [" .. v1030 + 1 .. "]");
-                end, 
+                end,
                 FASTCALL2K = function(v1033, _)
                     local v1035 = bit32.band(bit32.rshift(v1033, 8), 255);
                     local v1036 = bit32.band(bit32.rshift(v1033, 16), 255);
@@ -3450,7 +3450,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("FASTCALL2K " .. v1035 .. ", " .. v1036 .. ", " .. v1037 .. " [" .. l_v1038_0 .. "]", "... = " .. v1040 .. "(var" .. v1036 .. ", " .. v550(v1038) .. ") -- Uses results from call at [" .. v1041 .. "]. If successful, goto [" .. v1041 + 1 .. "]");
-                end, 
+                end,
                 FASTCALL3 = function(v1044, _)
                     local v1046 = bit32.band(bit32.rshift(v1044, 8), 255);
                     local v1047 = bit32.band(bit32.rshift(v1044, 16), 255);
@@ -3475,7 +3475,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("FASTCALL3 " .. v1046 .. ", " .. v1047 .. ", " .. v1048, "... = " .. v1052 .. "(var" .. v1047 .. ", var" .. v1049 .. ", var" .. v1051 .. ") -- Uses results from call at [" .. v1053 .. "]. If successful, goto [" .. v1053 + 1 .. "]");
-                end, 
+                end,
                 JUMPXEQKNIL = function(v1056, _)
                     local v1058 = bit32.band(bit32.rshift(v1056, 8), 255);
                     buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v1056, 16), 65535)));
@@ -3500,7 +3500,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("JUMPXEQKNIL " .. v1058 .. ", " .. v1059 .. " [0x" .. (v64[bit32.rshift(l_v1060_0, 24)] .. v64[bit32.band(bit32.rrotate(l_v1060_0, 16), 255)] .. v64[bit32.band(bit32.rrotate(l_v1060_0, 8), 255)] .. v64[bit32.band(l_v1060_0, 255)]) .. "]", "if var" .. v1058 .. " " .. (v1060 and "~" or "=") .. "= nil then goto [" .. v1062 .. "] end");
-                end, 
+                end,
                 JUMPXEQKB = function(v1064, _)
                     local v1066 = bit32.band(bit32.rshift(v1064, 8), 255);
                     buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v1064, 16), 65535)));
@@ -3525,7 +3525,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("JUMPXEQKB " .. v1066 .. ", " .. v1067 .. " [0x" .. (v64[bit32.rshift(l_v1068_0, 24)] .. v64[bit32.band(bit32.rrotate(l_v1068_0, 16), 255)] .. v64[bit32.band(bit32.rrotate(l_v1068_0, 8), 255)] .. v64[bit32.band(l_v1068_0, 255)]) .. "]", "if var" .. v1066 .. " " .. (v1068 and "~" or "=") .. "= " .. (bit32.band(l_v1068_0, 1) == 0 and "false" or "true") .. " then goto [" .. v1070 .. "] end");
-                end, 
+                end,
                 JUMPXEQKN = function(v1072, _)
                     local v1074 = bit32.band(bit32.rshift(v1072, 8), 255);
                     buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v1072, 16), 65535)));
@@ -3551,7 +3551,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("JUMPXEQKN " .. v1074 .. ", " .. v1075 .. " [0x" .. (v64[bit32.rshift(l_v1076_0, 24)] .. v64[bit32.band(bit32.rrotate(l_v1076_0, 16), 255)] .. v64[bit32.band(bit32.rrotate(l_v1076_0, 8), 255)] .. v64[bit32.band(l_v1076_0, 255)]) .. "]", "if var" .. v1074 .. " " .. (v1076 and "~" or "=") .. "= " .. v550(v1078) .. " then goto [" .. v1079 .. "] end");
-                end, 
+                end,
                 JUMPXEQKS = function(v1081, _)
                     local v1083 = bit32.band(bit32.rshift(v1081, 8), 255);
                     buffer.writeu16(v569, 0, (bit32.band(bit32.rshift(v1081, 16), 65535)));
@@ -3577,7 +3577,7 @@ local function v1121(v552)
                         };
                     end;
                     v590("JUMPXEQKS " .. v1083 .. ", " .. v1084 .. " [0x" .. (v64[bit32.rshift(l_v1085_0, 24)] .. v64[bit32.band(bit32.rrotate(l_v1085_0, 16), 255)] .. v64[bit32.band(bit32.rrotate(l_v1085_0, 8), 255)] .. v64[bit32.band(l_v1085_0, 255)]) .. "]", "if var" .. v1083 .. " " .. (v1085 and "~" or "=") .. "= " .. v550(v1087) .. " then goto [" .. v1088 .. "] end");
-                end, 
+                end,
                 IDIV = function(v1090, _)
                     local v1092 = bit32.band(bit32.rshift(v1090, 8), 255);
                     local v1093 = bit32.band(bit32.rshift(v1090, 16), 255);
@@ -3589,7 +3589,7 @@ local function v1121(v552)
                         v590("IDIV " .. v1092 .. ", " .. v1093 .. ", " .. v1094, "var" .. v1092 .. " = var" .. v1093 .. " // var" .. v1094);
                         return;
                     end;
-                end, 
+                end,
                 IDIVK = function(v1095, _)
                     local v1097 = bit32.band(bit32.rshift(v1095, 8), 255);
                     local v1098 = bit32.band(bit32.rshift(v1095, 16), 255);
@@ -3729,7 +3729,7 @@ local function v4318(v1125, v1126)
         local v1142 = {};
         local function _(v1143, v1144)
             table.insert(v1142, {
-                type = v1143, 
+                type = v1143,
                 content = v1144
             });
         end;
@@ -3822,16 +3822,16 @@ local function v4318(v1125, v1126)
         end;
         local v1195 = 1;
         local v1196 = {
-            [0] = "nil", 
-            [1] = "boolean", 
-            [2] = "number", 
-            [3] = "string", 
-            [4] = "table", 
-            [5] = "function", 
-            [6] = "thread", 
-            [7] = "userdata", 
-            [8] = "vector", 
-            [9] = "buffer", 
+            [0] = "nil",
+            [1] = "boolean",
+            [2] = "number",
+            [3] = "string",
+            [4] = "table",
+            [5] = "function",
+            [6] = "thread",
+            [7] = "userdata",
+            [8] = "vector",
+            [9] = "buffer",
             [15] = "any"
         };
         local function _(v1197)
@@ -3839,12 +3839,12 @@ local function v4318(v1125, v1126)
             local v1199 = v1196[v1197];
             if v1199 then
                 return {
-                    type = v1199, 
+                    type = v1199,
                     optional = v1198
                 };
             else
                 return {
-                    type = "invalid", 
+                    type = "invalid",
                     optional = false
                 };
             end;
@@ -3855,11 +3855,11 @@ local function v4318(v1125, v1126)
         local v1203 = {};
         local function v1205(v1204)
             return {
-                t = "comment", 
-                lines = v1203, 
-                reads = {}, 
-                writes = {}, 
-                text = v1204, 
+                t = "comment",
+                lines = v1203,
+                reads = {},
+                writes = {},
+                text = v1204,
                 stack = 1
             };
         end;
@@ -3890,12 +3890,12 @@ local function v4318(v1125, v1126)
                 error((("[alloc] Variable %* already allocated"):format(v1219)));
             end;
             local v1222 = {
-                name = v1219, 
-                attributes = {}, 
-                reads = {}, 
-                writes = {}, 
-                registers = v1220, 
-                var_num = #v1221 + 1, 
+                name = v1219,
+                attributes = {},
+                reads = {},
+                writes = {},
+                registers = v1220,
+                var_num = #v1221 + 1,
                 var_list = v1221
             };
             v1206[v1219] = v1222;
@@ -3908,7 +3908,7 @@ local function v4318(v1125, v1126)
                 return v1225;
             else
                 return (v1223(v1224, {
-                    beginning = -1, 
+                    beginning = -1,
                     ending = -1
                 }, {}));
             end;
@@ -4018,7 +4018,7 @@ local function v4318(v1125, v1126)
             v1274 = l_l_v1274_0_0;
             v1207 = v1207 + 1;
             l_v1223_1 = l_v1223_1(v1274, {
-                beginning = v1270, 
+                beginning = v1270,
                 ending = v1270
             }, v1271);
             l_v1223_1.func_name = v1269;
@@ -4027,26 +4027,26 @@ local function v4318(v1125, v1126)
         local v1280 = {};
         local function v1281()
             return {
-                t = "nothing", 
-                lines = v1203, 
-                reads = {}, 
+                t = "nothing",
+                lines = v1203,
+                reads = {},
                 writes = {}
             };
         end;
         local function v1283(v1282)
             if v1282 then
                 return {
-                    t = "nil", 
-                    reads = {}, 
-                    writes = {}, 
-                    contributors = {}, 
+                    t = "nil",
+                    reads = {},
+                    writes = {},
+                    contributors = {},
                     invisible = true
                 };
             else
                 return {
-                    t = "nil", 
-                    reads = {}, 
-                    writes = {}, 
+                    t = "nil",
+                    reads = {},
+                    writes = {},
                     contributors = {}
                 };
             end;
@@ -4067,39 +4067,39 @@ local function v4318(v1125, v1126)
                 end;
             end;
             return {
-                t = "call", 
-                reads = v1287, 
-                writes = v1288, 
-                contributors = v1289, 
-                func = v1284, 
+                t = "call",
+                reads = v1287,
+                writes = v1288,
+                contributors = v1289,
+                func = v1284,
                 args = v1285
             };
         end;
         local function v1299(v1298)
             return {
-                t = "name", 
+                t = "name",
                 reads = {
                     v1298
-                }, 
-                writes = {}, 
-                contributors = {}, 
+                },
+                writes = {},
+                contributors = {},
                 name = v1298
             };
         end;
         local function v1301(v1300)
             return {
-                t = "not", 
-                reads = table.clone(v1300.reads), 
-                writes = table.clone(v1300.writes), 
-                contributors = table.clone(v1300.contributors), 
-                precedence = 2, 
+                t = "not",
+                reads = table.clone(v1300.reads),
+                writes = table.clone(v1300.writes),
+                contributors = table.clone(v1300.contributors),
+                precedence = 2,
                 rhs = v1300
             };
         end;
         local function v1309(v1302, v1303)
             local v1304 = {
-                t = "and", 
-                reads = v89(v1302.reads, v1303.reads), 
+                t = "and",
+                reads = v89(v1302.reads, v1303.reads),
                 writes = v89(v1302.writes, v1303.writes)
             };
             local l_contributors_0 = v1302.contributors;
@@ -4117,8 +4117,8 @@ local function v4318(v1125, v1126)
         local function v1318(v1310, v1311, v1312)
             if v1312 then
                 local v1313 = {
-                    t = "condition", 
-                    reads = v89(v1310.reads, v1312.reads), 
+                    t = "condition",
+                    reads = v89(v1310.reads, v1312.reads),
                     writes = v89(v1310.writes, v1312.writes)
                 };
                 local l_contributors_2 = v1310.contributors;
@@ -4135,25 +4135,25 @@ local function v4318(v1125, v1126)
                 return v1313;
             else
                 return {
-                    t = "condition", 
-                    reads = table.clone(v1310.reads), 
-                    writes = table.clone(v1310.writes), 
-                    contributors = table.clone(v1310.contributors), 
-                    precedence = 2, 
-                    condition = v1311, 
+                    t = "condition",
+                    reads = table.clone(v1310.reads),
+                    writes = table.clone(v1310.writes),
+                    contributors = table.clone(v1310.contributors),
+                    precedence = 2,
+                    condition = v1311,
                     lhs = v1310
                 };
             end;
         end;
         local function v1325(v1319, v1320, v1321, v1322, v1323)
             local v1324 = {
-                t = "define function", 
-                reads = {}, 
-                writes = {}, 
-                lines = v1319, 
-                func = v1320, 
-                func_name = v1321, 
-                define_function_type = v1322, 
+                t = "define function",
+                reads = {},
+                writes = {},
+                lines = v1319,
+                func = v1320,
+                func_name = v1321,
+                define_function_type = v1322,
                 path = v1323
             };
             v1187(v1324, v1320);
@@ -4161,10 +4161,10 @@ local function v4318(v1125, v1126)
         end;
         local function v1328(v1326, v1327)
             return {
-                t = "return", 
-                lines = v1326, 
-                reads = {}, 
-                writes = {}, 
+                t = "return",
+                lines = v1326,
+                reads = {},
+                writes = {},
                 values = v1327
             };
         end;
@@ -4193,16 +4193,16 @@ local function v4318(v1125, v1126)
         end;
         local function v1342()
             return {
-                global_failed_instructions_count = v551, 
-                notices = table.clone(v1142), 
-                lines = table.clone(v1203), 
-                variable_mapped_long_string_constants = table.clone(v1332), 
-                variable_mapped_long_string_constants_order = table.clone(v1333), 
-                long_string_usage_counts = table.clone(v1334), 
-                long_string_constant_already_used = table.clone(v1335), 
-                long_string_variable_count = v1336, 
-                lines_had_skipped_return = table.clone(v1337), 
-                condition_stop_points = table.clone(v1338), 
+                global_failed_instructions_count = v551,
+                notices = table.clone(v1142),
+                lines = table.clone(v1203),
+                variable_mapped_long_string_constants = table.clone(v1332),
+                variable_mapped_long_string_constants_order = table.clone(v1333),
+                long_string_usage_counts = table.clone(v1334),
+                long_string_constant_already_used = table.clone(v1335),
+                long_string_variable_count = v1336,
+                lines_had_skipped_return = table.clone(v1337),
+                condition_stop_points = table.clone(v1338),
                 marked_condition_stop_points = v1339
             };
         end;
@@ -4257,9 +4257,9 @@ local function v4318(v1125, v1126)
                 table.insert(v1203, v1363);
                 v1146[v1363] = v1364;
                 v1363 = {
-                    t = "Unknown", 
-                    lines = v1203, 
-                    reads = {}, 
+                    t = "Unknown",
+                    lines = v1203,
+                    reads = {},
                     writes = {}
                 };
             end;
@@ -4272,9 +4272,9 @@ local function v4318(v1125, v1126)
                 table.insert(v1367 or v1203, v1366, v1363);
                 v1146[v1363] = v1364;
                 v1363 = {
-                    t = "Unknown", 
-                    lines = v1203, 
-                    reads = {}, 
+                    t = "Unknown",
+                    lines = v1203,
+                    reads = {},
                     writes = {}
                 };
             end;
@@ -4300,9 +4300,9 @@ local function v4318(v1125, v1126)
             end;
             local function _()
                 v1363 = {
-                    t = "nothing", 
-                    lines = v1203, 
-                    reads = {}, 
+                    t = "nothing",
+                    lines = v1203,
+                    reads = {},
                     writes = {}
                 };
             end;
@@ -4313,11 +4313,11 @@ local function v4318(v1125, v1126)
                 end;
                 assert(#v1380 > 0);
                 v1363 = {
-                    t = "define variable", 
-                    lines = v1203, 
-                    reads = {}, 
-                    writes = {}, 
-                    names = v1380, 
+                    t = "define variable",
+                    lines = v1203,
+                    reads = {},
+                    writes = {},
+                    names = v1380,
                     value = v1381
                 };
                 if v1381.t == "nil" and v1381.invisible then
@@ -4427,11 +4427,11 @@ local function v4318(v1125, v1126)
             end;
             local function v1435(v1432, v1433)
                 local v1434 = {
-                    t = "set variable", 
-                    reads = {}, 
-                    writes = {}, 
-                    lines = v1203, 
-                    name = v1432, 
+                    t = "set variable",
+                    reads = {},
+                    writes = {},
+                    lines = v1203,
+                    name = v1432,
                     value = v1433
                 };
                 v1187(v1434, v1433);
@@ -4442,11 +4442,11 @@ local function v4318(v1125, v1126)
             v1426 = v1435;
             local function v1439(v1436, v1437)
                 local v1438 = {
-                    t = "set global", 
-                    reads = {}, 
-                    writes = {}, 
-                    lines = v1203, 
-                    name = v1436, 
+                    t = "set global",
+                    reads = {},
+                    writes = {},
+                    lines = v1203,
+                    name = v1436,
                     value = v1437
                 };
                 v1187(v1438, v1437);
@@ -4471,12 +4471,12 @@ local function v4318(v1125, v1126)
                 end;
                 local l_v1443_0 = v1443;
                 v1363 = {
-                    t = "set table", 
-                    lines = v1203, 
-                    reads = {}, 
-                    writes = {}, 
-                    table = l_v1443_0, 
-                    key = v1441, 
+                    t = "set table",
+                    lines = v1203,
+                    reads = {},
+                    writes = {},
+                    table = l_v1443_0,
+                    key = v1441,
                     value = v1442
                 };
                 v1187(v1363, l_v1443_0);
@@ -4535,26 +4535,26 @@ local function v4318(v1125, v1126)
             end;
             local function v1460()
                 v1363 = {
-                    t = "break", 
-                    lines = v1203, 
-                    reads = {}, 
+                    t = "break",
+                    lines = v1203,
+                    reads = {},
                     writes = {}
                 };
             end;
             local function v1461()
                 v1363 = {
-                    t = "continue", 
-                    lines = v1203, 
-                    reads = {}, 
+                    t = "continue",
+                    lines = v1203,
+                    reads = {},
                     writes = {}
                 };
             end;
             local function v1463(v1462)
                 v1363 = {
-                    t = "unknown jump", 
-                    lines = v1203, 
-                    reads = {}, 
-                    writes = {}, 
+                    t = "unknown jump",
+                    lines = v1203,
+                    reads = {},
+                    writes = {},
                     destination = v1462
                 };
             end;
@@ -4583,7 +4583,7 @@ local function v4318(v1125, v1126)
                     local v1476 = {};
                     for v1477 = l_beginning_2, l_ending_1 do
                         local v1478 = {
-                            beginning = v1477, 
+                            beginning = v1477,
                             ending = v1477
                         };
                         local l_v1223_3 = v1223;
@@ -4760,12 +4760,12 @@ local function v4318(v1125, v1126)
                 end;
                 local l_v1526_0 = v1526;
                 v1526 = {
-                    t = "call", 
-                    reads = {}, 
-                    writes = {}, 
-                    lines = v1203, 
-                    func = l_v1526_0, 
-                    args = v1525, 
+                    t = "call",
+                    reads = {},
+                    writes = {},
+                    lines = v1203,
+                    func = l_v1526_0,
+                    args = v1525,
                     namecall_method = v1524
                 };
                 v1187(v1526, l_v1526_0);
@@ -4807,19 +4807,19 @@ local function v4318(v1125, v1126)
             end;
             local function v1540(v1539)
                 return v1375(v1539, {
-                    t = "varargs", 
-                    reads = {}, 
-                    writes = {}, 
+                    t = "varargs",
+                    reads = {},
+                    writes = {},
                     contributors = {}
                 });
             end;
             local function v1543(v1541, v1542)
                 assert(v1542);
                 return v1375(v1541, {
-                    t = "global", 
-                    reads = {}, 
-                    writes = {}, 
-                    contributors = {}, 
+                    t = "global",
+                    reads = {},
+                    writes = {},
+                    contributors = {},
                     name = v1542
                 });
             end;
@@ -4844,31 +4844,31 @@ local function v4318(v1125, v1126)
                     end;
                 end;
                 return v1375(v1544, {
-                    t = "constant", 
-                    reads = {}, 
-                    writes = {}, 
-                    contributors = {}, 
+                    t = "constant",
+                    reads = {},
+                    writes = {},
+                    contributors = {},
                     const = v1545
                 });
             end;
             local function v1550(v1549)
                 return v1375(v1549, {
-                    t = "new table", 
-                    reads = {}, 
-                    writes = {}, 
-                    contributors = {}, 
-                    initializers = {}, 
+                    t = "new table",
+                    reads = {},
+                    writes = {},
+                    contributors = {},
+                    initializers = {},
                     initializers_order = {}
                 });
             end;
             local function v1555(v1551, v1552, v1553, v1554)
                 return v1375(v1551, {
-                    t = "constant index", 
-                    reads = table.clone(v1552.reads), 
-                    writes = table.clone(v1552.writes), 
-                    contributors = table.clone(v1552.contributors), 
-                    table = v1552, 
-                    index = v1553, 
+                    t = "constant index",
+                    reads = table.clone(v1552.reads),
+                    writes = table.clone(v1552.writes),
+                    contributors = table.clone(v1552.contributors),
+                    table = v1552,
+                    index = v1553,
                     namecall = v1554
                 });
             end;
@@ -4877,10 +4877,10 @@ local function v4318(v1125, v1126)
             end;
             local function v1560(v1558, v1559)
                 return v1375(v1558, {
-                    t = "boolean", 
-                    reads = {}, 
-                    writes = {}, 
-                    contributors = {}, 
+                    t = "boolean",
+                    reads = {},
+                    writes = {},
+                    contributors = {},
                     value = v1559
                 });
             end;
@@ -4888,8 +4888,8 @@ local function v4318(v1125, v1126)
                 local l_v1375_0 = v1375;
                 local l_v1561_0 = v1561;
                 local v1566 = {
-                    t = "or", 
-                    reads = v89(v1562.reads, v1563.reads), 
+                    t = "or",
+                    reads = v89(v1562.reads, v1563.reads),
                     writes = v89(v1562.writes, v1563.writes)
                 };
                 local l_contributors_4 = v1562.contributors;
@@ -4914,8 +4914,8 @@ local function v4318(v1125, v1126)
                 local l_v1375_1 = v1375;
                 local l_v1581_0 = v1581;
                 local v1586 = {
-                    t = "addition", 
-                    reads = v89(v1582.reads, v1583.reads), 
+                    t = "addition",
+                    reads = v89(v1582.reads, v1583.reads),
                     writes = v89(v1582.writes, v1583.writes)
                 };
                 local l_contributors_6 = v1582.contributors;
@@ -4934,8 +4934,8 @@ local function v4318(v1125, v1126)
                 local l_v1375_2 = v1375;
                 local l_v1592_0 = v1592;
                 local v1597 = {
-                    t = "subtraction", 
-                    reads = v89(v1593.reads, v1594.reads), 
+                    t = "subtraction",
+                    reads = v89(v1593.reads, v1594.reads),
                     writes = v89(v1593.writes, v1594.writes)
                 };
                 local l_contributors_8 = v1593.contributors;
@@ -4954,8 +4954,8 @@ local function v4318(v1125, v1126)
                 local l_v1375_3 = v1375;
                 local l_v1603_0 = v1603;
                 local v1608 = {
-                    t = "multiplication", 
-                    reads = v89(v1604.reads, v1605.reads), 
+                    t = "multiplication",
+                    reads = v89(v1604.reads, v1605.reads),
                     writes = v89(v1604.writes, v1605.writes)
                 };
                 local l_contributors_10 = v1604.contributors;
@@ -4974,8 +4974,8 @@ local function v4318(v1125, v1126)
                 local l_v1375_4 = v1375;
                 local l_v1614_0 = v1614;
                 local v1619 = {
-                    t = "division", 
-                    reads = v89(v1615.reads, v1616.reads), 
+                    t = "division",
+                    reads = v89(v1615.reads, v1616.reads),
                     writes = v89(v1615.writes, v1616.writes)
                 };
                 local l_contributors_12 = v1615.contributors;
@@ -4994,8 +4994,8 @@ local function v4318(v1125, v1126)
                 local l_v1375_5 = v1375;
                 local l_v1625_0 = v1625;
                 local v1630 = {
-                    t = "floor division", 
-                    reads = v89(v1626.reads, v1627.reads), 
+                    t = "floor division",
+                    reads = v89(v1626.reads, v1627.reads),
                     writes = v89(v1626.writes, v1627.writes)
                 };
                 local l_contributors_14 = v1626.contributors;
@@ -5014,8 +5014,8 @@ local function v4318(v1125, v1126)
                 local l_v1375_6 = v1375;
                 local l_v1636_0 = v1636;
                 local v1641 = {
-                    t = "modulus", 
-                    reads = v89(v1637.reads, v1638.reads), 
+                    t = "modulus",
+                    reads = v89(v1637.reads, v1638.reads),
                     writes = v89(v1637.writes, v1638.writes)
                 };
                 local l_contributors_16 = v1637.contributors;
@@ -5035,21 +5035,21 @@ local function v4318(v1125, v1126)
             end;
             local function v1652(v1650, v1651)
                 return v1375(v1650, {
-                    t = "negate", 
-                    reads = table.clone(v1651.reads), 
-                    writes = table.clone(v1651.writes), 
-                    contributors = table.clone(v1651.contributors), 
-                    precedence = 2, 
+                    t = "negate",
+                    reads = table.clone(v1651.reads),
+                    writes = table.clone(v1651.writes),
+                    contributors = table.clone(v1651.contributors),
+                    precedence = 2,
                     rhs = v1651
                 });
             end;
             local function v1655(v1653, v1654)
                 return v1375(v1653, {
-                    t = "length", 
-                    reads = table.clone(v1654.reads), 
-                    writes = table.clone(v1654.writes), 
-                    contributors = table.clone(v1654.contributors), 
-                    precedence = 2, 
+                    t = "length",
+                    reads = table.clone(v1654.reads),
+                    writes = table.clone(v1654.writes),
+                    contributors = table.clone(v1654.contributors),
+                    precedence = 2,
                     rhs = v1654
                 });
             end;
@@ -5057,8 +5057,8 @@ local function v4318(v1125, v1126)
                 local l_v1375_7 = v1375;
                 local l_v1656_0 = v1656;
                 local v1661 = {
-                    t = "exponentiation", 
-                    reads = v89(v1657.reads, v1658.reads), 
+                    t = "exponentiation",
+                    reads = v89(v1657.reads, v1658.reads),
                     writes = v89(v1657.writes, v1658.writes)
                 };
                 local l_contributors_18 = v1657.contributors;
@@ -5089,11 +5089,11 @@ local function v4318(v1125, v1126)
                     end;
                 end;
                 return v1375(v1667, {
-                    t = "concatenation", 
-                    reads = v1669, 
-                    writes = v1670, 
-                    contributors = v1671, 
-                    precedence = 0, 
+                    t = "concatenation",
+                    reads = v1669,
+                    writes = v1670,
+                    contributors = v1671,
+                    precedence = 0,
                     exprs = v1668
                 });
             end;
@@ -5101,8 +5101,8 @@ local function v4318(v1125, v1126)
                 local l_v1375_8 = v1375;
                 local l_v1680_0 = v1680;
                 local v1685 = {
-                    t = "get table", 
-                    reads = v89(v1681.reads, v1682.reads), 
+                    t = "get table",
+                    reads = v89(v1681.reads, v1682.reads),
                     writes = v89(v1681.writes, v1682.writes)
                 };
                 local l_contributors_20 = v1681.contributors;
@@ -5227,21 +5227,21 @@ local function v4318(v1125, v1126)
                 end;
                 v1213[l_v1724_0] = v1735;
                 l_v1223_4 = l_v1223_4(l_l_v1724_0_0, {
-                    beginning = v1721, 
+                    beginning = v1721,
                     ending = v1721
                 }, {});
                 local v1736 = v1375(v1721, {
-                    t = "function", 
-                    reads = {}, 
-                    writes = {}, 
-                    contributors = v1723, 
+                    t = "function",
+                    reads = {},
+                    writes = {},
+                    contributors = v1723,
                     varname = l_v1223_4
                 });
                 l_v1724_0 = v1203[#v1203];
                 v1516(v1721, v1736);
                 if not v1389[v1721] then
                     v1417({
-                        beginning = v1721, 
+                        beginning = v1721,
                         ending = v1721
                     }, v1736, {
                         l_v1223_4
@@ -5262,7 +5262,7 @@ local function v4318(v1125, v1126)
                                 local v1742 = v1347.upvalues[bit32.band(bit32.rshift(l_inst_37, 16), 255)];
                                 assert(v1742.name.attributes.is_upvalue);
                                 table.insert(v1737, {
-                                    name = v1742.name, 
+                                    name = v1742.name,
                                     access = v1742.access == "readonly" and "copied, readonly" or v1742.access == "read and write" and "copied, read and write" or v1742.access
                                 });
                             else
@@ -5270,9 +5270,9 @@ local function v4318(v1125, v1126)
                                 v1371(l_prefix_warning_1 .. ": Malformed upref, replacing with `" .. v1743 .. "`");
                                 table.insert(v1737, {
                                     name = v1223(v1743, {
-                                        beginning = -1, 
+                                        beginning = -1,
                                         ending = -1
-                                    }, {}), 
+                                    }, {}),
                                     access = "copied, unknown"
                                 });
                             end;
@@ -5294,13 +5294,13 @@ local function v4318(v1125, v1126)
                                 if v1745.t ~= "name" then
                                     local l_v1417_0 = v1417;
                                     local v1748 = {
-                                        beginning = v1721, 
+                                        beginning = v1721,
                                         ending = v1721
                                     };
                                     local l_v1736_0 = v1736;
                                     local v1750 = {};
                                     local v1751 = {
-                                        beginning = v1721, 
+                                        beginning = v1721,
                                         ending = v1721
                                     };
                                     local v1752 = {};
@@ -5344,13 +5344,13 @@ local function v4318(v1125, v1126)
                                         l_name_5.attributes.is_upvalue = "read";
                                     end;
                                     table.insert(v1737, {
-                                        name = l_name_5, 
+                                        name = l_name_5,
                                         access = "readonly"
                                     });
                                 else
                                     l_name_5.attributes.is_upvalue = "write";
                                     table.insert(v1737, {
-                                        name = l_name_5, 
+                                        name = l_name_5,
                                         access = "read and write"
                                     });
                                 end;
@@ -5369,12 +5369,12 @@ local function v4318(v1125, v1126)
                                 if v1762.t ~= "name" then
                                     local l_v1425_0 = v1425;
                                     local v1765 = {
-                                        beginning = v1744, 
+                                        beginning = v1744,
                                         ending = v1744
                                     };
                                     local v1766 = {};
                                     local v1767 = {
-                                        beginning = v1744, 
+                                        beginning = v1744,
                                         ending = v1744
                                     };
                                     local v1768 = {};
@@ -5414,13 +5414,13 @@ local function v4318(v1125, v1126)
                                         v1762.name.attributes.is_upvalue = "read";
                                     end;
                                     table.insert(v1737, {
-                                        name = v1762.name, 
+                                        name = v1762.name,
                                         access = "readonly"
                                     });
                                 else
                                     v1762.name.attributes.is_upvalue = "write";
                                     table.insert(v1737, {
-                                        name = v1762.name, 
+                                        name = v1762.name,
                                         access = "read and write"
                                     });
                                 end;
@@ -5465,7 +5465,7 @@ local function v4318(v1125, v1126)
                     v1783 = l_l_v1783_0_0;
                     v1207 = v1207 + 1;
                     l_v1223_7 = l_v1223_7(v1783, {
-                        beginning = v1780, 
+                        beginning = v1780,
                         ending = v1780
                     }, v1779);
                     l_v1223_7.func_name = l_v1223_4;
@@ -5474,22 +5474,22 @@ local function v4318(v1125, v1126)
                 v1207 = 1;
                 local l_v1345_0 = v1345;
                 local v1790 = {
-                    t = "function", 
-                    reads = {}, 
-                    writes = {}, 
-                    contributors = v1723, 
-                    is_self_referencing = v1735, 
-                    name = v1724, 
-                    varname = l_v1223_4, 
-                    name_known = v1725, 
-                    args = v1779, 
-                    is_vararg = v1722.is_vararg, 
-                    line_defined = v1722.line_defined, 
-                    upvalues_count = v1722.upvalues_count, 
-                    upvalues = v1737, 
+                    t = "function",
+                    reads = {},
+                    writes = {},
+                    contributors = v1723,
+                    is_self_referencing = v1735,
+                    name = v1724,
+                    varname = l_v1223_4,
+                    name_known = v1725,
+                    args = v1779,
+                    is_vararg = v1722.is_vararg,
+                    line_defined = v1722.line_defined,
+                    upvalues_count = v1722.upvalues_count,
+                    upvalues = v1737,
                     ast = l_v1345_0(v1722, {
-                        args = v1779, 
-                        upvalues = v1737, 
+                        args = v1779,
+                        upvalues = v1737,
                         name = v1724
                     })
                 };
@@ -5616,15 +5616,15 @@ local function v4318(v1125, v1126)
                     else
                         local l_opname_2 = v1833.opname;
                         local v1837 = {
-                            index = v1359, 
-                            code_index = v1358, 
-                            actual_index = v1825, 
-                            actual_code_index = v1826, 
-                            opinfo = v1833, 
-                            opname = l_opname_2, 
-                            opcode = v1832, 
-                            inst = v1831, 
-                            aux = if v1833.aux then l_code_1[v1358 + 1] else nil, 
+                            index = v1359,
+                            code_index = v1358,
+                            actual_index = v1825,
+                            actual_code_index = v1826,
+                            opinfo = v1833,
+                            opname = l_opname_2,
+                            opcode = v1832,
+                            inst = v1831,
+                            aux = if v1833.aux then l_code_1[v1358 + 1] else nil,
                             size = v1833.aux and 2 or 1
                         };
                         table.insert(v1362, v1837);
@@ -5648,11 +5648,11 @@ local function v4318(v1125, v1126)
                                     v1841 = true;
                                 end;
                                 v1813[v1359] = {
-                                    code = v1837, 
-                                    index = v1359, 
-                                    destination = v1358 + v1838 + 1, 
-                                    condition = v1841 and "~=" or "==", 
-                                    lhs = nil, 
+                                    code = v1837,
+                                    index = v1359,
+                                    destination = v1358 + v1838 + 1,
+                                    condition = v1841 and "~=" or "==",
+                                    lhs = nil,
                                     rhs = v1839
                                 };
                             elseif not (l_opname_2 ~= "JUMPIFEQ" and l_opname_2 ~= "JUMPIFLE" and l_opname_2 ~= "JUMPIFLT" and l_opname_2 ~= "JUMPIFNOTEQ" and l_opname_2 ~= "JUMPIFNOTLE") or l_opname_2 == "JUMPIFNOTLT" then
@@ -5663,17 +5663,17 @@ local function v4318(v1125, v1126)
                                 v1843 = if string.match(l_opname_2, "NOT") then v1844 == "EQ" and "~=" or v1844 == "LE" and ">" or ">=" else v1844 == "EQ" and "==" or v1844 == "LE" and "<=" or "<";
                                 assert(v1843, l_opname_2);
                                 v1813[v1359] = {
-                                    code = v1837, 
-                                    index = v1359, 
-                                    destination = v1358 + v1842 + 1, 
+                                    code = v1837,
+                                    index = v1359,
+                                    destination = v1358 + v1842 + 1,
                                     condition = v1843
                                 };
                             elseif not (l_opname_2 ~= "JUMPIF") or l_opname_2 == "JUMPIFNOT" then
                                 buffer.writeu16(v44, 0, (bit32.band(bit32.rshift(v1831, 16), 65535)));
                                 v1813[v1359] = {
-                                    code = v1837, 
-                                    index = v1359, 
-                                    destination = v1358 + buffer.readi16(v44, 0) + 1, 
+                                    code = v1837,
+                                    index = v1359,
+                                    destination = v1358 + buffer.readi16(v44, 0) + 1,
                                     condition = l_opname_2 == "JUMPIFNOT" and "not exist" or "exist"
                                 };
                             elseif not (l_opname_2 ~= "JUMP" and l_opname_2 ~= "JUMPBACK") or l_opname_2 == "JUMPX" then
@@ -5685,34 +5685,34 @@ local function v4318(v1125, v1126)
                                     v1845 = buffer.readi16(v44, 0);
                                 end;
                                 v1813[v1359] = {
-                                    code = v1837, 
-                                    index = v1359, 
+                                    code = v1837,
+                                    index = v1359,
                                     destination = v1358 + v1845 + 1
                                 };
                             elseif l_opname_2 == "FORNLOOP" then
                                 local v1846 = bit32.band(bit32.rshift(v1831, 8), 255);
                                 buffer.writeu16(v44, 0, (bit32.band(bit32.rshift(v1831, 16), 65535)));
                                 local v1847 = {
-                                    code = v1837, 
-                                    index = v1359, 
+                                    code = v1837,
+                                    index = v1359,
                                     destination = v1358 + buffer.readi16(v44, 0) + 1
                                 };
                                 local v1848 = {
-                                    type = "numeric", 
+                                    type = "numeric",
                                     variable_count = 1
                                 };
                                 local v1849 = v1846 + 2;
                                 v1848.variables_reg_range = {
-                                    beginning = v1849, 
+                                    beginning = v1849,
                                     ending = v1849
                                 };
                                 local v1850 = {};
                                 local v1851 = v1846 + 2;
                                 v1850.register_range = if v1851 then {
-                                    beginning = v1846, 
+                                    beginning = v1846,
                                     ending = v1851
                                 } else {
-                                    beginning = v1846, 
+                                    beginning = v1846,
                                     ending = v1846
                                 };
                                 v1850.index_reg = v1846 + 2;
@@ -5732,30 +5732,30 @@ local function v4318(v1125, v1126)
                                 v1854 = bit32.band(v1854, 255);
                                 assert(v1854 > 0);
                                 local v1855 = {
-                                    code = v1837, 
-                                    index = v1359, 
+                                    code = v1837,
+                                    index = v1359,
                                     destination = v1358 + v1853 + 1
                                 };
                                 local v1856 = {
-                                    type = "generic", 
+                                    type = "generic",
                                     variable_count = v1854
                                 };
                                 local v1857 = v1852 + 3;
                                 local v1858 = v1852 + 2 + v1854;
                                 v1856.variables_reg_range = if v1858 then {
-                                    beginning = v1857, 
+                                    beginning = v1857,
                                     ending = v1858
                                 } else {
-                                    beginning = v1857, 
+                                    beginning = v1857,
                                     ending = v1857
                                 };
                                 local v1859 = {};
                                 v1858 = v1852 + 2;
                                 v1859.register_range = if v1858 then {
-                                    beginning = v1852, 
+                                    beginning = v1852,
                                     ending = v1858
                                 } else {
-                                    beginning = v1852, 
+                                    beginning = v1852,
                                     ending = v1852
                                 };
                                 v1859.generator_reg = v1852;
@@ -5769,9 +5769,9 @@ local function v4318(v1125, v1126)
                                 local v1860 = bit32.band(bit32.rshift(v1831, 24), 255);
                                 if v1860 ~= 0 then
                                     local v1861 = {
-                                        index = v1359, 
-                                        code_index = v1358, 
-                                        actual_index = v1825, 
+                                        index = v1359,
+                                        code_index = v1358,
+                                        actual_index = v1825,
                                         actual_code_index = v1826
                                     };
                                     local l_JUMP_0 = v180.JUMP;
@@ -5795,8 +5795,8 @@ local function v4318(v1125, v1126)
                                     v1359 = v1359 + 1;
                                     v1361[v1359] = v1358;
                                     v1813[v1359] = {
-                                        code = v1861, 
-                                        index = v1359, 
+                                        code = v1861,
+                                        index = v1359,
                                         destination = v1358 + v1860 + 1
                                     };
                                 end;
@@ -5852,18 +5852,18 @@ local function v4318(v1125, v1126)
                             assert(#v1878 > 0);
                             assert(v1874 < v1875);
                             table.insert(v1872, {
-                                insts = v1873, 
+                                insts = v1873,
                                 index = v1874
                             });
                             table.insert(v1872, {
-                                insts = {}, 
-                                index = v1875, 
+                                insts = {},
+                                index = v1875,
                                 visitor = v1877
                             });
                         else
                             table.insert(v1872, {
-                                insts = v1873, 
-                                index = v1874, 
+                                insts = v1873,
+                                index = v1874,
                                 visitor = v1877
                             });
                         end;
@@ -5876,7 +5876,7 @@ local function v4318(v1125, v1126)
                             table.insert(v1873, v1876);
                         end;
                         table.insert(v1872, {
-                            insts = v1873, 
+                            insts = v1873,
                             index = v1874
                         });
                         if v1874 == v1875 then
@@ -5901,7 +5901,7 @@ local function v4318(v1125, v1126)
                 end;
                 if v1874 <= #v1362 then
                     table.insert(v1872, {
-                        insts = v1873, 
+                        insts = v1873,
                         index = v1874
                     });
                 end;
@@ -5916,9 +5916,9 @@ local function v4318(v1125, v1126)
                         v1882[v1884] = l_visitor_0.destination;
                     end;
                     local v1887 = {
-                        insts = v1884.insts, 
-                        index = v1884.index, 
-                        visitor = l_visitor_0, 
+                        insts = v1884.insts,
+                        index = v1884.index,
+                        visitor = l_visitor_0,
                         children = {}
                     };
                     v1880[v1884.index] = v1887;
@@ -5956,7 +5956,7 @@ local function v4318(v1125, v1126)
                 local function v1901()
 
                 end;
-                local l_v1900_0 = v1900 --[[ copy: 109 -> 170 ]];
+                local l_v1900_0 = v1900 ;
                 local function v1906(v1903)
                     local l_type_2 = v1903.type;
                     if l_type_2 == "ifthen" then
@@ -5992,9 +5992,9 @@ local function v4318(v1125, v1126)
                         end;
                     end;
                 end;
-                local l_v1898_0 = v1898 --[[ copy: 107 -> 171 ]];
-                local l_v1897_0 = v1897 --[[ copy: 106 -> 172 ]];
-                local l_v1910_0 = v1910 --[[ copy: 112 -> 173 ]];
+                local l_v1898_0 = v1898 ;
+                local l_v1897_0 = v1897 ;
+                local l_v1910_0 = v1910 ;
                 local function v1918(v1914, v1915)
                     table.insert(v1364, v1914);
                     table.insert(l_v1898_0, v1914);
@@ -6007,7 +6007,7 @@ local function v4318(v1125, v1126)
                         end;
                     end;
                 end;
-                local l_v1901_0 = v1901 --[[ copy: 110 -> 174 ]];
+                local l_v1901_0 = v1901 ;
                 local function v1924(v1920, v1921)
                     local l_hl_index_0 = v1920.hl_index;
                     assert(l_hl_index_0 == v1921.hl_index);
@@ -6025,36 +6025,36 @@ local function v4318(v1125, v1126)
                     assert(v1926.index == v1880[v1926.index].index);
                     local l_insts_0 = v1880[v1926.index].insts;
                     local v1928 = {
-                        code_index = v1361[v1926.index], 
-                        index = v1926.index, 
-                        actual_code_index = v1827[v1361[v1926.index]], 
-                        actual_index = v1828[v1926.index], 
-                        hl_index = #v1364 + 1, 
-                        length = if v1926.visitor then #l_insts_0 + 1 else #l_insts_0, 
-                        type = "single", 
-                        data = l_insts_0, 
-                        parents = {}, 
-                        children = {}, 
-                        jumped_to_by = {}, 
+                        code_index = v1361[v1926.index],
+                        index = v1926.index,
+                        actual_code_index = v1827[v1361[v1926.index]],
+                        actual_index = v1828[v1926.index],
+                        hl_index = #v1364 + 1,
+                        length = if v1926.visitor then #l_insts_0 + 1 else #l_insts_0,
+                        type = "single",
+                        data = l_insts_0,
+                        parents = {},
+                        children = {},
+                        jumped_to_by = {},
                         _visitor = v1926.visitor
                     };
                     v1918(v1928);
                     table.insert(v1899, v1928);
                     v1869[v1926.index] = v1928;
                 end;
-                local l_v1918_0 = v1918 --[[ copy: 113 -> 175 ]];
+                local l_v1918_0 = v1918 ;
                 local function v1931()
                     local v1930 = {
-                        code_index = 0, 
-                        index = 0, 
-                        actual_code_index = 0, 
-                        actual_index = 0, 
-                        hl_index = #v1364 + 1, 
-                        length = 0, 
-                        type = "single", 
-                        data = {}, 
-                        parents = {}, 
-                        children = {}, 
+                        code_index = 0,
+                        index = 0,
+                        actual_code_index = 0,
+                        actual_index = 0,
+                        hl_index = #v1364 + 1,
+                        length = 0,
+                        type = "single",
+                        data = {},
+                        parents = {},
+                        children = {},
                         jumped_to_by = {}
                     };
                     l_v1918_0(v1930);
@@ -6063,7 +6063,7 @@ local function v4318(v1125, v1126)
                 local function v1935(v1932, v1933)
                     assert(not v1932.jump);
                     v1932.jump = {
-                        type = "goto", 
+                        type = "goto",
                         destination = v1933
                     };
                     local v1934 = v1364[v1933];
@@ -6106,19 +6106,19 @@ local function v4318(v1125, v1126)
                     v1950.jump = nil;
                     assert(not v1950.jump);
                     v1950.jump = {
-                        type = "goto", 
+                        type = "goto",
                         destination = v1951
                     };
                     l_jump_2 = v1364[v1951];
                     assert(l_jump_2);
                     table.insert(v1869[l_jump_2.index].jumped_to_by, v1950.hl_index);
                 end;
-                local l_v1931_0 = v1931 --[[ copy: 115 -> 176 ]];
+                local l_v1931_0 = v1931 ;
                 local function v1962(v1959)
                     local v1960 = l_v1931_0();
                     assert(not v1960.jump);
                     v1960.jump = {
-                        type = "goto", 
+                        type = "goto",
                         destination = v1959
                     };
                     local v1961 = v1364[v1959];
@@ -6129,7 +6129,7 @@ local function v4318(v1125, v1126)
                 local function v1964()
                     local v1963 = l_v1931_0();
                     v1963.jump = {
-                        type = "break", 
+                        type = "break",
                         destination = 0
                     };
                     return v1963;
@@ -6171,7 +6171,7 @@ local function v4318(v1125, v1126)
                     table.remove(v1975.children, v1977);
                     table.remove(v1976.parents, v1978);
                 end;
-                local l_v1979_0 = v1979 --[[ copy: 125 -> 177 ]];
+                local l_v1979_0 = v1979 ;
                 local function v1984(v1981)
                     for _, v1983 in ipairs(table.clone(v1981.children)) do
                         l_v1979_0(v1981, v1364[v1983]);
@@ -6182,8 +6182,8 @@ local function v4318(v1125, v1126)
                         l_v1979_0(v1364[v1987], v1985);
                     end;
                 end;
-                local l_v1988_0 = v1988 --[[ copy: 127 -> 178 ]];
-                local l_v1984_0 = v1984 --[[ copy: 126 -> 179 ]];
+                local l_v1988_0 = v1988 ;
+                local l_v1984_0 = v1984 ;
                 local function v1992(v1991)
                     l_v1988_0(v1991);
                     l_v1984_0(v1991);
@@ -6214,7 +6214,7 @@ local function v4318(v1125, v1126)
                     table.insert(v2001.children, v1999.hl_index);
                     v1999.parents[v2002] = v2001.hl_index;
                 end;
-                local l_v1897_1 = v1897 --[[ copy: 106 -> 180 ]];
+                local l_v1897_1 = v1897 ;
                 local function v2012(v2006, v2007)
                     local l__visitor_1 = v2006._visitor;
                     if l__visitor_1 and l__visitor_1.destination then
@@ -6232,7 +6232,7 @@ local function v4318(v1125, v1126)
                         return (table.clone(v2006.children));
                     end;
                 end;
-                local l_v2012_0 = v2012 --[[ copy: 131 -> 181 ]];
+                local l_v2012_0 = v2012 ;
                 local function v2018(v2014)
                     local v2015 = l_v2012_0(v2014);
                     if v2014.type == "ifthen" then
@@ -6273,7 +6273,7 @@ local function v4318(v1125, v1126)
                         return false;
                     end;
                 end;
-                local l_v2018_0 = v2018 --[[ copy: 132 -> 182 ]];
+                local l_v2018_0 = v2018 ;
                 local function v2027(v2028, v2029, v2030)
                     if v2028 == v2029 then
                         return true;
@@ -6293,7 +6293,7 @@ local function v4318(v1125, v1126)
                         return false;
                     end;
                 end;
-                local l_v1998_0 = v1998 --[[ copy: 129 -> 183 ]];
+                local l_v1998_0 = v1998 ;
                 local function v2039(v2034, v2035)
                     assert(v2034 ~= v2035);
                     assert(v2034.hl_index ~= v2035.hl_index);
@@ -6303,7 +6303,7 @@ local function v4318(v1125, v1126)
                         l_v1998_0(v1364[v2038], v2034, v2035);
                     end;
                 end;
-                local l_v2004_0 = v2004 --[[ copy: 130 -> 184 ]];
+                local l_v2004_0 = v2004 ;
                 local function v2046(v2041, v2042)
                     assert(v2041 ~= v2042);
                     assert(v2041.hl_index ~= v2042.hl_index);
@@ -6312,8 +6312,8 @@ local function v4318(v1125, v1126)
                         l_v2004_0(v1364[v2045], v2041, v2042);
                     end;
                 end;
-                local l_v2039_0 = v2039 --[[ copy: 135 -> 185 ]];
-                local l_v2046_0 = v2046 --[[ copy: 136 -> 186 ]];
+                local l_v2039_0 = v2039 ;
+                local l_v2046_0 = v2046 ;
                 local function v2051(v2049, v2050)
                     l_v2039_0(v2049, v2050);
                     l_v2046_0(v2049, v2050);
@@ -6328,31 +6328,31 @@ local function v4318(v1125, v1126)
                 end;
                 local function v2062(v2057, v2058, v2059, v2060, v2061)
                     return {
-                        is_full_condition_t = true, 
-                        type = v2057, 
-                        condition = v2058, 
-                        lhs = v2059, 
-                        rhs = v2060, 
+                        is_full_condition_t = true,
+                        type = v2057,
+                        condition = v2058,
+                        lhs = v2059,
+                        rhs = v2060,
                         code = v2061
                     };
                 end;
                 local function v2066(v2063, v2064, v2065)
                     return {
-                        is_full_condition_t = true, 
-                        type = "and", 
-                        condition = v2065 and "not exist" or "exist", 
-                        lhs = v2063, 
-                        rhs = v2064, 
+                        is_full_condition_t = true,
+                        type = "and",
+                        condition = v2065 and "not exist" or "exist",
+                        lhs = v2063,
+                        rhs = v2064,
                         code = nil
                     };
                 end;
                 local function v2070(v2067, v2068, v2069)
                     return {
-                        is_full_condition_t = true, 
-                        type = "or", 
-                        condition = v2069 and "not exist" or "exist", 
-                        lhs = v2067, 
-                        rhs = v2068, 
+                        is_full_condition_t = true,
+                        type = "or",
+                        condition = v2069 and "not exist" or "exist",
+                        lhs = v2067,
+                        rhs = v2068,
                         code = nil
                     };
                 end;
@@ -6429,9 +6429,9 @@ local function v4318(v1125, v1126)
                     end;
                     return v1364[v2075], v2081;
                 end;
-                local l_v1901_1 = v1901 --[[ copy: 110 -> 187 ]];
-                local l_v2087_0 = v2087 --[[ copy: 141 -> 188 ]];
-                local l_v1979_1 = v1979 --[[ copy: 125 -> 189 ]];
+                local l_v1901_1 = v1901 ;
+                local l_v2087_0 = v2087 ;
+                local l_v1979_1 = v1979 ;
                 local function v2091(v2092, v2093, v2094)
                     local v2095 = false;
                     l_v1901_1();
@@ -6535,39 +6535,39 @@ local function v4318(v1125, v1126)
                         end;
                         if v2116 then
                             local v2127 = {
-                                is_full_condition_t = true, 
-                                type = "reg", 
-                                condition = v2119._visitor.condition, 
-                                lhs = v2123, 
-                                rhs = v2124, 
+                                is_full_condition_t = true,
+                                type = "reg",
+                                condition = v2119._visitor.condition,
+                                lhs = v2123,
+                                rhs = v2124,
                                 code = v2119.hl_index
                             };
                             if v2120 then
                                 v2116 = {
-                                    is_full_condition_t = true, 
-                                    type = "and", 
-                                    condition = v2122 and "not exist" or "exist", 
-                                    lhs = v2127, 
-                                    rhs = v2116, 
+                                    is_full_condition_t = true,
+                                    type = "and",
+                                    condition = v2122 and "not exist" or "exist",
+                                    lhs = v2127,
+                                    rhs = v2116,
                                     code = nil
                                 };
                             else
                                 v2116 = {
-                                    is_full_condition_t = true, 
-                                    type = "or", 
-                                    condition = v2122 and "not exist" or "exist", 
-                                    lhs = v2127, 
-                                    rhs = v2116, 
+                                    is_full_condition_t = true,
+                                    type = "or",
+                                    condition = v2122 and "not exist" or "exist",
+                                    lhs = v2127,
+                                    rhs = v2116,
                                     code = nil
                                 };
                             end;
                         else
                             v2116 = {
-                                is_full_condition_t = true, 
-                                type = "reg", 
-                                condition = v2119._visitor.condition, 
-                                lhs = v2123, 
-                                rhs = v2124, 
+                                is_full_condition_t = true,
+                                type = "reg",
+                                condition = v2119._visitor.condition,
+                                lhs = v2123,
+                                rhs = v2124,
                                 code = v2119.hl_index
                             };
                         end;
@@ -6580,11 +6580,11 @@ local function v4318(v1125, v1126)
                     end;
                     if v2099 then
                         v2116 = {
-                            is_full_condition_t = true, 
-                            type = "or", 
-                            condition = "exist", 
-                            lhs = v2099, 
-                            rhs = v2116, 
+                            is_full_condition_t = true,
+                            type = "or",
+                            condition = "exist",
+                            lhs = v2099,
+                            rhs = v2116,
                             code = nil
                         };
                     end;
@@ -6646,12 +6646,12 @@ local function v4318(v1125, v1126)
                     end;
                 end;
                 local v2151 = nil;
-                local l_v1898_1 = v1898 --[[ copy: 107 -> 190 ]];
-                local l_v1900_1 = v1900 --[[ copy: 109 -> 191 ]];
-                local l_v1910_1 = v1910 --[[ copy: 112 -> 192 ]];
-                local l_v2046_1 = v2046 --[[ copy: 136 -> 193 ]];
-                local l_v1918_1 = v1918 --[[ copy: 113 -> 194 ]];
-                local l_v2039_1 = v2039 --[[ copy: 135 -> 195 ]];
+                local l_v1898_1 = v1898 ;
+                local l_v1900_1 = v1900 ;
+                local l_v1910_1 = v1910 ;
+                local l_v2046_1 = v2046 ;
+                local l_v1918_1 = v1918 ;
+                local l_v2039_1 = v2039 ;
                 do
                     local l_v2151_0 = v2151;
                     local function v2170()
@@ -6718,24 +6718,24 @@ local function v4318(v1125, v1126)
                                             v2160 = v2160 + 1;
                                             v2164 = #v1364 + 1;
                                             local v2169 = {
-                                                code_index = v1361[v2162.index], 
-                                                index = v2162.index, 
-                                                actual_code_index = v1827[v1361[v2162.index]], 
-                                                actual_index = v1828[v2162.index], 
-                                                hl_index = v2164, 
-                                                length = v2162.length + v2163.length, 
-                                                type = "sequential", 
+                                                code_index = v1361[v2162.index],
+                                                index = v2162.index,
+                                                actual_code_index = v1827[v1361[v2162.index]],
+                                                actual_index = v1828[v2162.index],
+                                                hl_index = v2164,
+                                                length = v2162.length + v2163.length,
+                                                type = "sequential",
                                                 data = {
-                                                    v2162.hl_index, 
+                                                    v2162.hl_index,
                                                     v2163.hl_index
-                                                }, 
-                                                parents = {}, 
-                                                children = {}, 
-                                                jumped_to_by = {}, 
+                                                },
+                                                parents = {},
+                                                children = {},
+                                                jumped_to_by = {},
                                                 _visitor = v2163._visitor
                                             };
                                             l_v1918_1(v2169, {
-                                                v2162, 
+                                                v2162,
                                                 v2163
                                             });
                                             l_v2039_1(v2162, v2169);
@@ -6835,20 +6835,20 @@ local function v4318(v1125, v1126)
                                         end;
                                         local v2187, v2188, v2189, v2190 = v2091(if v2173 then v2177 else v2178, v2177, v2178.index == 0);
                                         local v2191 = {
-                                            code_index = v2188.code_index, 
-                                            index = v2188.index, 
-                                            actual_code_index = v2188.actual_code_index, 
-                                            actual_index = v2188.actual_index, 
-                                            hl_index = #v1364 + 1, 
-                                            length = v2190 + v2178.length, 
-                                            type = "ifthen", 
+                                            code_index = v2188.code_index,
+                                            index = v2188.index,
+                                            actual_code_index = v2188.actual_code_index,
+                                            actual_index = v2188.actual_index,
+                                            hl_index = #v1364 + 1,
+                                            length = v2190 + v2178.length,
+                                            type = "ifthen",
                                             data = {
-                                                pass = v2178.hl_index, 
-                                                condition = v2187, 
+                                                pass = v2178.hl_index,
+                                                condition = v2187,
                                                 condition_length = v2190
-                                            }, 
-                                            parents = {}, 
-                                            children = {}, 
+                                            },
+                                            parents = {},
+                                            children = {},
                                             jumped_to_by = {}
                                         };
                                         local v2192 = {
@@ -6914,20 +6914,20 @@ local function v4318(v1125, v1126)
                                         l_v2151_0 = l_v2151_0 + 1;
                                         v2200 = v2200 + 1;
                                         local v2204 = {
-                                            code_index = v2202.code_index, 
-                                            index = v2202.index, 
-                                            actual_code_index = v2202.actual_code_index, 
-                                            actual_index = v2202.actual_index, 
-                                            hl_index = #v1364 + 1, 
-                                            length = v2202.length, 
-                                            type = "oneblockwhile", 
+                                            code_index = v2202.code_index,
+                                            index = v2202.index,
+                                            actual_code_index = v2202.actual_code_index,
+                                            actual_index = v2202.actual_index,
+                                            hl_index = #v1364 + 1,
+                                            length = v2202.length,
+                                            type = "oneblockwhile",
                                             data = {
-                                                code = v2202.hl_index, 
+                                                code = v2202.hl_index,
                                                 for_info = l__visitor_8.for_info
-                                            }, 
-                                            parents = {}, 
-                                            children = {}, 
-                                            jumped_to_by = {}, 
+                                            },
+                                            parents = {},
+                                            children = {},
+                                            jumped_to_by = {},
                                             _visitor = v2202._visitor
                                         };
                                         v1918(v2204, {
@@ -6942,7 +6942,7 @@ local function v4318(v1125, v1126)
                                             v2206[v2205.index] = true;
                                         end;
                                         v2130(v2202, v2206, {
-                                            [v2204.index] = true, 
+                                            [v2204.index] = true,
                                             [v2204.index + v2204.length - 1] = true
                                         });
                                     end;
@@ -6992,16 +6992,16 @@ local function v4318(v1125, v1126)
                                     v1979(v1364[v2217], v2208);
                                 end;
                                 v1918({
-                                    code_index = v1361[l_index_3], 
-                                    index = l_index_3, 
-                                    actual_code_index = v1827[v1361[l_index_3]], 
-                                    actual_index = v1828[l_index_3], 
-                                    hl_index = #v1364 + 1, 
-                                    length = l_length_0, 
-                                    type = "sequential", 
-                                    data = v2209, 
-                                    parents = {}, 
-                                    children = v2208.children, 
+                                    code_index = v1361[l_index_3],
+                                    index = l_index_3,
+                                    actual_code_index = v1827[v1361[l_index_3]],
+                                    actual_index = v1828[l_index_3],
+                                    hl_index = #v1364 + 1,
+                                    length = l_length_0,
+                                    type = "sequential",
+                                    data = v2209,
+                                    parents = {},
+                                    children = v2208.children,
                                     jumped_to_by = {}
                                 });
                                 v2208.analysis_failed = true;
@@ -7163,8 +7163,8 @@ local function v4318(v1125, v1126)
                 end;
                 v1931 = function(v2261, v2262, v2263)
                     local v2264 = {
-                        hl_index = v2261.location.hl_index, 
-                        start_code = v2262, 
+                        hl_index = v2261.location.hl_index,
+                        start_code = v2262,
                         register = v2263
                     };
                     if v2261.neglected[v2263] then
@@ -7277,24 +7277,24 @@ local function v4318(v1125, v1126)
                     end;
                     assert(v2290);
                     table.insert(v2285.observations, {
-                        type = "scoped variable", 
+                        type = "scoped variable",
                         info = {
-                            wanted_definition_point = v2290, 
-                            definition_location = v2291, 
-                            is_predefinition = v2289, 
+                            wanted_definition_point = v2290,
+                            definition_location = v2291,
+                            is_predefinition = v2289,
                             register_range = v2286.register_range
-                        }, 
+                        },
                         location = v2285.location
                     });
                 end;
                 v1957 = function(v2303, v2304, v2305, v2306, v2307, v2308)
                     local v2309 = {
-                        type = "define variable", 
+                        type = "define variable",
                         info = {
-                            register_range = v2304, 
-                            definition_location = v2306, 
-                            is_predefinition = v2307, 
-                            no_definition = v2308, 
+                            register_range = v2304,
+                            definition_location = v2306,
+                            is_predefinition = v2307,
+                            no_definition = v2308,
                             start_of_use = v2305
                         }
                     };
@@ -7329,9 +7329,9 @@ local function v4318(v1125, v1126)
                 end;
                 v1962 = function(v2319, v2320, v2321, v2322)
                     local v2323 = {
-                        hl_index = v2319, 
-                        depth = if v2321 then v2320.depth + 1 else v2320.depth, 
-                        parent = if v2321 then v2320 else v2320.parent, 
+                        hl_index = v2319,
+                        depth = if v2321 then v2320.depth + 1 else v2320.depth,
+                        parent = if v2321 then v2320 else v2320.parent,
                         last_loop = v2320.last_loop
                     };
                     if v2322 then
@@ -7344,9 +7344,9 @@ local function v4318(v1125, v1126)
                     v2324.preprocess_task_index = v1900;
                     v1901[v1900] = v2325;
                     local v2330 = {
-                        type = v2326, 
-                        var_reg_range = v2327, 
-                        predef = v2328, 
+                        type = v2326,
+                        var_reg_range = v2327,
+                        predef = v2328,
                         no_inline = v2329
                     };
                     local v2331 = v1357[v2325];
@@ -7498,8 +7498,8 @@ local function v4318(v1125, v1126)
                     end;
                     table.insert(v2389, v2386);
                     v2389 = {
-                        hl_index = v2384.location.hl_index, 
-                        start_code = v2386.code, 
+                        hl_index = v2384.location.hl_index,
+                        start_code = v2386.code,
                         register = v2385
                     };
                     if v2384.neglected[v2385] then
@@ -7536,9 +7536,9 @@ local function v4318(v1125, v1126)
                                     for v2408 = l_register_range_3.beginning, l_register_range_3.ending do
                                         local v2409 = v2395.reg_forced_var[v2408];
                                         local v2410 = {
-                                            register_range = l_register_range_3, 
-                                            beginning = v2402.index, 
-                                            definition_location = v2406.info.definition_location, 
+                                            register_range = l_register_range_3,
+                                            beginning = v2402.index,
+                                            definition_location = v2406.info.definition_location,
                                             start_of_use = v2406.info.start_of_use
                                         };
                                         if v2409 then
@@ -7600,17 +7600,17 @@ local function v4318(v1125, v1126)
                                 local v2426 = v2412[1];
                                 local v2427 = v2412[#v2412];
                                 v2415 = if v2427 then {
-                                    beginning = v2426, 
+                                    beginning = v2426,
                                     ending = v2427
                                 } else {
-                                    beginning = v2426, 
+                                    beginning = v2426,
                                     ending = v2426
                                 };
                             end;
                         elseif #v2412 == 1 then
                             local v2428 = v2412[1];
                             v2415 = {
-                                beginning = v2428, 
+                                beginning = v2428,
                                 ending = v2428
                             };
                         end;
@@ -7624,8 +7624,8 @@ local function v4318(v1125, v1126)
                                 end;
                                 v2395.uncertain_regs[v2430] = nil;
                                 local v2433 = {
-                                    code = v2402, 
-                                    location = v2395.location, 
+                                    code = v2402,
+                                    location = v2395.location,
                                     reg_range = v2415
                                 };
                                 local l_reg_writes_2 = v2395.reg_writes;
@@ -7650,8 +7650,8 @@ local function v4318(v1125, v1126)
                                 end;
                                 table.insert(v2436, v2433);
                                 v2436 = {
-                                    hl_index = v2395.location.hl_index, 
-                                    start_code = v2433.code, 
+                                    hl_index = v2395.location.hl_index,
+                                    start_code = v2433.code,
                                     register = v2430
                                 };
                                 if v2395.neglected[v2430] then
@@ -7742,10 +7742,10 @@ local function v4318(v1125, v1126)
                                                     end;
                                                     if not v2453 then
                                                         v2453 = {
-                                                            index = v2402.index, 
-                                                            location = l_location_6, 
+                                                            index = v2402.index,
+                                                            location = l_location_6,
                                                             register_range = {
-                                                                beginning = v2443, 
+                                                                beginning = v2443,
                                                                 ending = v2443
                                                             }
                                                         };
@@ -7785,10 +7785,10 @@ local function v4318(v1125, v1126)
                                     end;
                                 end;
                                 local v2463 = {
-                                    code = v2402, 
-                                    location = v2395.location, 
+                                    code = v2402,
+                                    location = v2395.location,
                                     reg_range = {
-                                        beginning = v2443, 
+                                        beginning = v2443,
                                         ending = v2443
                                     }
                                 };
@@ -7830,8 +7830,8 @@ local function v4318(v1125, v1126)
                                 end;
                                 v2395.uncertain_regs[v2472] = nil;
                                 local v2475 = {
-                                    code = v2402, 
-                                    location = v2395.location, 
+                                    code = v2402,
+                                    location = v2395.location,
                                     reg_range = v2415
                                 };
                                 local l_reg_writes_3 = v2395.reg_writes;
@@ -7856,8 +7856,8 @@ local function v4318(v1125, v1126)
                                 end;
                                 table.insert(v2478, v2475);
                                 v2478 = {
-                                    hl_index = v2395.location.hl_index, 
-                                    start_code = v2475.code, 
+                                    hl_index = v2395.location.hl_index,
+                                    start_code = v2475.code,
                                     register = v2472
                                 };
                                 if v2395.neglected[v2472] then
@@ -7907,17 +7907,17 @@ local function v4318(v1125, v1126)
                     local v2493 = v109(v2492.reg_reads);
                     local v2494 = v109(v2492.reg_reads_global);
                     return {
-                        reg_has_var = table.clone(v2492.reg_has_var), 
-                        reg_forced_var = v2492.reg_forced_var, 
-                        reg_reads = v2493, 
-                        reg_reads_global = v2494, 
-                        reg_writes = {}, 
-                        reg_writes_global = v2492.reg_writes_global, 
-                        demands = v2492.demands, 
-                        observations = v2492.observations, 
-                        uncertain_regs = v2492.uncertain_regs, 
-                        preprocess_task_index = v2492.preprocess_task_index, 
-                        neglected = {}, 
+                        reg_has_var = table.clone(v2492.reg_has_var),
+                        reg_forced_var = v2492.reg_forced_var,
+                        reg_reads = v2493,
+                        reg_reads_global = v2494,
+                        reg_writes = {},
+                        reg_writes_global = v2492.reg_writes_global,
+                        demands = v2492.demands,
+                        observations = v2492.observations,
+                        uncertain_regs = v2492.uncertain_regs,
+                        preprocess_task_index = v2492.preprocess_task_index,
+                        neglected = {},
                         location = v2492.location
                     };
                 end;
@@ -7929,10 +7929,10 @@ local function v4318(v1125, v1126)
                         if #v2500 > 0 and not v2496.reg_has_var[v2499] then
                             v2495.uncertain_regs[v2499] = {
                                 register_range = {
-                                    beginning = v2499, 
+                                    beginning = v2499,
                                     ending = v2499
-                                }, 
-                                index = v2500[1].code.index, 
+                                },
+                                index = v2500[1].code.index,
                                 location = v2496.location
                             };
                         end;
@@ -7964,9 +7964,9 @@ local function v4318(v1125, v1126)
                     local l_hl_index_6 = v2510.hl_index;
                     local l_location_8 = v2509.location;
                     local v2516 = {
-                        hl_index = l_hl_index_6, 
-                        depth = if v2512 then l_location_8.depth + 1 else l_location_8.depth, 
-                        parent = if v2512 then l_location_8 else l_location_8.parent, 
+                        hl_index = l_hl_index_6,
+                        depth = if v2512 then l_location_8.depth + 1 else l_location_8.depth,
+                        parent = if v2512 then l_location_8 else l_location_8.parent,
                         last_loop = l_location_8.last_loop
                     };
                     if v2513 then
@@ -8015,7 +8015,7 @@ local function v4318(v1125, v1126)
                             if l_location_8.type == "numeric" then
                                 local l_index_reg_0 = l_location_8.args.index_reg;
                                 local v2522 = {
-                                    beginning = l_index_reg_0, 
+                                    beginning = l_index_reg_0,
                                     ending = l_index_reg_0
                                 };
                                 l_index_reg_0 = {};
@@ -8078,9 +8078,9 @@ local function v4318(v1125, v1126)
                         local l_hl_index_7 = v2547.hl_index;
                         local l_location_9 = v2542.location;
                         v2546 = {
-                            hl_index = l_hl_index_7, 
-                            depth = if v2545 then l_location_9.depth + 1 else l_location_9.depth, 
-                            parent = if v2545 then l_location_9 else l_location_9.parent, 
+                            hl_index = l_hl_index_7,
+                            depth = if v2545 then l_location_9.depth + 1 else l_location_9.depth,
+                            parent = if v2545 then l_location_9 else l_location_9.parent,
                             last_loop = l_location_9.last_loop
                         };
                         v2542.location = v2546;
@@ -8090,9 +8090,9 @@ local function v4318(v1125, v1126)
                         local l_hl_index_8 = v2542.location.hl_index;
                         local l_location_10 = v2542.location;
                         v2546 = {
-                            hl_index = l_hl_index_8, 
-                            depth = if v2545 then l_location_10.depth + 1 else l_location_10.depth, 
-                            parent = if v2545 then l_location_10 else l_location_10.parent, 
+                            hl_index = l_hl_index_8,
+                            depth = if v2545 then l_location_10.depth + 1 else l_location_10.depth,
+                            parent = if v2545 then l_location_10 else l_location_10.parent,
                             last_loop = l_location_10.last_loop
                         };
                         v2542.location = v2546;
@@ -8141,24 +8141,24 @@ local function v4318(v1125, v1126)
                     end;
                     v2062 = {};
                     local v2554 = {
-                        hl_index = v2087.hl_index, 
-                        depth = 0, 
+                        hl_index = v2087.hl_index,
+                        depth = 0,
                         parent = nil
                     };
                     v2066({
-                        reg_src = {}, 
-                        reg_all_src = {}, 
-                        reg_has_var = {}, 
-                        reg_forced_var = {}, 
-                        reg_reads = {}, 
-                        reg_reads_global = {}, 
-                        reg_writes = {}, 
-                        reg_writes_global = {}, 
-                        demands = v2129, 
-                        observations = v2130, 
-                        uncertain_regs = {}, 
-                        preprocess_task_index = v1900, 
-                        neglected = v2151, 
+                        reg_src = {},
+                        reg_all_src = {},
+                        reg_has_var = {},
+                        reg_forced_var = {},
+                        reg_reads = {},
+                        reg_reads_global = {},
+                        reg_writes = {},
+                        reg_writes_global = {},
+                        demands = v2129,
+                        observations = v2130,
+                        uncertain_regs = {},
+                        preprocess_task_index = v1900,
+                        neglected = v2151,
                         location = v2554
                     }, v2087, v2087, true);
                     if not next(v2129) then
@@ -8234,33 +8234,33 @@ local function v4318(v1125, v1126)
                 end;
                 local v2581 = nil;
                 v2581 = {
-                    FASTCALL = v2578, 
-                    FASTCALL1 = v2578, 
-                    FASTCALL2 = v2578, 
-                    FASTCALL2K = v2578, 
-                    FASTCALL3 = v2578, 
-                    FORNPREP = v2578, 
-                    FORGPREP = v2578, 
-                    FORGPREP_NEXT = v2578, 
-                    FORGPREP_INEXT = v2578, 
-                    PREPVARARGS = v2578, 
-                    JUMP = v2580, 
-                    JUMPBACK = v2580, 
-                    JUMPX = v2580, 
-                    JUMPIF = v2580, 
-                    JUMPIFNOT = v2580, 
-                    JUMPIFEQ = v2580, 
-                    JUMPIFLE = v2580, 
-                    JUMPIFLT = v2580, 
-                    JUMPIFNOTEQ = v2580, 
-                    JUMPIFNOTLE = v2580, 
-                    JUMPIFNOTLT = v2580, 
-                    JUMPXEQKNIL = v2580, 
-                    JUMPXEQKB = v2580, 
-                    JUMPXEQKN = v2580, 
-                    JUMPXEQKS = v2580, 
-                    FORNLOOP = v2580, 
-                    FORGLOOP = v2580, 
+                    FASTCALL = v2578,
+                    FASTCALL1 = v2578,
+                    FASTCALL2 = v2578,
+                    FASTCALL2K = v2578,
+                    FASTCALL3 = v2578,
+                    FORNPREP = v2578,
+                    FORGPREP = v2578,
+                    FORGPREP_NEXT = v2578,
+                    FORGPREP_INEXT = v2578,
+                    PREPVARARGS = v2578,
+                    JUMP = v2580,
+                    JUMPBACK = v2580,
+                    JUMPX = v2580,
+                    JUMPIF = v2580,
+                    JUMPIFNOT = v2580,
+                    JUMPIFEQ = v2580,
+                    JUMPIFLE = v2580,
+                    JUMPIFLT = v2580,
+                    JUMPIFNOTEQ = v2580,
+                    JUMPIFNOTLE = v2580,
+                    JUMPIFNOTLT = v2580,
+                    JUMPXEQKNIL = v2580,
+                    JUMPXEQKB = v2580,
+                    JUMPXEQKN = v2580,
+                    JUMPXEQKS = v2580,
+                    FORNLOOP = v2580,
+                    FORGLOOP = v2580,
                     GETVARARGS = function(v2582)
                         local v2583 = bit32.band(bit32.rshift(v2582, 8), 255);
                         local v2584 = bit32.band(bit32.rshift(v2582, 16), 255) - 1;
@@ -8274,7 +8274,7 @@ local function v4318(v1125, v1126)
                             v1516(v2583, v1540(v2583));
                             return;
                         end;
-                    end, 
+                    end,
                     MOVE = function(v2585)
                         local v2586 = bit32.band(bit32.rshift(v2585, 8), 255);
                         local v2587 = bit32.band(bit32.rshift(v2585, 16), 255);
@@ -8292,12 +8292,12 @@ local function v4318(v1125, v1126)
                         v1355[v2586] = v2588;
                         v1356[v2588] = v2586;
                         v1516(v2586, v1410(v2587));
-                    end, 
+                    end,
                     LOADK = function(v2590)
                         local v2591 = bit32.band(bit32.rshift(v2590, 8), 255);
                         local v2592 = l_constants_1[bit32.band(bit32.rshift(v2590, 16), 65535)];
                         v1516(v2591, v1548(v2591, v2592));
-                    end, 
+                    end,
                     LOADKX = function(v2593)
                         local v2594 = bit32.band(bit32.rshift(v2593, 8), 255);
                         local v2595 = l_code_1[v1358 + 1];
@@ -8306,33 +8306,33 @@ local function v4318(v1125, v1126)
                         end;
                         v2595 = l_constants_1[v2595];
                         v1516(v2594, v1548(v2594, v2595));
-                    end, 
+                    end,
                     LOADN = function(v2596)
                         local v2597 = bit32.band(bit32.rshift(v2596, 8), 255);
                         buffer.writeu16(v44, 0, (bit32.band(bit32.rshift(v2596, 16), 65535)));
                         v1516(v2597, v1548(v2597, {
-                            type = 2, 
+                            type = 2,
                             value = buffer.readi16(v44, 0)
                         }));
-                    end, 
+                    end,
                     LOADNIL = function(v2598)
                         local v2599 = bit32.band(bit32.rshift(v2598, 8), 255);
                         v1516(v2599, v1378(v2599));
-                    end, 
+                    end,
                     LOADB = function(v2600)
                         local v2601 = bit32.band(bit32.rshift(v2600, 8), 255);
                         local v2602 = bit32.band(bit32.rshift(v2600, 16), 255);
                         assert(v2602 <= 1);
                         v1516(v2601, v1560(v2601, v2602 == 1));
-                    end, 
+                    end,
                     NEWTABLE = function(v2603)
                         local v2604 = bit32.band(bit32.rshift(v2603, 8), 255);
                         v1516(v2604, v1550(v2604));
-                    end, 
+                    end,
                     DUPTABLE = function(v2605)
                         local v2606 = bit32.band(bit32.rshift(v2605, 8), 255);
                         v1516(v2606, v1550(v2606));
-                    end, 
+                    end,
                     SETTABLE = function(v2607)
                         local v2608 = bit32.band(bit32.rshift(v2607, 8), 255);
                         local v2609 = bit32.band(bit32.rshift(v2607, 16), 255);
@@ -8375,7 +8375,7 @@ local function v4318(v1125, v1126)
                         l_v1446_0(l_v2609_0, l_v2613_0, v2616);
                         v1365();
                         v1520();
-                    end, 
+                    end,
                     SETTABLEKS = function(v2618)
                         local v2619 = bit32.band(bit32.rshift(v2618, 8), 255);
                         local v2620 = bit32.band(bit32.rshift(v2618, 16), 255);
@@ -8407,7 +8407,7 @@ local function v4318(v1125, v1126)
                         l_l_constants_1_0(l_v2620_0, v2622, v2625);
                         v1365();
                         v1520();
-                    end, 
+                    end,
                     SETTABLEN = function(v2627)
                         local v2628 = bit32.band(bit32.rshift(v2627, 8), 255);
                         local v2629 = bit32.band(bit32.rshift(v2627, 16), 255);
@@ -8415,7 +8415,7 @@ local function v4318(v1125, v1126)
                         local l_v1446_1 = v1446;
                         local l_v2629_0 = v2629;
                         local v2633 = v1548(nil, {
-                            type = 2, 
+                            type = 2,
                             value = v2630
                         });
                         local v2634;
@@ -8437,7 +8437,7 @@ local function v4318(v1125, v1126)
                         l_v1446_1(l_v2629_0, v2633, v2634);
                         v1365();
                         v1520();
-                    end, 
+                    end,
                     GETTABLE = function(v2636)
                         local v2637 = bit32.band(bit32.rshift(v2636, 8), 255);
                         local v2638 = bit32.band(bit32.rshift(v2636, 16), 255);
@@ -8475,7 +8475,7 @@ local function v4318(v1125, v1126)
                             v1331[v2638] = true;
                         end;
                         v1516(v2637, v1690(v2637, l_v2639_0, v2638));
-                    end, 
+                    end,
                     GETTABLEKS = function(v2644)
                         local v2645 = bit32.band(bit32.rshift(v2644, 8), 255);
                         local v2646 = bit32.band(bit32.rshift(v2644, 16), 255);
@@ -8503,7 +8503,7 @@ local function v4318(v1125, v1126)
                         end;
                         v2647 = v2646[v2650];
                         v1516(v2645, v1690(v2645, l_v2647_0, v1548(nil, v2647)));
-                    end, 
+                    end,
                     GETTABLEN = function(v2651)
                         local v2652 = bit32.band(bit32.rshift(v2651, 8), 255);
                         local v2653 = bit32.band(bit32.rshift(v2651, 16), 255);
@@ -8526,10 +8526,10 @@ local function v4318(v1125, v1126)
                         local l_v2654_0 = v2654;
                         v2654 = bit32.band(bit32.rshift(v2651, 24), 255) + 1;
                         v1516(v2652, v1690(v2652, l_v2654_0, v1548(nil, {
-                            type = 2, 
+                            type = 2,
                             value = v2654
                         })));
-                    end, 
+                    end,
                     SETLIST = function(v2657)
                         local v2658 = bit32.band(bit32.rshift(v2657, 8), 255);
                         local v2659 = bit32.band(bit32.rshift(v2657, 16), 255);
@@ -8555,7 +8555,7 @@ local function v4318(v1125, v1126)
                             local l_v1446_2 = v1446;
                             local l_v2658_0 = v2658;
                             local v2669 = v1548(nil, {
-                                type = 2, 
+                                type = 2,
                                 value = l_v2661_0
                             });
                             local v2670;
@@ -8580,14 +8580,14 @@ local function v4318(v1125, v1126)
                         end;
                         v1375(v2658, v2661);
                         v1520();
-                    end, 
+                    end,
                     GETUPVAL = function(v2672)
                         local v2673 = bit32.band(bit32.rshift(v2672, 8), 255);
                         local v2674 = bit32.band(bit32.rshift(v2672, 16), 255);
                         assert(v1347);
                         local v2675 = v1347.upvalues[v2674];
                         v1516(v2673, v1388(v2673, v2675.name));
-                    end, 
+                    end,
                     SETUPVAL = function(v2676)
                         local v2677 = bit32.band(bit32.rshift(v2676, 8), 255);
                         local v2678 = bit32.band(bit32.rshift(v2676, 16), 255);
@@ -8614,7 +8614,7 @@ local function v4318(v1125, v1126)
                         l_v1435_0(l_name_8, v2682);
                         v1365();
                         v1520();
-                    end, 
+                    end,
                     GETIMPORT = function(v2684)
                         local v2685 = bit32.band(bit32.rshift(v2684, 8), 255);
                         local v2686 = l_code_1[v1358 + 1];
@@ -8624,7 +8624,7 @@ local function v4318(v1125, v1126)
                         v2686 = v1698(v2685, v2686);
                         assert(v2686);
                         v1516(v2685, v2686);
-                    end, 
+                    end,
                     GETGLOBAL = function(v2687)
                         local v2688 = bit32.band(bit32.rshift(v2687, 8), 255);
                         local l_l_constants_1_1 = l_constants_1;
@@ -8634,7 +8634,7 @@ local function v4318(v1125, v1126)
                         end;
                         local v2691 = l_l_constants_1_1[v2690];
                         v1516(v2688, v1543(v2688, v2691));
-                    end, 
+                    end,
                     SETGLOBAL = function(v2692)
                         local v2693 = bit32.band(bit32.rshift(v2692, 8), 255);
                         local l_l_constants_1_2 = l_constants_1;
@@ -8664,7 +8664,7 @@ local function v4318(v1125, v1126)
                         l_l_constants_1_2(l_v2696_0, v2698);
                         v1365();
                         v1520();
-                    end, 
+                    end,
                     NAMECALL = function(v2700)
                         local v2701 = bit32.band(bit32.rshift(v2700, 8), 255);
                         local v2702 = bit32.band(bit32.rshift(v2700, 16), 255);
@@ -8674,7 +8674,7 @@ local function v4318(v1125, v1126)
                             error("Expected aux");
                         end;
                         v1521 = l_l_constants_1_3[v2704] or {
-                            type = 3, 
+                            type = 3,
                             value = "<UNK>"
                         };
                         assert(v1521);
@@ -8704,7 +8704,7 @@ local function v4318(v1125, v1126)
                         l_l_constants_1_3 = v1555(v2701, v2705, v1521, true);
                         assert(l_l_constants_1_3);
                         v1516(v2701, l_l_constants_1_3);
-                    end, 
+                    end,
                     RETURN = function(v2708)
                         local v2709 = bit32.band(bit32.rshift(v2708, 8), 255);
                         local v2710 = bit32.band(bit32.rshift(v2708, 16), 255) - 1;
@@ -8718,7 +8718,7 @@ local function v4318(v1125, v1126)
                             v1520();
                             return;
                         end;
-                    end, 
+                    end,
                     CALL = function(v2711)
                         local v2712 = bit32.band(bit32.rshift(v2711, 8), 255);
                         local v2713 = bit32.band(bit32.rshift(v2711, 16), 255) - 1;
@@ -8738,11 +8738,11 @@ local function v4318(v1125, v1126)
                             if v2715.t == "name" then
                             else
                                 local v2716 = {
-                                    t = "call", 
-                                    lines = v1203, 
-                                    reads = {}, 
-                                    writes = {}, 
-                                    func = v2715.func, 
+                                    t = "call",
+                                    lines = v1203,
+                                    reads = {},
+                                    writes = {},
+                                    func = v2715.func,
                                     args = v2715.args
                                 };
                                 v1187(v2716, v2715.func);
@@ -8755,7 +8755,7 @@ local function v4318(v1125, v1126)
                             v1520();
                             return;
                         end;
-                    end, 
+                    end,
                     CLOSEUPVALS = function(v2719)
                         local v2720 = bit32.band(bit32.rshift(v2719, 8), 255);
                         for v2721 in pairs(table.clone(v1716)) do
@@ -8765,7 +8765,7 @@ local function v4318(v1125, v1126)
                             end;
                         end;
                         v1520();
-                    end, 
+                    end,
                     DUPCLOSURE = function(v2722)
                         local v2723 = bit32.band(bit32.rshift(v2722, 8), 255);
                         local v2724 = l_constants_1[bit32.band(bit32.rshift(v2722, 16), 65535)];
@@ -8775,12 +8775,12 @@ local function v4318(v1125, v1126)
                         end;
                         local v2725 = v1138[v2724.value];
                         v1796(v2723, v2725);
-                    end, 
+                    end,
                     NEWCLOSURE = function(v2726)
                         local v2727 = bit32.band(bit32.rshift(v2726, 8), 255);
                         local v2728 = l_protos_1[bit32.band(bit32.rshift(v2726, 16), 65535)];
                         v1796(v2727, v2728);
-                    end, 
+                    end,
                     ADD = function(v2729)
                         local v2730 = bit32.band(bit32.rshift(v2729, 8), 255);
                         local v2731 = bit32.band(bit32.rshift(v2729, 16), 255);
@@ -8823,7 +8823,7 @@ local function v4318(v1125, v1126)
                             v1331[v2740] = true;
                         end;
                         l_v1516_0(l_v2730_0, l_v1591_0(l_v2730_1, l_v2737_0, v2740));
-                    end, 
+                    end,
                     ADDK = function(v2742)
                         local v2743 = bit32.band(bit32.rshift(v2742, 8), 255);
                         local v2744 = bit32.band(bit32.rshift(v2742, 16), 255);
@@ -8852,7 +8852,7 @@ local function v4318(v1125, v1126)
                             v1331[v2750] = true;
                         end;
                         l_v1516_1(l_v2743_0, l_v1591_1(l_v2743_1, v2750, v1548(nil, v2745)));
-                    end, 
+                    end,
                     SUB = function(v2752)
                         local v2753 = bit32.band(bit32.rshift(v2752, 8), 255);
                         local v2754 = bit32.band(bit32.rshift(v2752, 16), 255);
@@ -8895,7 +8895,7 @@ local function v4318(v1125, v1126)
                             v1331[v2763] = true;
                         end;
                         l_v1516_2(l_v2753_0, l_v1602_0(l_v2753_1, l_v2760_0, v2763));
-                    end, 
+                    end,
                     SUBK = function(v2765)
                         local v2766 = bit32.band(bit32.rshift(v2765, 8), 255);
                         local v2767 = bit32.band(bit32.rshift(v2765, 16), 255);
@@ -8924,7 +8924,7 @@ local function v4318(v1125, v1126)
                             v1331[v2773] = true;
                         end;
                         l_v1516_3(l_v2766_0, l_v1602_1(l_v2766_1, v2773, v1548(nil, v2768)));
-                    end, 
+                    end,
                     MUL = function(v2775)
                         local v2776 = bit32.band(bit32.rshift(v2775, 8), 255);
                         local v2777 = bit32.band(bit32.rshift(v2775, 16), 255);
@@ -8967,7 +8967,7 @@ local function v4318(v1125, v1126)
                             v1331[v2786] = true;
                         end;
                         l_v1516_4(l_v2776_0, l_v1613_0(l_v2776_1, l_v2783_0, v2786));
-                    end, 
+                    end,
                     MULK = function(v2788)
                         local v2789 = bit32.band(bit32.rshift(v2788, 8), 255);
                         local v2790 = bit32.band(bit32.rshift(v2788, 16), 255);
@@ -8996,7 +8996,7 @@ local function v4318(v1125, v1126)
                             v1331[v2796] = true;
                         end;
                         l_v1516_5(l_v2789_0, l_v1613_1(l_v2789_1, v2796, v1548(nil, v2791)));
-                    end, 
+                    end,
                     DIV = function(v2798)
                         local v2799 = bit32.band(bit32.rshift(v2798, 8), 255);
                         local v2800 = bit32.band(bit32.rshift(v2798, 16), 255);
@@ -9039,7 +9039,7 @@ local function v4318(v1125, v1126)
                             v1331[v2809] = true;
                         end;
                         l_v1516_6(l_v2799_0, l_v1624_0(l_v2799_1, l_v2806_0, v2809));
-                    end, 
+                    end,
                     DIVK = function(v2811)
                         local v2812 = bit32.band(bit32.rshift(v2811, 8), 255);
                         local v2813 = bit32.band(bit32.rshift(v2811, 16), 255);
@@ -9068,7 +9068,7 @@ local function v4318(v1125, v1126)
                             v1331[v2819] = true;
                         end;
                         l_v1516_7(l_v2812_0, l_v1624_1(l_v2812_1, v2819, v1548(nil, v2814)));
-                    end, 
+                    end,
                     SUBRK = function(v2821)
                         local v2822 = bit32.band(bit32.rshift(v2821, 8), 255);
                         local v2823 = l_constants_1[bit32.band(bit32.rshift(v2821, 16), 255)];
@@ -9098,7 +9098,7 @@ local function v4318(v1125, v1126)
                             v1331[v2830] = true;
                         end;
                         l_v1516_8(l_v2822_0, l_v1602_2(l_v2822_1, v2829, v2830));
-                    end, 
+                    end,
                     DIVRK = function(v2832)
                         local v2833 = bit32.band(bit32.rshift(v2832, 8), 255);
                         local v2834 = l_constants_1[bit32.band(bit32.rshift(v2832, 16), 255)];
@@ -9128,7 +9128,7 @@ local function v4318(v1125, v1126)
                             v1331[v2841] = true;
                         end;
                         l_v1516_9(l_v2833_0, l_v1624_2(l_v2833_1, v2840, v2841));
-                    end, 
+                    end,
                     IDIV = function(v2843)
                         local v2844 = bit32.band(bit32.rshift(v2843, 8), 255);
                         local v2845 = bit32.band(bit32.rshift(v2843, 16), 255);
@@ -9171,7 +9171,7 @@ local function v4318(v1125, v1126)
                             v1331[v2854] = true;
                         end;
                         l_v1516_10(l_v2844_0, l_v1635_0(l_v2844_1, l_v2851_0, v2854));
-                    end, 
+                    end,
                     IDIVK = function(v2856)
                         local v2857 = bit32.band(bit32.rshift(v2856, 8), 255);
                         local v2858 = bit32.band(bit32.rshift(v2856, 16), 255);
@@ -9200,7 +9200,7 @@ local function v4318(v1125, v1126)
                             v1331[v2864] = true;
                         end;
                         l_v1516_11(l_v2857_0, l_v1635_1(l_v2857_1, v2864, v1548(nil, v2859)));
-                    end, 
+                    end,
                     POW = function(v2866)
                         local v2867 = bit32.band(bit32.rshift(v2866, 8), 255);
                         local v2868 = bit32.band(bit32.rshift(v2866, 16), 255);
@@ -9243,7 +9243,7 @@ local function v4318(v1125, v1126)
                             v1331[v2877] = true;
                         end;
                         l_v1516_12(l_v2867_0, l_v1666_0(l_v2867_1, l_v2874_0, v2877));
-                    end, 
+                    end,
                     POWK = function(v2879)
                         local v2880 = bit32.band(bit32.rshift(v2879, 8), 255);
                         local v2881 = bit32.band(bit32.rshift(v2879, 16), 255);
@@ -9272,7 +9272,7 @@ local function v4318(v1125, v1126)
                             v1331[v2887] = true;
                         end;
                         l_v1516_13(l_v2880_0, l_v1666_1(l_v2880_1, v2887, v1548(nil, v2882)));
-                    end, 
+                    end,
                     MOD = function(v2889)
                         local v2890 = bit32.band(bit32.rshift(v2889, 8), 255);
                         local v2891 = bit32.band(bit32.rshift(v2889, 16), 255);
@@ -9315,7 +9315,7 @@ local function v4318(v1125, v1126)
                             v1331[v2900] = true;
                         end;
                         l_v1516_14(l_v2890_0, l_v1646_0(l_v2890_1, l_v2897_0, v2900));
-                    end, 
+                    end,
                     MODK = function(v2902)
                         local v2903 = bit32.band(bit32.rshift(v2902, 8), 255);
                         local v2904 = bit32.band(bit32.rshift(v2902, 16), 255);
@@ -9344,7 +9344,7 @@ local function v4318(v1125, v1126)
                             v1331[v2910] = true;
                         end;
                         l_v1516_15(l_v2903_0, l_v1646_1(l_v2903_1, v2910, v1548(nil, v2905)));
-                    end, 
+                    end,
                     AND = function(v2912)
                         local v2913 = bit32.band(bit32.rshift(v2912, 8), 255);
                         local v2914 = bit32.band(bit32.rshift(v2912, 16), 255);
@@ -9387,7 +9387,7 @@ local function v4318(v1125, v1126)
                             v1331[v2923] = true;
                         end;
                         l_v1516_16(l_v2913_0, l_v1575_0(l_v2913_1, l_v2920_0, v2923));
-                    end, 
+                    end,
                     ANDK = function(v2925)
                         local v2926 = bit32.band(bit32.rshift(v2925, 8), 255);
                         local v2927 = bit32.band(bit32.rshift(v2925, 16), 255);
@@ -9413,7 +9413,7 @@ local function v4318(v1125, v1126)
                             v1331[v2933] = true;
                         end;
                         l_v1516_17(l_v2926_0, l_v1575_1(l_v2926_1, v2933, v1548(nil, v2928)));
-                    end, 
+                    end,
                     OR = function(v2935)
                         local v2936 = bit32.band(bit32.rshift(v2935, 8), 255);
                         local v2937 = bit32.band(bit32.rshift(v2935, 16), 255);
@@ -9456,7 +9456,7 @@ local function v4318(v1125, v1126)
                             v1331[v2946] = true;
                         end;
                         l_v1516_18(l_v2936_0, l_v1571_0(l_v2936_1, l_v2943_0, v2946));
-                    end, 
+                    end,
                     ORK = function(v2948)
                         local v2949 = bit32.band(bit32.rshift(v2948, 8), 255);
                         local v2950 = bit32.band(bit32.rshift(v2948, 16), 255);
@@ -9482,7 +9482,7 @@ local function v4318(v1125, v1126)
                             v1331[v2956] = true;
                         end;
                         l_v1516_19(l_v2949_0, l_v1571_1(l_v2949_1, v2956, v1548(nil, v2951)));
-                    end, 
+                    end,
                     CONCAT = function(v2958)
                         local v2959 = bit32.band(bit32.rshift(v2958, 8), 255);
                         local v2960 = bit32.band(bit32.rshift(v2958, 16), 255);
@@ -9508,7 +9508,7 @@ local function v4318(v1125, v1126)
                             table.insert(v2962, v2964);
                         end;
                         v1516(v2959, v1679(v2959, v2962));
-                    end, 
+                    end,
                     NOT = function(v2966)
                         local v2967 = bit32.band(bit32.rshift(v2966, 8), 255);
                         local v2968 = bit32.band(bit32.rshift(v2966, 16), 255);
@@ -9533,7 +9533,7 @@ local function v4318(v1125, v1126)
                             v1331[v2973] = true;
                         end;
                         l_v1516_20(l_v2967_0, l_v1649_0(l_v2967_1, v2973));
-                    end, 
+                    end,
                     MINUS = function(v2975)
                         local v2976 = bit32.band(bit32.rshift(v2975, 8), 255);
                         local v2977 = bit32.band(bit32.rshift(v2975, 16), 255);
@@ -9558,7 +9558,7 @@ local function v4318(v1125, v1126)
                             v1331[v2982] = true;
                         end;
                         l_v1516_21(l_v2976_0, l_v1652_0(l_v2976_1, v2982));
-                    end, 
+                    end,
                     LENGTH = function(v2984)
                         local v2985 = bit32.band(bit32.rshift(v2984, 8), 255);
                         local v2986 = bit32.band(bit32.rshift(v2984, 16), 255);
@@ -9583,7 +9583,7 @@ local function v4318(v1125, v1126)
                             v1331[v2991] = true;
                         end;
                         l_v1516_22(l_v2985_0, l_v1655_0(l_v2985_1, v2991));
-                    end, 
+                    end,
                     NATIVECALL = function(_)
                         local v2994 = v1203[#v1203];
                         if v2994 and v2994.t == "comment" and string.sub(v2994.text, 1, 12) == "<NATIVECALL>" then
@@ -9594,7 +9594,7 @@ local function v4318(v1125, v1126)
                             v1365();
                         end;
                         v1520();
-                    end, 
+                    end,
                     BREAK = function(_)
                         local v2996 = v1203[#v1203];
                         if v2996 and v2996.t == "comment" and string.sub(v2996.text, 1, 12) == "<DEBUGBREAK>" then
@@ -9605,7 +9605,7 @@ local function v4318(v1125, v1126)
                             v1365();
                         end;
                         v1520();
-                    end, 
+                    end,
                     NOP = function(_)
                         local v2998 = v1203[#v1203];
                         if v2998 and v2998.t == "comment" and string.sub(v2998.text, 1, 5) == "<NOP>" then
@@ -9616,7 +9616,7 @@ local function v4318(v1125, v1126)
                             v1365();
                         end;
                         v1520();
-                    end, 
+                    end,
                     COVERAGE = function(_)
                         local v3000 = v1203[#v1203];
                         if v3000 and v3000.t == "comment" and string.sub(v3000.text, 1, 10) == "<COVERAGE>" then
@@ -9762,21 +9762,21 @@ local function v4318(v1125, v1126)
                     v1520();
                 end;
                 local v3069 = {
-                    JUMP = v3017, 
-                    JUMPX = v3017, 
-                    JUMPBACK = v3017, 
-                    JUMPIF = v3026, 
-                    JUMPIFNOT = v3026, 
-                    JUMPIFEQ = v3037, 
-                    JUMPIFLE = v3037, 
-                    JUMPIFLT = v3037, 
-                    JUMPIFNOTEQ = v3037, 
-                    JUMPIFNOTLE = v3037, 
-                    JUMPIFNOTLT = v3037, 
-                    JUMPXEQKNIL = v3046, 
-                    JUMPXEQKB = v3046, 
-                    JUMPXEQKN = v3046, 
-                    JUMPXEQKS = v3046, 
+                    JUMP = v3017,
+                    JUMPX = v3017,
+                    JUMPBACK = v3017,
+                    JUMPIF = v3026,
+                    JUMPIFNOT = v3026,
+                    JUMPIFEQ = v3037,
+                    JUMPIFLE = v3037,
+                    JUMPIFLT = v3037,
+                    JUMPIFNOTEQ = v3037,
+                    JUMPIFNOTLE = v3037,
+                    JUMPIFNOTLT = v3037,
+                    JUMPXEQKNIL = v3046,
+                    JUMPXEQKB = v3046,
+                    JUMPXEQKN = v3046,
+                    JUMPXEQKS = v3046,
                     FORNLOOP = function(v3047, _)
                         local v3049 = bit32.band(bit32.rshift(v3047, 8), 255);
                         local v3050 = v1280[v1358];
@@ -9819,7 +9819,7 @@ local function v4318(v1125, v1126)
                         end;
                         l_v1187_3(l_v3050_0, v3053);
                         v1520();
-                    end, 
+                    end,
                     FORGLOOP = function(v3057, v3058)
                         local v3059 = bit32.band(bit32.rshift(v3057, 8), 255);
                         local v3060 = v1280[v1358];
@@ -9921,11 +9921,11 @@ local function v4318(v1125, v1126)
                             local l_for_info_0 = l_data_6.for_info;
                             if l_for_info_0 then
                                 v3081 = {
-                                    t = "for", 
-                                    lines = v1203, 
-                                    reads = {}, 
-                                    writes = {}, 
-                                    code = v3079, 
+                                    t = "for",
+                                    lines = v1203,
+                                    reads = {},
+                                    writes = {},
+                                    code = v3079,
                                     for_info = l_for_info_0
                                 };
                                 local l_variables_0 = l_for_info_0.variables;
@@ -10042,11 +10042,11 @@ local function v4318(v1125, v1126)
                                 v3070(v3079, v1364[l_data_6.code], true);
                             else
                                 v3081 = {
-                                    t = "while", 
-                                    lines = v1203, 
-                                    reads = {}, 
-                                    writes = {}, 
-                                    code = v3079, 
+                                    t = "while",
+                                    lines = v1203,
+                                    reads = {},
+                                    writes = {},
+                                    code = v3079,
                                     expr = nil
                                 };
                                 v3070(v3079, v1364[l_data_6.code], true);
@@ -10098,13 +10098,13 @@ local function v4318(v1125, v1126)
                                 v3070(v3118, v1364[l_data_7.else_], true);
                             end;
                             local v3119 = {
-                                t = "if", 
-                                lines = v1203, 
-                                reads = {}, 
-                                writes = {}, 
-                                pass = v3117, 
-                                elseifs = {}, 
-                                else_ = v3118, 
+                                t = "if",
+                                lines = v1203,
+                                reads = {},
+                                writes = {},
+                                pass = v3117,
+                                elseifs = {},
+                                else_ = v3118,
                                 expr = v3116
                             };
                             for _, v3121 in ipairs(v3117) do
@@ -10218,24 +10218,24 @@ local function v4318(v1125, v1126)
                                 v1213.INLINED = v3146;
                                 local l_v3145_0 = v3145;
                                 l_INLINED_0 = v1223(l_v3145_0, {
-                                    beginning = -1, 
+                                    beginning = -1,
                                     ending = -1
                                 }, {});
                                 v3132 = v1297(v1388(nil, l_INLINED_0), {}, false);
                                 v3145 = {
-                                    t = "function", 
-                                    reads = {}, 
-                                    writes = {}, 
-                                    contributors = {}, 
-                                    is_self_referencing = false, 
-                                    name = l_v3145_0, 
-                                    varname = l_INLINED_0, 
-                                    name_known = true, 
-                                    args = {}, 
-                                    is_vararg = false, 
-                                    line_defined = -1, 
-                                    upvalues_count = 0, 
-                                    upvalues = {}, 
+                                    t = "function",
+                                    reads = {},
+                                    writes = {},
+                                    contributors = {},
+                                    is_self_referencing = false,
+                                    name = l_v3145_0,
+                                    varname = l_INLINED_0,
+                                    name_known = true,
+                                    args = {},
+                                    is_vararg = false,
+                                    line_defined = -1,
+                                    upvalues_count = 0,
+                                    upvalues = {},
                                     ast = v3138
                                 };
                                 table.insert(v3145.writes, l_INLINED_0);
@@ -10394,20 +10394,20 @@ local function v4318(v1125, v1126)
                                 local v3174 = v24[v3173.type];
                                 if v3174 then
                                     local v3175 = {
-                                        type = "warning", 
+                                        type = "warning",
                                         content = ("A SETGLOBAL instruction specified a%* %* constant. Expected a string."):format(v61[string.sub(v3174, 1, 1)] and "n" or "", v3174)
                                     };
                                     table.insert(v1142, v3175);
                                 else
                                     table.insert(v1142, {
-                                        type = "warning", 
+                                        type = "warning",
                                         content = "A SETGLOBAL instruction specified a constant with an invalid type."
                                     });
                                 end;
                             end;
                         else
                             table.insert(v1142, {
-                                type = "warning", 
+                                type = "warning",
                                 content = "A SETGLOBAL instruction specified an invalid constant."
                             });
                         end;
@@ -10444,21 +10444,21 @@ local function v4318(v1125, v1126)
         end;
         local v3188 = nil;
         local v3210 = {
-            ["nil"] = v3187, 
-            boolean = v3187, 
-            global = v3187, 
-            varargs = v3187, 
-            addition = v3183, 
-            subtraction = v3183, 
-            multiplication = v3183, 
-            division = v3183, 
-            exponentiation = v3183, 
-            ["floor division"] = v3183, 
-            modulus = v3183, 
-            ["and"] = v3183, 
-            ["or"] = v3183, 
-            condition = v3183, 
-            negate = v3185, 
+            ["nil"] = v3187,
+            boolean = v3187,
+            global = v3187,
+            varargs = v3187,
+            addition = v3183,
+            subtraction = v3183,
+            multiplication = v3183,
+            division = v3183,
+            exponentiation = v3183,
+            ["floor division"] = v3183,
+            modulus = v3183,
+            ["and"] = v3183,
+            ["or"] = v3183,
+            condition = v3183,
+            negate = v3185,
             ["not"] = function(v3189)
                 local v3190 = 1;
                 local l_v3189_0 = v3189;
@@ -10475,32 +10475,32 @@ local function v4318(v1125, v1126)
                     end;
                 end;
                 v3180(v3189.rhs);
-            end, 
-            length = v3185, 
+            end,
+            length = v3185,
             concatenation = function(v3193)
                 for _, v3195 in ipairs(v3193.exprs) do
                     v3180(v3195);
                 end;
-            end, 
+            end,
             name = function(v3196)
                 local l_override_expr_2 = v3196.name.override_expr;
                 if l_override_expr_2 then
                     v3180(l_override_expr_2);
                 end;
-            end, 
+            end,
             constant = function(v3198)
                 local l_const_0 = v3198.const;
                 if l_const_0.type == 4 then
                     v3180(l_const_0.value);
                 end;
-            end, 
+            end,
             ["constant index"] = function(v3200)
                 local l_index_4 = v3200.index;
                 if l_index_4.type == 4 then
                     v3180(l_index_4.value);
                 end;
                 v3180(v3200.table);
-            end, 
+            end,
             ["new table"] = function(v3202)
                 for v3203, v3204 in pairs(v3202.initializers) do
                     if type(v3203) == "table" then
@@ -10510,16 +10510,16 @@ local function v4318(v1125, v1126)
                         v3180(v3204);
                     end;
                 end;
-            end, 
+            end,
             ["function"] = function(v3205)
                 v3179(v3205.ast);
-            end, 
+            end,
             call = function(v3206)
                 v3180(v3206.func);
                 for _, v3208 in ipairs(v3206.args) do
                     v3180(v3208);
                 end;
-            end, 
+            end,
             ["get table"] = function(v3209)
                 v3180(v3209.table);
                 v3180(v3209.index);
@@ -10716,10 +10716,10 @@ local function v4318(v1125, v1126)
         end;
         local v3261 = {};
         local v3357 = {
-            comment = v3235, 
-            ["break"] = v3235, 
-            continue = v3235, 
-            ["unknown jump"] = v3235, 
+            comment = v3235,
+            ["break"] = v3235,
+            continue = v3235,
+            ["unknown jump"] = v3235,
             ["define variable"] = function(v3262)
                 local l_value_5 = v3262.value;
                 while l_value_5.t == "name" do
@@ -10735,27 +10735,27 @@ local function v4318(v1125, v1126)
                     v3251(v3262);
                 end;
                 v3180(l_l_value_5_0);
-            end, 
+            end,
             ["set global"] = function(v3266)
                 v3180(v3266.value);
-            end, 
+            end,
             ["define function"] = function(v3267)
                 v3180(v3267.func);
-            end, 
+            end,
             call = function(v3268)
                 v3180(v3268.func);
                 for _, v3270 in ipairs(v3268.args) do
                     v3180(v3270);
                 end;
-            end, 
+            end,
             ["set table"] = function(v3271)
                 v3180(v3271.table);
                 v3180(v3271.key);
                 v3180(v3271.value);
-            end, 
+            end,
             ["set variable"] = function(v3272)
                 v3180(v3272.value);
-            end, 
+            end,
             ["return"] = function(v3273)
                 local l_lines_1 = v3273.lines;
                 local v3275 = table.find(l_lines_1, v3273);
@@ -10765,10 +10765,10 @@ local function v4318(v1125, v1126)
                         v3273
                     };
                     l_lines_1[v3275] = {
-                        t = "do", 
-                        lines = l_lines_1, 
-                        reads = {}, 
-                        writes = {}, 
+                        t = "do",
+                        lines = l_lines_1,
+                        reads = {},
+                        writes = {},
                         content = v3276
                     };
                     v3273.lines = v3276;
@@ -10777,7 +10777,7 @@ local function v4318(v1125, v1126)
                 for _, v3278 in ipairs(v3273.values) do
                     v3180(v3278);
                 end;
-            end, 
+            end,
             ["if"] = function(v3279)
                 v3180(v3279.expr);
                 v3179(v3279.pass);
@@ -10791,7 +10791,7 @@ local function v4318(v1125, v1126)
                         local v3283 = l_else__3[1];
                         while v3283.t == "if" do
                             table.insert(v3279.elseifs, {
-                                expr = v3283.expr, 
+                                expr = v3283.expr,
                                 code = v3283.pass
                             });
                             v3177 = v3177 + 1;
@@ -10925,7 +10925,7 @@ local function v4318(v1125, v1126)
                     end;
                     return;
                 end;
-            end, 
+            end,
             ["while"] = function(v3310)
                 local v3311 = false;
                 local v3312 = false;
@@ -11011,16 +11011,16 @@ local function v4318(v1125, v1126)
                     v3180(v3310.expr);
                 end;
                 v3179(v3310.code);
-            end, 
+            end,
             ["repeat"] = function(v3330)
                 if v3330.expr then
                     v3180(v3330.expr);
                 end;
                 v3179(v3330.code);
-            end, 
+            end,
             ["do"] = function(v3331)
                 v3179(v3331.content);
-            end, 
+            end,
             ["for"] = function(v3332)
                 local l_for_info_1 = v3332.for_info;
                 local l_variables_1 = l_for_info_1.variables;
@@ -11141,7 +11141,7 @@ local function v4318(v1125, v1126)
             end
         };
         local v3399 = {
-            {}, 
+            {},
             {
                 ["define variable"] = function(v3358)
                     local l_value_6 = v3358.value;
@@ -11172,7 +11172,7 @@ local function v4318(v1125, v1126)
                         v3233(v3358, l_l_value_6_0, l_value_6, "local");
                     end;
                     v3180(l_l_value_6_0);
-                end, 
+                end,
                 ["set variable"] = function(v3364)
                     local l_value_7 = v3364.value;
                     while l_value_7.t == "name" do
@@ -11200,7 +11200,7 @@ local function v4318(v1125, v1126)
                         v3233(v3364, l_l_value_7_0, l_value_7, "global");
                     end;
                     v3180(v3364.value);
-                end, 
+                end,
                 ["set global"] = function(v3370)
                     local l_value_8 = v3370.value;
                     while l_value_8.t == "name" do
@@ -11220,13 +11220,13 @@ local function v4318(v1125, v1126)
                             local l_l_l_value_8_0_0 = l_l_value_8_0;
                             local l_value_9 = l_value_8.value;
                             l_v3233_0(l_v3370_0, l_l_l_value_8_0_0, v1206[l_value_9] or v1223(l_value_9, {
-                                beginning = -1, 
+                                beginning = -1,
                                 ending = -1
                             }, {}), "global");
                         end;
                     end;
                     v3180(l_l_value_8_0);
-                end, 
+                end,
                 ["set table"] = function(v3378)
                     local l_value_10 = v3378.value;
                     while l_value_10.t == "name" do
@@ -11278,19 +11278,19 @@ local function v4318(v1125, v1126)
                                 local l_l_l_value_10_0_0 = l_l_value_10_0;
                                 local l_v3386_0 = v3386;
                                 local v3394 = v1206[l_v3386_0] or v1223(l_v3386_0, {
-                                    beginning = -1, 
+                                    beginning = -1,
                                     ending = -1
                                 }, {});
                                 l_v3386_0 = "table";
                                 local v3395 = {};
                                 local l_v3384_0 = v3384;
                                 local v3397 = v1206[l_v3384_0] or v1223(l_v3384_0, {
-                                    beginning = -1, 
+                                    beginning = -1,
                                     ending = -1
                                 }, {});
                                 local l_v3386_1 = v3386;
                                 l_v3384_0 = v1206[l_v3386_1] or v1223(l_v3386_1, {
-                                    beginning = -1, 
+                                    beginning = -1,
                                     ending = -1
                                 }, {});
                                 v6(v3395, 1, v3397, l_v3384_0);
@@ -11668,7 +11668,7 @@ local function v4318(v1125, v1126)
                     end;
                 end;
                 return "mouse";
-            end, 
+            end,
             Clone = function(v3482, _)
                 if v1129.smart_var_level >= 3 then
                     local l_var_num_2 = v3482.var_num;
@@ -11678,7 +11678,7 @@ local function v4318(v1125, v1126)
                     end;
                 end;
                 return "clone";
-            end, 
+            end,
             GetChildren = function(v3485, _)
                 if v1129.smart_var_level >= 3 then
                     local l_var_num_3 = v3485.var_num;
@@ -11688,7 +11688,7 @@ local function v4318(v1125, v1126)
                     end;
                 end;
                 return "children";
-            end, 
+            end,
             GetDescendants = function(v3488, _)
                 if v1129.smart_var_level >= 3 then
                     local l_var_num_4 = v3488.var_num;
@@ -11698,7 +11698,7 @@ local function v4318(v1125, v1126)
                     end;
                 end;
                 return "descendants";
-            end, 
+            end,
             GetPlayers = function(v3491, _)
                 if v1129.smart_var_level >= 3 then
                     local l_var_num_5 = v3491.var_num;
@@ -11708,7 +11708,7 @@ local function v4318(v1125, v1126)
                     end;
                 end;
                 return "players";
-            end, 
+            end,
             format = function(v3494, v3495)
                 if v1129.smart_var_level >= 3 then
                     local l_var_num_6 = v3494.var_num;
@@ -11727,7 +11727,7 @@ local function v4318(v1125, v1126)
                 else
                     return "formatted";
                 end;
-            end, 
+            end,
             IsA = function(v3498, _)
                 if v1129.smart_var_level >= 3 then
                     local l_var_num_7 = v3498.var_num;
@@ -11737,7 +11737,7 @@ local function v4318(v1125, v1126)
                     end;
                 end;
                 return "children";
-            end, 
+            end,
             WaitForChild = function(v3501, v3502)
                 if v1129.smart_var_level >= 3 then
                     local l_var_num_8 = v3501.var_num;
@@ -11770,7 +11770,7 @@ local function v4318(v1125, v1126)
                         return;
                     end;
                 end;
-            end, 
+            end,
             FindFirstChildOfClass = function(v3508, v3509)
                 if v1129.smart_var_level >= 3 then
                     local l_var_num_9 = v3508.var_num;
@@ -11801,7 +11801,7 @@ local function v4318(v1125, v1126)
                         return;
                     end;
                 end;
-            end, 
+            end,
             FindFirstChildWhichIsA = function(v3515, v3516)
                 if v1129.smart_var_level >= 3 then
                     local l_var_num_10 = v3515.var_num;
@@ -11832,7 +11832,7 @@ local function v4318(v1125, v1126)
                         return;
                     end;
                 end;
-            end, 
+            end,
             GetAttribute = function(v3522, v3523)
                 if v1129.smart_var_level >= 3 then
                     local l_var_num_11 = v3522.var_num;
@@ -11863,7 +11863,7 @@ local function v4318(v1125, v1126)
                         return;
                     end;
                 end;
-            end, 
+            end,
             GetAttributeChangedSignal = function(v3529, v3530)
                 if v1129.smart_var_level >= 3 then
                     local l_var_num_12 = v3529.var_num;
@@ -11894,7 +11894,7 @@ local function v4318(v1125, v1126)
                         return;
                     end;
                 end;
-            end, 
+            end,
             GetPropertyChangedSignal = function(v3536, v3537)
                 if v1129.smart_var_level >= 3 then
                     local l_var_num_13 = v3536.var_num;
@@ -11989,7 +11989,7 @@ local function v4318(v1125, v1126)
                         end;
                     end;
                 end;
-            end, 
+            end,
             ["math.random"] = function(v3556, v3557)
                 local l_var_num_15 = v3556.var_num;
                 assert(l_var_num_15);
@@ -12009,7 +12009,7 @@ local function v4318(v1125, v1126)
                         return "randint";
                     end;
                 end;
-            end, 
+            end,
             ["math.sqrt"] = function(v3560, v3561)
                 local l_var_num_16 = v3560.var_num;
                 assert(l_var_num_16);
@@ -12026,7 +12026,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.abs"] = function(v3563, v3564)
                 local l_var_num_17 = v3563.var_num;
                 assert(l_var_num_17);
@@ -12043,7 +12043,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.floor"] = function(v3566, v3567)
                 local l_var_num_18 = v3566.var_num;
                 assert(l_var_num_18);
@@ -12054,7 +12054,7 @@ local function v4318(v1125, v1126)
                     if v3569 then
                         if v3569.t == "addition" then
                             l_var_num_18 = {
-                                v3569.lhs, 
+                                v3569.lhs,
                                 v3569.rhs
                             };
                             local v3570 = 0;
@@ -12084,7 +12084,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.ceil"] = function(v3574, v3575)
                 local l_var_num_19 = v3574.var_num;
                 assert(l_var_num_19);
@@ -12101,7 +12101,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.round"] = function(v3577, v3578)
                 local l_var_num_20 = v3577.var_num;
                 assert(l_var_num_20);
@@ -12118,7 +12118,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.sin"] = function(v3580, v3581)
                 local l_var_num_21 = v3580.var_num;
                 assert(l_var_num_21);
@@ -12135,7 +12135,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.sinh"] = function(v3583, v3584)
                 local l_var_num_22 = v3583.var_num;
                 assert(l_var_num_22);
@@ -12152,7 +12152,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.asin"] = function(v3586, v3587)
                 local l_var_num_23 = v3586.var_num;
                 assert(l_var_num_23);
@@ -12169,7 +12169,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.cos"] = function(v3589, v3590)
                 local l_var_num_24 = v3589.var_num;
                 assert(l_var_num_24);
@@ -12186,7 +12186,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.cosh"] = function(v3592, v3593)
                 local l_var_num_25 = v3592.var_num;
                 assert(l_var_num_25);
@@ -12203,7 +12203,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.acos"] = function(v3595, v3596)
                 local l_var_num_26 = v3595.var_num;
                 assert(l_var_num_26);
@@ -12220,7 +12220,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.tan"] = function(v3598, v3599)
                 local l_var_num_27 = v3598.var_num;
                 assert(l_var_num_27);
@@ -12237,7 +12237,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.tanh"] = function(v3601, v3602)
                 local l_var_num_28 = v3601.var_num;
                 assert(l_var_num_28);
@@ -12254,7 +12254,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.atan"] = function(v3604, v3605)
                 local l_var_num_29 = v3604.var_num;
                 assert(l_var_num_29);
@@ -12271,7 +12271,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.atan2"] = function(v3607, v3608)
                 local l_var_num_30 = v3607.var_num;
                 assert(l_var_num_30);
@@ -12288,7 +12288,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.rad"] = function(v3610, v3611)
                 local l_var_num_31 = v3610.var_num;
                 assert(l_var_num_31);
@@ -12305,7 +12305,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.deg"] = function(v3613, v3614)
                 local l_var_num_32 = v3613.var_num;
                 assert(l_var_num_32);
@@ -12322,7 +12322,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.sign"] = function(v3616, v3617)
                 local l_var_num_33 = v3616.var_num;
                 assert(l_var_num_33);
@@ -12339,7 +12339,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.exp"] = function(v3619, v3620)
                 local l_var_num_34 = v3619.var_num;
                 assert(l_var_num_34);
@@ -12354,7 +12354,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.clamp"] = function(v3622, v3623)
                 local l_var_num_35 = v3622.var_num;
                 assert(l_var_num_35);
@@ -12371,7 +12371,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.min"] = function(v3625, v3626)
                 local l_var_num_36 = v3625.var_num;
                 assert(l_var_num_36);
@@ -12388,7 +12388,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["math.max"] = function(v3628, v3629)
                 local l_var_num_37 = v3628.var_num;
                 assert(l_var_num_37);
@@ -12405,7 +12405,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["Random.new"] = function(v3631, _)
                 local l_var_num_38 = v3631.var_num;
                 assert(l_var_num_38);
@@ -12414,7 +12414,7 @@ local function v4318(v1125, v1126)
                 else
                     return "random_state";
                 end;
-            end, 
+            end,
             ["bit32.lshift"] = function(v3634, v3635)
                 local l_var_num_39 = v3634.var_num;
                 assert(l_var_num_39);
@@ -12431,7 +12431,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["bit32.rshift"] = function(v3637, v3638)
                 local l_var_num_40 = v3637.var_num;
                 assert(l_var_num_40);
@@ -12448,7 +12448,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["bit32.arshift"] = function(v3640, v3641)
                 local l_var_num_41 = v3640.var_num;
                 assert(l_var_num_41);
@@ -12465,7 +12465,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["bit32.lrotate"] = function(v3643, v3644)
                 local l_var_num_42 = v3643.var_num;
                 assert(l_var_num_42);
@@ -12482,7 +12482,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["bit32.rrotate"] = function(v3646, v3647)
                 local l_var_num_43 = v3646.var_num;
                 assert(l_var_num_43);
@@ -12499,7 +12499,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["bit32.band"] = function(v3649, v3650)
                 local l_var_num_44 = v3649.var_num;
                 assert(l_var_num_44);
@@ -12516,7 +12516,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["bit32.bor"] = function(v3652, v3653)
                 local l_var_num_45 = v3652.var_num;
                 assert(l_var_num_45);
@@ -12533,7 +12533,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["bit32.bxor"] = function(v3655, v3656)
                 local l_var_num_46 = v3655.var_num;
                 assert(l_var_num_46);
@@ -12550,7 +12550,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["bit32.bnot"] = function(v3658, v3659)
                 local l_var_num_47 = v3658.var_num;
                 assert(l_var_num_47);
@@ -12567,7 +12567,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["bit32.btest"] = function(v3661, v3662)
                 local l_var_num_48 = v3661.var_num;
                 assert(l_var_num_48);
@@ -12584,7 +12584,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["bit32.countlz"] = function(v3664, v3665)
                 local l_var_num_49 = v3664.var_num;
                 assert(l_var_num_49);
@@ -12601,7 +12601,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["bit32.countrz"] = function(v3667, v3668)
                 local l_var_num_50 = v3667.var_num;
                 assert(l_var_num_50);
@@ -12618,7 +12618,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["bit32.extract"] = function(v3670, v3671)
                 local l_var_num_51 = v3670.var_num;
                 assert(l_var_num_51);
@@ -12635,7 +12635,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["bit32.replace"] = function(v3673, v3674)
                 local l_var_num_52 = v3673.var_num;
                 assert(l_var_num_52);
@@ -12652,7 +12652,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["debug.traceback"] = function(v3676, _)
                 local l_var_num_53 = v3676.var_num;
                 assert(l_var_num_53);
@@ -12663,7 +12663,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["debug.info"] = function(v3679, v3680)
                 if v1129.smart_var_level >= 2 then
                     if #v3680.args < 2 then
@@ -12728,7 +12728,7 @@ local function v4318(v1125, v1126)
                     end;
                 end;
                 return v3458;
-            end, 
+            end,
             ["Vector3.new"] = function(v3692, v3693)
                 local l_var_num_61 = v3692.var_num;
                 assert(l_var_num_61);
@@ -12745,7 +12745,7 @@ local function v4318(v1125, v1126)
                 else
                     return "vector";
                 end;
-            end, 
+            end,
             ["Vector2.new"] = function(v3695, v3696)
                 local l_var_num_62 = v3695.var_num;
                 assert(l_var_num_62);
@@ -12762,7 +12762,7 @@ local function v4318(v1125, v1126)
                 else
                     return "vector";
                 end;
-            end, 
+            end,
             ["UDim.new"] = function(v3698, v3699)
                 local l_var_num_63 = v3698.var_num;
                 assert(l_var_num_63);
@@ -12777,7 +12777,7 @@ local function v4318(v1125, v1126)
                 else
                     return "udim";
                 end;
-            end, 
+            end,
             ["UDim2.new"] = function(v3701, v3702)
                 local l_var_num_64 = v3701.var_num;
                 assert(l_var_num_64);
@@ -12792,7 +12792,7 @@ local function v4318(v1125, v1126)
                 else
                     return "udim2";
                 end;
-            end, 
+            end,
             ["UDim2.fromOffset"] = function(v3704, v3705)
                 local l_var_num_65 = v3704.var_num;
                 assert(l_var_num_65);
@@ -12807,7 +12807,7 @@ local function v4318(v1125, v1126)
                 else
                     return "udim2";
                 end;
-            end, 
+            end,
             ["UDim2.fromScale"] = function(v3707, v3708)
                 local l_var_num_66 = v3707.var_num;
                 assert(l_var_num_66);
@@ -12822,7 +12822,7 @@ local function v4318(v1125, v1126)
                 else
                     return "udim2";
                 end;
-            end, 
+            end,
             ["CFrame.new"] = function(v3710, v3711)
                 local l_var_num_67 = v3710.var_num;
                 assert(l_var_num_67);
@@ -12833,7 +12833,7 @@ local function v4318(v1125, v1126)
                 else
                     return "cframe";
                 end;
-            end, 
+            end,
             ["CFrame.Angles"] = function(v3713, v3714)
                 local l_var_num_68 = v3713.var_num;
                 assert(l_var_num_68);
@@ -12844,7 +12844,7 @@ local function v4318(v1125, v1126)
                 else
                     return "cframe";
                 end;
-            end, 
+            end,
             ["CFrame.fromEulerAnglesXYZ"] = function(v3716, v3717)
                 local l_var_num_69 = v3716.var_num;
                 assert(l_var_num_69);
@@ -12855,7 +12855,7 @@ local function v4318(v1125, v1126)
                 else
                     return "cframe";
                 end;
-            end, 
+            end,
             ["CFrame.fromEulerAnglesYXZ"] = function(v3719, v3720)
                 local l_var_num_70 = v3719.var_num;
                 assert(l_var_num_70);
@@ -12866,7 +12866,7 @@ local function v4318(v1125, v1126)
                 else
                     return "cframe";
                 end;
-            end, 
+            end,
             ["CFrame.fromEulerAngles"] = function(v3722, v3723)
                 local l_var_num_71 = v3722.var_num;
                 assert(l_var_num_71);
@@ -12877,7 +12877,7 @@ local function v4318(v1125, v1126)
                 else
                     return "cframe";
                 end;
-            end, 
+            end,
             ["CFrame.fromOrientation"] = function(v3725, v3726)
                 local l_var_num_72 = v3725.var_num;
                 assert(l_var_num_72);
@@ -12888,7 +12888,7 @@ local function v4318(v1125, v1126)
                 else
                     return "cframe";
                 end;
-            end, 
+            end,
             ["CFrame.lookAt"] = function(v3728, v3729)
                 local l_var_num_73 = v3728.var_num;
                 assert(l_var_num_73);
@@ -12901,7 +12901,7 @@ local function v4318(v1125, v1126)
                 else
                     return "cframe";
                 end;
-            end, 
+            end,
             ["CFrame.lookAlong"] = function(v3731, v3732)
                 local l_var_num_74 = v3731.var_num;
                 assert(l_var_num_74);
@@ -12914,7 +12914,7 @@ local function v4318(v1125, v1126)
                 else
                     return "cframe";
                 end;
-            end, 
+            end,
             ["CFrame.fromMatrix"] = function(v3734, v3735)
                 local l_var_num_75 = v3734.var_num;
                 assert(l_var_num_75);
@@ -12927,7 +12927,7 @@ local function v4318(v1125, v1126)
                 else
                     return "cframe";
                 end;
-            end, 
+            end,
             ["CFrame.fromAxisAngle"] = function(v3737, v3738)
                 local l_var_num_76 = v3737.var_num;
                 assert(l_var_num_76);
@@ -12940,7 +12940,7 @@ local function v4318(v1125, v1126)
                 else
                     return "cframe";
                 end;
-            end, 
+            end,
             ["game.GetService"] = function(v3740, v3741)
                 local l_var_num_77 = v3740.var_num;
                 assert(l_var_num_77);
@@ -12974,7 +12974,7 @@ local function v4318(v1125, v1126)
                         end;
                     end;
                 end;
-            end, 
+            end,
             select = function(v3748, v3749)
                 local l_var_num_78 = v3748.var_num;
                 assert(l_var_num_78);
@@ -13005,7 +13005,7 @@ local function v4318(v1125, v1126)
                 else
                     return;
                 end;
-            end, 
+            end,
             require = function(v3753, v3754)
                 local l_var_num_79 = v3753.var_num;
                 assert(l_var_num_79);
@@ -13042,22 +13042,22 @@ local function v4318(v1125, v1126)
                 else
                     return;
                 end;
-            end, 
+            end,
             ["table.clear"] = function(_, _)
                 return v3458;
-            end, 
+            end,
             ["table.foreach"] = function(_, _)
                 return v3458;
-            end, 
+            end,
             ["table.foreachi"] = function(_, _)
                 return v3458;
-            end, 
+            end,
             ["table.insert"] = function(_, _)
                 return v3458;
-            end, 
+            end,
             ["table.sort"] = function(_, _)
                 return v3458;
-            end, 
+            end,
             ["table.clone"] = function(v3774, v3775)
                 local l_var_num_80 = v3774.var_num;
                 assert(l_var_num_80);
@@ -13074,7 +13074,7 @@ local function v4318(v1125, v1126)
                 else
                     return "tbl";
                 end;
-            end, 
+            end,
             ["table.concat"] = function(v3777, v3778)
                 local l_var_num_81 = v3777.var_num;
                 assert(l_var_num_81);
@@ -13091,7 +13091,7 @@ local function v4318(v1125, v1126)
                 else
                     return "str";
                 end;
-            end, 
+            end,
             ["table.getn"] = function(v3780, v3781)
                 local l_var_num_82 = v3780.var_num;
                 assert(l_var_num_82);
@@ -13108,7 +13108,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["table.maxn"] = function(v3783, v3784)
                 local l_var_num_83 = v3783.var_num;
                 assert(l_var_num_83);
@@ -13125,7 +13125,7 @@ local function v4318(v1125, v1126)
                 else
                     return "num";
                 end;
-            end, 
+            end,
             ["table.isfrozen"] = function(v3786, v3787)
                 local l_var_num_84 = v3786.var_num;
                 assert(l_var_num_84);
@@ -13142,7 +13142,7 @@ local function v4318(v1125, v1126)
                 else
                     return "bool";
                 end;
-            end, 
+            end,
             ["table.pack"] = function(v3789, _)
                 local l_var_num_85 = v3789.var_num;
                 assert(l_var_num_85);
@@ -13155,7 +13155,7 @@ local function v4318(v1125, v1126)
                 else
                     return "tbl";
                 end;
-            end, 
+            end,
             ["table.unpack"] = function(v3792, _)
                 if v1129.smart_var_level >= 2 then
                     local v3794 = "unpacked_value_";
@@ -13165,7 +13165,7 @@ local function v4318(v1125, v1126)
                 else
                     return;
                 end;
-            end, 
+            end,
             ["table.remove"] = function(v3796, v3797)
                 local l_var_num_87 = v3796.var_num;
                 assert(l_var_num_87);
@@ -13184,7 +13184,7 @@ local function v4318(v1125, v1126)
                 else
                     return;
                 end;
-            end, 
+            end,
             ["table.move"] = function(v3799, v3800)
                 local l_var_num_88 = v3799.var_num;
                 assert(l_var_num_88);
@@ -13201,7 +13201,7 @@ local function v4318(v1125, v1126)
                 else
                     return "tbl";
                 end;
-            end, 
+            end,
             ["coroutine.running"] = function(v3802, _)
                 local l_var_num_89 = v3802.var_num;
                 assert(l_var_num_89);
@@ -13263,7 +13263,7 @@ local function v4318(v1125, v1126)
                 local _ = nil;
                 local v3831 = string.reverse("game.GetService");
                 local v3832 = string.find(v3831, "%.");
-                local l_v3826_0 = v3826 --[[ copy: 114 -> 161 ]];
+                local l_v3826_0 = v3826 ;
                 v3543[if v3832 then string.sub("game.GetService", 15 - v3832 + 2, 15) else "game.GetService"] = function(v3834, v3835)
                     local v3836 = l_v3826_0(v3834, v3835);
                     if v3836 then
@@ -13317,7 +13317,7 @@ local function v4318(v1125, v1126)
                         return v545(v3850, nil, true) .. "_result" .. (v3838.var_num or "");
                     end;
                 end;
-            end, 
+            end,
             ["new table"] = function(v3852, v3853, _)
                 local v3855 = false;
                 local l_initializers_0 = v3853.initializers;
@@ -13387,14 +13387,14 @@ local function v4318(v1125, v1126)
                 else
                     return v3858 .. "tbl" .. v3857;
                 end;
-            end, 
+            end,
             ["constant index"] = function(_, v3870, _)
                 if v1129.smart_var_level >= 2 then
                     return (v545(v550(v3870.index, v1129.string_quotes_behavior, true)));
                 else
                     return;
                 end;
-            end, 
+            end,
             ["get table"] = function(_, v3873, _)
                 if v1129.smart_var_level >= 2 then
                     local l_index_5 = v3873.index;
@@ -13406,7 +13406,7 @@ local function v4318(v1125, v1126)
                         return (v545(v3876));
                     end;
                 end;
-            end, 
+            end,
             constant = function(v3877, v3878, _)
                 if not v1129.smart_var_usage_analysis then
                     return;
@@ -13445,7 +13445,7 @@ local function v4318(v1125, v1126)
                         return;
                     end;
                 end;
-            end, 
+            end,
             length = function(_, v3885, _)
                 if v1129.smart_var_level >= 2 then
                     local l_rhs_8 = v3885.rhs;
@@ -13473,7 +13473,7 @@ local function v4318(v1125, v1126)
                 else
                     return;
                 end;
-            end, 
+            end,
             global = function(_, v3891, _)
                 return (v545(v550(v3891.name, v1129.string_quotes_behavior, true)));
             end
@@ -13730,16 +13730,16 @@ local function v4318(v1125, v1126)
         local v4105 = {
             nothing = function(_, _)
                 error("Shouldn't happen !!!!!!!!!!");
-            end, 
+            end,
             comment = function(v3993, _)
                 v3915 = v3915 .. "-- " .. v3993.text;
-            end, 
+            end,
             ["break"] = function(_, _)
                 v3915 = v3915 .. "break";
-            end, 
+            end,
             continue = function(_, _)
                 v3915 = v3915 .. "continue";
-            end, 
+            end,
             ["unknown jump"] = function(v3999, _)
                 local v4001 = v1146[v3999];
                 if v4001 then
@@ -13755,7 +13755,7 @@ local function v4318(v1125, v1126)
                     v3915 = v3915 .. ("-- %*: GOTO UNK1"):format(l_prefix_warning_1);
                     return;
                 end;
-            end, 
+            end,
             ["if"] = function(v4003, v4004)
                 v3915 = v3915 .. "if ";
                 v3919(v4003.expr, v4004);
@@ -13791,7 +13791,7 @@ local function v4318(v1125, v1126)
                     v3915 = v3915 .. v4004 .. "end";
                     return;
                 end;
-            end, 
+            end,
             ["for"] = function(v4011, v4012)
                 local v4013 = false;
                 local l_for_info_3 = v4011.for_info;
@@ -13853,18 +13853,18 @@ local function v4318(v1125, v1126)
                         v4029 = if not l_state_expr_1 or l_state_expr_1.t == "nil" then not v219[l_generator_expr_2.t] else not v219[l_state_expr_1.t];
                     end;
                     v4026 = if l_index_expr_2 then if l_state_expr_1 then if l_state_expr_1.t == "nil" and l_index_expr_2.t == "nil" then {
-                        l_generator_expr_2, 
+                        l_generator_expr_2,
                         l_state_expr_1
                     } else {
-                        l_generator_expr_2, 
-                        l_state_expr_1, 
+                        l_generator_expr_2,
+                        l_state_expr_1,
                         l_index_expr_2
                     } else {
-                        l_generator_expr_2, 
-                        v1283(), 
+                        l_generator_expr_2,
+                        v1283(),
                         l_index_expr_2
                     } else if l_state_expr_1 then {
-                        l_generator_expr_2, 
+                        l_generator_expr_2,
                         l_state_expr_1
                     } else {
                         l_generator_expr_2
@@ -13895,7 +13895,7 @@ local function v4318(v1125, v1126)
                 v3915 = v3915 .. " do\n";
                 v3920(v4011.code, v3918(v4012));
                 v3915 = v3915 .. v4012 .. "end";
-            end, 
+            end,
             ["while"] = function(v4033, v4034)
                 if v4033.expr then
                     v3915 = v3915 .. "while ";
@@ -13908,7 +13908,7 @@ local function v4318(v1125, v1126)
                 end;
                 v3920(v4033.code, v3918(v4034));
                 v3915 = v3915 .. v4034 .. "end";
-            end, 
+            end,
             ["repeat"] = function(v4035, v4036)
                 v3915 = v3915 .. "repeat\n";
                 v3920(v4035.code, v3918(v4036));
@@ -13920,12 +13920,12 @@ local function v4318(v1125, v1126)
                     v3915 = v3915 .. v4036 .. "until nil";
                     return;
                 end;
-            end, 
+            end,
             ["do"] = function(v4037, v4038)
                 v3915 = v3915 .. "do\n";
                 v3920(v4037.content, v3918(v4038));
                 v3915 = v3915 .. v4038 .. "end";
-            end, 
+            end,
             call = function(v4039, v4040)
                 local l_func_1 = v4039.func;
                 while l_func_1.t == "name" do
@@ -14013,7 +14013,7 @@ local function v4318(v1125, v1126)
                     end;
                 end;
                 v3915 = v3915 .. ")";
-            end, 
+            end,
             ["define variable"] = function(v4063, v4064)
                 if v1129.mark_reads_and_writes then
                     v3990(v4063.names, v4064);
@@ -14029,7 +14029,7 @@ local function v4318(v1125, v1126)
                     v3915 = v3915 .. " = ";
                     v3919(v4063.value, v4064);
                 end;
-            end, 
+            end,
             ["define function"] = function(v4067, v4068)
                 local l_func_2 = v4067.func;
                 local l_define_function_type_0 = v4067.define_function_type;
@@ -14074,7 +14074,7 @@ local function v4318(v1125, v1126)
                 v3915 = v3915 .. "\n";
                 v3976(l_func_2, v4068);
                 v3915 = v3915 .. v4068 .. "end";
-            end, 
+            end,
             ["set variable"] = function(v4077, v4078)
                 v3915 = v3915 .. v4077.name.name;
                 local v4079 = v214[v4077.value.t];
@@ -14097,7 +14097,7 @@ local function v4318(v1125, v1126)
                     v3919(v4077.value, v4078);
                     return;
                 end;
-            end, 
+            end,
             ["set global"] = function(v4081, v4082)
                 local _ = v4081.value;
                 v3915 = v3915 .. v4081.name.value;
@@ -14130,7 +14130,7 @@ local function v4318(v1125, v1126)
                 if v1129.mark_setglobal then
                     v3915 = v3915 .. " -- Setting global";
                 end;
-            end, 
+            end,
             ["set table"] = function(v4088, v4089)
                 local l_table_2 = v4088.table;
                 while l_table_2.t == "name" do
@@ -14188,7 +14188,7 @@ local function v4318(v1125, v1126)
                     v3919(v4088.value, v4089);
                     return;
                 end;
-            end, 
+            end,
             ["return"] = function(v4100, v4101)
                 v3915 = v3915 .. "return";
                 local l_values_2 = v4100.values;
@@ -14216,7 +14216,7 @@ local function v4318(v1125, v1126)
                     error("Corrupted global");
                     return;
                 end;
-            end, 
+            end,
             name = function(v4108, v4109)
                 local l_name_19 = v4108.name;
                 local l_override_expr_23 = l_name_19.override_expr;
@@ -14227,16 +14227,16 @@ local function v4318(v1125, v1126)
                     v3915 = v3915 .. l_name_19.name;
                     return;
                 end;
-            end, 
+            end,
             varargs = function(_, _)
                 v3915 = v3915 .. "...";
-            end, 
+            end,
             ["nil"] = function(_, _)
                 v3915 = v3915 .. "nil";
-            end, 
+            end,
             boolean = function(v4116, _)
                 v3915 = v3915 .. (v4116.value and "true" or "false");
-            end, 
+            end,
             ["new table"] = function(v4118, v4119)
                 local l_initializers_1 = v4118.initializers;
                 local v4121 = true;
@@ -14339,11 +14339,11 @@ local function v4318(v1125, v1126)
                     table.insert(v3922, v3915);
                     v3915 = "";
                 end;
-            end, 
+            end,
             constant = function(v4134, v4135)
                 v3921(v4134.const, v4135);
-            end, 
-            call = v4105.call, 
+            end,
+            call = v4105.call,
             ["constant index"] = function(v4136, v4137)
                 v3919(v4136.table, v4137);
                 if v4136.index.type == 3 and v538(v4136.index.value) then
@@ -14363,7 +14363,7 @@ local function v4318(v1125, v1126)
                     v3915 = v3915 .. "]";
                     return;
                 end;
-            end, 
+            end,
             ["function"] = function(v4138, v4139)
                 v3915 = v3915 .. "function(";
                 v3947(v4138, v4139);
@@ -14388,7 +14388,7 @@ local function v4318(v1125, v1126)
                 v3915 = "";
                 v3976(v4138, v4139);
                 v3915 = v3915 .. v4139 .. "end";
-            end, 
+            end,
             ["and"] = function(v4142, v4143)
                 local l_v3919_0 = v3919;
                 local l_lhs_4 = v4142.lhs;
@@ -14401,7 +14401,7 @@ local function v4318(v1125, v1126)
                 l_v4143_0 = v4143;
                 l_lhs_5 = v4142.rhs;
                 l_v3919_0(l_lhs_4, l_v4143_0, (l_lhs_5 and l_lhs_5.precedence or -100) > (v4142 and v4142.precedence or -100));
-            end, 
+            end,
             ["or"] = function(v4148, v4149)
                 local l_v3919_1 = v3919;
                 local l_lhs_6 = v4148.lhs;
@@ -14414,7 +14414,7 @@ local function v4318(v1125, v1126)
                 l_v4149_0 = v4149;
                 l_lhs_7 = v4148.rhs;
                 l_v3919_1(l_lhs_6, l_v4149_0, (l_lhs_7 and l_lhs_7.precedence or -100) > (v4148 and v4148.precedence or -100));
-            end, 
+            end,
             condition = function(v4154, v4155)
                 local l_v3919_2 = v3919;
                 local l_lhs_8 = v4154.lhs;
@@ -14427,7 +14427,7 @@ local function v4318(v1125, v1126)
                 l_v4155_0 = v4155;
                 l_lhs_9 = v4154.rhs;
                 l_v3919_2(l_lhs_8, l_v4155_0, (l_lhs_9 and l_lhs_9.precedence or -100) > (v4154 and v4154.precedence or -100));
-            end, 
+            end,
             addition = function(v4160, v4161)
                 local l_v3919_3 = v3919;
                 local l_lhs_10 = v4160.lhs;
@@ -14454,7 +14454,7 @@ local function v4318(v1125, v1126)
                     end;
                 end;
                 l_v3919_3(l_lhs_10, l_v4161_0, v4165);
-            end, 
+            end,
             subtraction = function(v4167, v4168)
                 local l_v3919_4 = v3919;
                 local l_lhs_12 = v4167.lhs;
@@ -14481,7 +14481,7 @@ local function v4318(v1125, v1126)
                     end;
                 end;
                 l_v3919_4(l_lhs_12, l_v4168_0, v4172);
-            end, 
+            end,
             multiplication = function(v4174, v4175)
                 local l_v3919_5 = v3919;
                 local l_lhs_14 = v4174.lhs;
@@ -14508,7 +14508,7 @@ local function v4318(v1125, v1126)
                     end;
                 end;
                 l_v3919_5(l_lhs_14, l_v4175_0, v4179);
-            end, 
+            end,
             division = function(v4181, v4182)
                 local l_v3919_6 = v3919;
                 local l_lhs_16 = v4181.lhs;
@@ -14535,7 +14535,7 @@ local function v4318(v1125, v1126)
                     end;
                 end;
                 l_v3919_6(l_lhs_16, l_v4182_0, v4186);
-            end, 
+            end,
             ["floor division"] = function(v4188, v4189)
                 local l_v3919_7 = v3919;
                 local l_lhs_18 = v4188.lhs;
@@ -14548,7 +14548,7 @@ local function v4318(v1125, v1126)
                 l_v4189_0 = v4189;
                 l_lhs_19 = v4188.rhs;
                 l_v3919_7(l_lhs_18, l_v4189_0, (l_lhs_19 and l_lhs_19.precedence or -100) > (v4188 and v4188.precedence or -100));
-            end, 
+            end,
             modulus = function(v4194, v4195)
                 local l_v3919_8 = v3919;
                 local l_lhs_20 = v4194.lhs;
@@ -14561,7 +14561,7 @@ local function v4318(v1125, v1126)
                 l_v4195_0 = v4195;
                 l_lhs_21 = v4194.rhs;
                 l_v3919_8(l_lhs_20, l_v4195_0, (l_lhs_21 and l_lhs_21.precedence or -100) > (v4194 and v4194.precedence or -100));
-            end, 
+            end,
             negate = function(v4200, v4201)
                 v3915 = v3915 .. "-";
                 local l_v3919_9 = v3919;
@@ -14569,7 +14569,7 @@ local function v4318(v1125, v1126)
                 local l_v4201_0 = v4201;
                 local l_rhs_10 = v4200.rhs;
                 l_v3919_9(l_rhs_9, l_v4201_0, (l_rhs_10 and l_rhs_10.precedence or -100) >= (v4200 and v4200.precedence or -100));
-            end, 
+            end,
             ["not"] = function(v4206, v4207)
                 v3915 = v3915 .. "not ";
                 local l_v3919_10 = v3919;
@@ -14577,7 +14577,7 @@ local function v4318(v1125, v1126)
                 local l_v4207_0 = v4207;
                 local l_rhs_12 = v4206.rhs;
                 l_v3919_10(l_rhs_11, l_v4207_0, (l_rhs_12 and l_rhs_12.precedence or -100) > (v4206 and v4206.precedence or -100));
-            end, 
+            end,
             length = function(v4212, v4213)
                 v3915 = v3915 .. "#";
                 local l_v3919_11 = v3919;
@@ -14585,7 +14585,7 @@ local function v4318(v1125, v1126)
                 local l_v4213_0 = v4213;
                 local l_rhs_14 = v4212.rhs;
                 l_v3919_11(l_rhs_13, l_v4213_0, (l_rhs_14 and l_rhs_14.precedence or -100) >= (v4212 and v4212.precedence or -100));
-            end, 
+            end,
             concatenation = function(v4218, v4219)
                 for v4220, v4221 in ipairs(v4218.exprs) do
                     if v4220 > 1 then
@@ -14593,7 +14593,7 @@ local function v4318(v1125, v1126)
                     end;
                     v3919(v4221, v4219, (v4218 and v4218.precedence or -100) < (v4221 and v4221.precedence or -100));
                 end;
-            end, 
+            end,
             exponentiation = function(v4222, v4223)
                 local l_v3919_12 = v3919;
                 local l_lhs_22 = v4222.lhs;
@@ -14606,7 +14606,7 @@ local function v4318(v1125, v1126)
                 l_v4223_0 = v4223;
                 l_lhs_23 = v4222.rhs;
                 l_v3919_12(l_lhs_22, l_v4223_0, (l_lhs_23 and l_lhs_23.precedence or -100) > (v4222 and v4222.precedence or -100));
-            end, 
+            end,
             ["get table"] = function(v4228, v4229)
                 local l_table_3 = v4228.table;
                 while l_table_3.t == "name" do
@@ -14768,12 +14768,12 @@ local function v4318(v1125, v1126)
             local v4271 = {};
             local v4272 = {};
             local v4273 = {};
-            local l_v4271_0 = v4271 --[[ copy: 146 -> 155 ]];
-            local l_v4268_0 = v4268 --[[ copy: 143 -> 156 ]];
-            local l_v4272_0 = v4272 --[[ copy: 147 -> 157 ]];
-            local l_v4269_0 = v4269 --[[ copy: 144 -> 158 ]];
-            local l_v4273_0 = v4273 --[[ copy: 148 -> 159 ]];
-            local l_v4270_0 = v4270 --[[ copy: 145 -> 160 ]];
+            local l_v4271_0 = v4271 ;
+            local l_v4268_0 = v4268 ;
+            local l_v4272_0 = v4272 ;
+            local l_v4269_0 = v4269 ;
+            local l_v4273_0 = v4273 ;
+            local l_v4270_0 = v4270 ;
             local function v4280(v4281, v4282)
                 if v4281 == "error" then
                     local v4283 = l_v4271_0[v4282];
@@ -14782,7 +14782,7 @@ local function v4318(v1125, v1126)
                         return;
                     else
                         local v4284 = {
-                            uses = 1, 
+                            uses = 1,
                             content = v4282
                         };
                         l_v4271_0[v4282] = v4284;
@@ -14796,7 +14796,7 @@ local function v4318(v1125, v1126)
                         return;
                     else
                         local v4286 = {
-                            uses = 1, 
+                            uses = 1,
                             content = v4282
                         };
                         l_v4272_0[v4282] = v4286;
@@ -14810,7 +14810,7 @@ local function v4318(v1125, v1126)
                         return;
                     else
                         local v4288 = {
-                            uses = 1, 
+                            uses = 1,
                             content = v4282
                         };
                         l_v4273_0[v4282] = v4288;
@@ -14930,7 +14930,7 @@ local function v4328(v4327)
         return v4318(l_getscriptbytecode_0(v4327));
     end;
 end;
-local l_v4328_0 = v4328 --[[ copy: 105 -> 109 ]];
+local l_v4328_0 = v4328 ;
 local function v4333(...)
     local v4331, v4332 = xpcall(l_v4328_0, function(v4330)
         return tostring(v4330) .. "\n" .. debug.traceback(nil, 2);
@@ -14977,7 +14977,7 @@ local function v4344(...)
     end;
 end;
 return {
-    decompile = v4328, 
+    decompile = v4328,
     disassemble = function(v4345)
         v16 = "vanilla";
         local v4346 = v4344(v4345);

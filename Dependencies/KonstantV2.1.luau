@@ -13487,6 +13487,9 @@ local function v4318(v1125, v1126)
                 end;
             end;
         end;
+        local function is_valid_identifier(name)
+            return type(name) == "string" and name:match("^[a-zA-Z_][a-zA-Z0-9_]*$") ~= nil;
+        end;
         for _, v3899 in pairs(table.clone(v1206)) do
             local l_attributes_1 = v3899.attributes;
             local l_name_16 = v3899.name;
@@ -13498,10 +13501,6 @@ local function v4318(v1125, v1126)
                     l_name_16 = v3904 and v3904(v3899, l_init_expr_2, true) or nil or l_name_16;
                 end;
                 if l_name_16 ~= l_l_name_16_0 then
-                    local function is_valid_identifier(name)
-                        return type(name) == "string" and name:match("^[a-zA-Z_][a-zA-Z0-9_]*$") ~= nil;
-                    end;
-
                     if not is_valid_identifier(l_name_16) then
                         l_name_16 = l_l_name_16_0;
                     end;
@@ -13532,9 +13531,14 @@ local function v4318(v1125, v1126)
                     while v1206[l_v3909_0] or v1141[l_v3909_0] do
                         v3912 = v3912 + 1;
                         l_v3909_0 = v3909 .. "_" .. v3912;
+						if not is_valid_identifier(l_v3909_0) then
+                            break;
+						end;
                     end;
-                    v1213[v3909] = v3912;
-                    l_name_16 = l_v3909_0;
+                    if is_valid_identifier(l_v3909_0) then
+                        v1213[v3909] = v3912;
+                        l_name_16 = l_v3909_0;
+                    end;
                 end;
                 local l_l_name_16_2 = l_name_16;
                 local l_name_17 = v3899.name;

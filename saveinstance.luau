@@ -4009,7 +4009,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 		end
 
 		savebuffer[savebuffer_size] =
-			"</roblox><!-- Saved by ImprovedUniversalSynSaveInstance -->"
+			"</roblox><!-- Saved by ImprovedUniversalSynSaveInstance\n -->"
 		savebuffer_size += 1
 		save_cache()
 		do

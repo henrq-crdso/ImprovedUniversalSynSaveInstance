@@ -13495,8 +13495,10 @@ local function v4318(v1125, v1126)
             end;
         end;
         local function is_valid_identifier(name)
-            return type(name) == "string" and name:match("^[a-zA-Z_][a-zA-Z0-9_]*$") ~= nil;
-        end;
+    		return type(name) == "string"
+        		and name:match("^[a-zA-Z_][a-zA-Z0-9_]*$") ~= nil
+        		and not v217[name]
+		end;
         for _, v3899 in pairs(table.clone(v1206)) do
             local l_attributes_1 = v3899.attributes;
             local l_name_16 = v3899.name;

@@ -456,7 +456,9 @@ local v189 = nil;
 local function v212(v190)
     v21();
     local v191 = nil;
-    if v190 >= 4 and v190 <= 6 then
+    if v190 >= 16 then
+        error((("Luau version %* not supported. You likely didn't input Luau bytecode, or the bytecode was encoded. No encoding is supported."):format(v190)));
+    elseif v190 >= 4 then
         local v192 = {
             opname = "DEP_JUMPIFEQK",
             aux = false
@@ -810,23 +812,13 @@ local function v212(v190)
                 aux = false
             }
         };
-        if v190 < 1 then
-            local v198 = table.find(v191, v193);
-            assert(v198);
-            v191[v198] = v192;
-            v198 = table.find(v191, v195);
-            assert(v198);
-            v191[v198] = v194;
-        end;
         if v190 >= 6 then
             local v199 = table.find(v191, v196);
             assert(v199);
             v191[v199] = v197;
         end;
-    elseif v190 >= 16 then
-        error((("Luau version %* not supported. You likely didn't input Luau bytecode, or the bytecode was encoded. No encoding is supported."):format(v190)));
     else
-        error((("Luau version %* not supported."):format(v190)));
+        error((("Luau version %* not supported. Minimum supported version is 4."):format(v190)));
     end;
     v179 = {};
     for v200, v201 in ipairs(v191) do
@@ -1020,14 +1012,49 @@ local function _(v223, v224)
         return v223;
     end;
 end;
+local v296_strict_types = false;
 local function v296(v226)
     local v227 = nil;
     v227 = if type(v226) == "buffer" then v226 else buffer.fromstring(v226);
     v27 = v26();
     local v228 = 0;
-    local function _()
-        local v229 = buffer.readu8(v227, v228);
+    local v_safe_len = buffer.len(v227);
+    local function v_safe_need(v_safe_n)
+        if v228 + v_safe_n > v_safe_len then
+            error((("Corrupted bytecode: unexpected end of buffer at offset %*, need %* byte(s), length %*"):format(v228, v_safe_n, v_safe_len)));
+        end;
+    end;
+    local function v_safe_readu8()
+        v_safe_need(1);
+        local v_safe_value = buffer.readu8(v227, v228);
         v228 = v228 + 1;
+        return v_safe_value;
+    end;
+    local function v_safe_readu32()
+        v_safe_need(4);
+        local v_safe_value = buffer.readu32(v227, v228);
+        v228 = v228 + 4;
+        return v_safe_value;
+    end;
+    local function v_safe_readf32()
+        v_safe_need(4);
+        local v_safe_value = buffer.readf32(v227, v228);
+        v228 = v228 + 4;
+        return v_safe_value;
+    end;
+    local function v_safe_readf64()
+        v_safe_need(8);
+        local v_safe_value = buffer.readf64(v227, v228);
+        v228 = v228 + 8;
+        return v_safe_value;
+    end;
+    local function v_safe_copy(v_safe_dst, v_safe_dst_offset, v_safe_n)
+        v_safe_need(v_safe_n);
+        buffer.copy(v_safe_dst, v_safe_dst_offset, v227, v228, v_safe_n);
+        v228 = v228 + v_safe_n;
+    end;
+    local function _()
+        local v229 = v_safe_readu8();
         return v229;
     end;
     local function v235()
@@ -1035,11 +1062,13 @@ local function v296(v226)
         local v232 = 0;
         local v233 = 0;
         while true do
-            local v234 = buffer.readu8(v227, v228);
-            v228 = v228 + 1;
+            local v234 = v_safe_readu8();
             v231 = v234;
             v233 = bit32.bor(v233, (bit32.lshift(bit32.band(v231, 127), v232)));
             v232 = v232 + 7;
+            if v232 > 35 then
+                error("Corrupted bytecode: malformed varint");
+            end;
             if not (bit32.band(v231, 128) ~= 0) then
                 break;
             end;
@@ -1047,38 +1076,39 @@ local function v296(v226)
         return v233;
     end;
     local function _()
-        local v236 = buffer.readu32(v227, v228);
-        v228 = v228 + 4;
+        local v236 = v_safe_readu32();
         return v236;
     end;
     local function _()
-        local v238 = buffer.readf32(v227, v228);
-        v228 = v228 + 4;
+        local v238 = v_safe_readf32();
         return v238;
     end;
     local function _()
-        local v240 = buffer.readf64(v227, v228);
-        v228 = v228 + 8;
+        local v240 = v_safe_readf64();
         return v240;
     end;
     local function v244()
         local v242 = v235();
+        v_safe_need(v242);
         local v243 = buffer.create(v242);
-        buffer.copy(v243, 0, v227, v228, v242);
-        v228 = v228 + v242;
+        v_safe_copy(v243, 0, v242);
         return buffer.tostring(v243);
     end;
-    local v245 = buffer.readu8(v227, v228);
-    v228 = v228 + 1;
+    local v245 = v_safe_readu8();
     local l_v245_0 = v245;
     v212(l_v245_0);
     v245 = nil;
     if l_v245_0 >= 4 then
-        local v247 = buffer.readu8(v227, v228);
-        v228 = v228 + 1;
+        local v247 = v_safe_readu8();
         v245 = v247;
         if v245 > 3 then
-            error((("Types version %* not supported. Only versions 1 to 3 are supported."):format(v245)));
+            if v296_strict_types then
+                error((("Types version %* not supported. Only versions 1 to 3 are supported."):format(v245)));
+            else
+                -- Best-effort compatibility for newer Luau type-info streams.
+                -- Known parser layout is v1..v3; v3 is the safest fallback instead of hard-failing.
+                v245 = 3;
+            end;
         end;
     end;
     local v248 = {};
@@ -1088,17 +1118,15 @@ local function v296(v226)
     end;
     local _ = {};
     if v245 == 3 then
-        local v252 = buffer.readu8(v227, v228);
-        v228 = v228 + 1;
+        local v252 = v_safe_readu8();
         local l_v252_0 = v252;
         while l_v252_0 ~= 0 do
             local v254 = v235();
+            v_safe_need(v254);
             local v255 = buffer.create(v254);
-            buffer.copy(v255, 0, v227, v228, v254);
-            v228 = v228 + v254;
+            v_safe_copy(v255, 0, v254);
             v252 = buffer.tostring(v255);
-            v254 = buffer.readu8(v227, v228);
-            v228 = v228 + 1;
+            v254 = v_safe_readu8();
             l_v252_0 = v254;
         end;
     end;
@@ -1111,32 +1139,25 @@ local function v296(v226)
     end;
     for v258 = 1, v256 do
         local v259 = v248[v258];
-        local v260 = buffer.readu8(v227, v228);
-        v228 = v228 + 1;
+        local v260 = v_safe_readu8();
         v259.stack_size = v260;
-        v260 = buffer.readu8(v227, v228);
-        v228 = v228 + 1;
+        v260 = v_safe_readu8();
         v259.params_count = v260;
-        v260 = buffer.readu8(v227, v228);
-        v228 = v228 + 1;
+        v260 = v_safe_readu8();
         v259.upvalues_count = v260;
-        local v261 = buffer.readu8(v227, v228);
-        v228 = v228 + 1;
+        local v261 = v_safe_readu8();
         v259.is_vararg = v261 ~= 0;
-        v260 = buffer.readu8(v227, v228);
-        v228 = v228 + 1;
+        v260 = v_safe_readu8();
         v259.flags = v260;
         local v262 = {};
         if v245 == 1 then
             for v263 = 1, v235() do
-                local v264 = buffer.readu8(v227, v228);
-                v228 = v228 + 1;
+                local v264 = v_safe_readu8();
                 v262[v263] = v264;
             end;
         elseif not (v245 ~= 2) or v245 == 3 then
             for v265 = 1, v235() do
-                local v266 = buffer.readu8(v227, v228);
-                v228 = v228 + 1;
+                local v266 = v_safe_readu8();
                 v262[v265] = v266;
             end;
         end;
@@ -1146,8 +1167,7 @@ local function v296(v226)
         v260 = v235();
         v261 = table.create(v260);
         for v267 = 1, v260 do
-            local v268 = buffer.readu32(v227, v228);
-            v228 = v228 + 4;
+            local v268 = v_safe_readu32();
             v261[v267] = v268;
         end;
         v259.code = v261;
@@ -1157,15 +1177,13 @@ local function v296(v226)
         local v270 = table.create(v269);
         for _ = 1, v269 do
             local v272 = nil;
-            local v273 = buffer.readu8(v227, v228);
-            v228 = v228 + 1;
+            local v273 = v_safe_readu8();
             local l_v273_0 = v273;
             if l_v273_0 == 2 then
                 v273 = {
                     type = 2
                 };
-                local v275 = buffer.readf64(v227, v228);
-                v228 = v228 + 8;
+                local v275 = v_safe_readf64();
                 v273.value = v275;
                 v272 = v273;
             elseif l_v273_0 == 3 then
@@ -1187,8 +1205,7 @@ local function v296(v226)
                     v235();
                 end;
             elseif l_v273_0 == 4 then
-                v273 = buffer.readu32(v227, v228);
-                v228 = v228 + 4;
+                v273 = v_safe_readu32();
                 v272 = {
                     type = 4,
                     value = v273
@@ -1197,8 +1214,7 @@ local function v296(v226)
                 v273 = {
                     type = 1
                 };
-                local v277 = buffer.readu8(v227, v228);
-                v228 = v228 + 1;
+                local v277 = v_safe_readu8();
                 v273.value = v277 ~= 0;
                 v272 = v273;
             elseif l_v273_0 == 0 then
@@ -1211,18 +1227,14 @@ local function v296(v226)
                     type = 7
                 };
                 local l_new_0 = v14.new;
-                local v279 = buffer.readf32(v227, v228);
-                v228 = v228 + 4;
+                local v279 = v_safe_readf32();
                 local l_v279_0 = v279;
-                local v281 = buffer.readf32(v227, v228);
-                v228 = v228 + 4;
+                local v281 = v_safe_readf32();
                 v279 = v281;
-                local v282 = buffer.readf32(v227, v228);
-                v228 = v228 + 4;
+                local v282 = v_safe_readf32();
                 v273.value = l_new_0(l_v279_0, v279, v282);
                 v272 = v273;
-                v273 = buffer.readf32(v227, v228);
-                v228 = v228 + 4;
+                v273 = v_safe_readf32();
             else
                 error((("Unknown constant type %*"):format(l_v273_0)));
             end;
@@ -1241,16 +1253,13 @@ local function v296(v226)
         v259.protos = v284;
         v259.line_defined = v235();
         v259.debug_name = v249[v235()];
-        local v286 = buffer.readu8(v227, v228);
-        v228 = v228 + 1;
+        local v286 = v_safe_readu8();
         if v286 > 0 then
-            local v287 = buffer.readu8(v227, v228);
-            v228 = v228 + 1;
+            local v287 = v_safe_readu8();
             v286 = v287;
             v287 = table.create(v260);
             for _ = 1, v260 do
-                local v289 = buffer.readu8(v227, v228);
-                v228 = v228 + 1;
+                local v289 = v_safe_readu8();
                 table.insert(v287, v289);
             end;
             table.move(v287, 1, #v287, 0, v287);
@@ -1260,16 +1269,14 @@ local function v296(v226)
             local v291 = bit32.rshift(v260 - 1, v286) + 1;
             local v292 = table.create(v291);
             for _ = 1, v291 do
-                local v294 = buffer.readu32(v227, v228);
-                v228 = v228 + 4;
+                local v294 = v_safe_readu32();
                 table.insert(v292, v294);
             end;
             table.move(v292, 1, #v292, 0, v292);
             table.remove(v292, #v292);
             v259.abs_line_info = v292;
         end;
-        local v295 = buffer.readu8(v227, v228);
-        v228 = v228 + 1;
+        local v295 = v_safe_readu8();
         v286 = v295;
         if v286 > 0 then
             if v286 == 1 then
@@ -14941,22 +14948,73 @@ local function v4333(...)
         return l_prefix_error_0 .. ": After: " .. v4332;
     end;
 end;
-v4328 = function(v4334)
-    v16 = "vanilla";
-    local v4335 = v4333(v4334);
-    local l_v551_0 = v551;
-    v16 = "mul227";
-    local v4337 = v4333(v4334);
-    local l_v551_1 = v551;
-    if l_v551_1 < l_v551_0 then
-        return v4337;
-    elseif l_v551_0 < l_v551_1 then
-        return v4335;
-    elseif string.match(v4335, "Unknown opcode") then
-        return v4337;
-    else
-        return v4335;
+local v4329 = false;
+local function v4330(v4330_callback)
+    while v4329 do
+        if v23 and v28 then
+            v23();
+        else
+            error("Decompiler is already running");
+        end;
     end;
+    v4329 = true;
+    local v4330_ok, v4330_result = xpcall(v4330_callback, function(v4330_error)
+        return tostring(v4330_error) .. "\n" .. debug.traceback(nil, 2);
+    end);
+    v4329 = false;
+    if v4330_ok then
+        return v4330_result;
+    else
+        return l_prefix_error_0 .. ": After: " .. v4330_result;
+    end;
+end;
+local function v_strict_types_from_options(v_options)
+    if type(v_options) == "table" then
+        if v_options.strict ~= nil then
+            return v_options.strict == true;
+        elseif v_options.strict_types ~= nil then
+            return v_options.strict_types == true;
+        elseif v_options.strictTypes ~= nil then
+            return v_options.strictTypes == true;
+        end;
+    elseif v_options ~= nil then
+        return v_options == true;
+    end;
+    return false;
+end;
+local function v_with_strict_types(v_options, v_callback)
+    local v_previous_strict_types = v296_strict_types;
+    v296_strict_types = v_strict_types_from_options(v_options);
+    local v_ok, v_result = xpcall(v_callback, function(v_error)
+        return v_error;
+    end);
+    v296_strict_types = v_previous_strict_types;
+    if v_ok then
+        return v_result;
+    else
+        error(v_result);
+    end;
+end;
+v4328 = function(v4334, v4334_options)
+    return v4330(function()
+        return v_with_strict_types(v4334_options, function()
+            v16 = "vanilla";
+            local v4335 = v4333(v4334);
+            local l_v551_0 = v551;
+            v16 = "mul227";
+            local v4337 = v4333(v4334);
+            local l_v551_1 = v551;
+            if l_v551_1 < l_v551_0 then
+                return v4337;
+            elseif l_v551_0 < l_v551_1 then
+                return v4335;
+            elseif string.match(v4335, "Unknown opcode") then
+                return v4337;
+            else
+                return v4335;
+            end;
+        end);
+    end);
 end;
 local function v4340(v4339)
     if type(v4339) == "string" then
@@ -14978,21 +15036,25 @@ local function v4344(...)
 end;
 return {
     decompile = v4328,
-    disassemble = function(v4345)
-        v16 = "vanilla";
-        local v4346 = v4344(v4345);
-        local l_v551_2 = v551;
-        v16 = "mul227";
-        local v4348 = v4344(v4345);
-        local l_v551_3 = v551;
-        if l_v551_3 < l_v551_2 then
-            return v4348;
-        elseif l_v551_2 < l_v551_3 then
-            return v4346;
-        elseif #v4348 >= #v4346 then
-            return v4348;
-        else
-            return v4346;
-        end;
+    disassemble = function(v4345, v4345_options)
+        return v4330(function()
+            return v_with_strict_types(v4345_options, function()
+                v16 = "vanilla";
+                local v4346 = v4344(v4345);
+                local l_v551_2 = v551;
+                v16 = "mul227";
+                local v4348 = v4344(v4345);
+                local l_v551_3 = v551;
+                if l_v551_3 < l_v551_2 then
+                    return v4348;
+                elseif l_v551_2 < l_v551_3 then
+                    return v4346;
+                elseif #v4348 >= #v4346 then
+                    return v4348;
+                else
+                    return v4346;
+                end;
+            end);
+        end);
     end
 };

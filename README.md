@@ -1,7 +1,6 @@
 # ImprovedUniversalSynSaveInstance
 
 > A passion-driven, faster fork of [UniversalSynSaveInstance](https://github.com/luau/UniversalSynSaveInstance) — the universal saveinstance revival, running smoother than ever. Also doubles as a fully editable Roblox Format File writer.
-[![Star History Chart](https://api.star-history.com/chart?repos=henrq-crdso%2Fimproveduniversalsynsaveinstance&type=date&legend=top-left)](https://www.star-history.com/?repos=henrq-crdso%2FImprovedUniversalSynSaveInstance&type=date&legend=top-left)
 
 [![USSI License](https://img.shields.io/badge/USSI-License-green)](https://github.com/luau/UniversalSynSaveInstance/blob/main/LICENSE)
 

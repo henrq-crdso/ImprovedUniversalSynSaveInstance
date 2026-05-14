@@ -1,5 +1,3 @@
---!nocheck
---!nolint
 local select_ref = select;
 local function copy_varargs_into_array(target_array, target_start_index, ...)
     local vararg_values, vararg_count = {

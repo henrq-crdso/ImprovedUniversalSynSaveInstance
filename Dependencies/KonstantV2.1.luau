@@ -1,3 +1,5 @@
+--!nocheck
+--!nolint
 local l_select_0 = select;
 local function v6(v1, v2, ...)
     local v3, v4 = {

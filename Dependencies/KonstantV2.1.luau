@@ -79,7 +79,9 @@ local CONSTANT_TYPE_NAMES = {
     [4] = "import",
     [5] = "table",
     [6] = "function",
-    [7] = "vector"
+    [7] = "vector",
+    [8] = "table with constants",
+    [9] = "integer"
 };
 local clock_ref = os.clock;
 local elapsed_time_ref = elapsedTime or clock_ref;
@@ -460,7 +462,7 @@ local function initialize_opcode_tables(luau_bytecode_version)
     local opcode_layout_entries = nil;
     if luau_bytecode_version >= 16 then
         error((("Luau version %* not supported. You likely didn't input Luau bytecode, or the bytecode was encoded. No encoding is supported."):format(luau_bytecode_version)));
-    elseif luau_bytecode_version >= 4 then
+    elseif luau_bytecode_version >= 3 then
         local deprecated_jump_equal_constant_opcode = {
             opname = "DEP_JUMPIFEQK",
             aux = false
@@ -828,7 +830,7 @@ local function initialize_opcode_tables(luau_bytecode_version)
             opcode_layout_entries[opcode_replace_index] = fastcall_three_opcode_entry;
         end;
     else
-        error((("Luau version %* not supported. Minimum supported version is 4."):format(luau_bytecode_version)));
+        error((("Luau version %* not supported. Minimum supported version is 3."):format(luau_bytecode_version)));
     end;
     opcode_defs_by_real_index = {};
     for layout_index, layout_entry in ipairs(opcode_layout_entries) do
@@ -1009,7 +1011,62 @@ local FASTCALL_FUNCTION_NAMES = {
     "buffer.readf32",
     "buffer.writef32",
     "buffer.readf64",
-    "buffer.writef64"
+    "buffer.writef64",
+    "vector.magnitude",
+    "vector.normalize",
+    "vector.cross",
+    "vector.dot",
+    "vector.floor",
+    "vector.ceil",
+    "vector.abs",
+    "vector.sign",
+    "vector.clamp",
+    "vector.min",
+    "vector.max",
+    "math.lerp",
+    "vector.lerp",
+    "math.isnan",
+    "math.isinf",
+    "math.isfinite",
+    "integer.create",
+    "integer.tonumber",
+    "integer.neg",
+    "integer.add",
+    "integer.sub",
+    "integer.mul",
+    "integer.div",
+    "integer.min",
+    "integer.max",
+    "integer.rem",
+    "integer.idiv",
+    "integer.udiv",
+    "integer.urem",
+    "integer.mod",
+    "integer.clamp",
+    "integer.band",
+    "integer.bor",
+    "integer.bnot",
+    "integer.bxor",
+    "integer.lt",
+    "integer.le",
+    "integer.ult",
+    "integer.ule",
+    "integer.gt",
+    "integer.ge",
+    "integer.ugt",
+    "integer.uge",
+    "integer.lshift",
+    "integer.rshift",
+    "integer.arshift",
+    "integer.lrotate",
+    "integer.rrotate",
+    "integer.extract",
+    "integer.btest",
+    "integer.countrz",
+    "integer.countlz",
+    "integer.bswap",
+    "buffer.readinteger",
+    "buffer.writeinteger"
 };
 local function _(param_051)
     table.move(param_051, 1, #param_051, 0, param_051);
@@ -1087,6 +1144,59 @@ local function deserialize_luau_bytecode(bytecode_input)
         end;
         return varint_result;
     end;
+    local function decimal_mul_small(decimal_text, small_multiplier)
+        local carry_value = 0;
+        local output_digits = {};
+        for digit_index = #decimal_text, 1, -1 do
+            local digit_value = string.byte(decimal_text, digit_index) - 48;
+            local product_value = digit_value * small_multiplier + carry_value;
+            table.insert(output_digits, 1, string.char(48 + product_value % 10));
+            carry_value = math.floor(product_value / 10);
+        end;
+        while carry_value > 0 do
+            table.insert(output_digits, 1, string.char(48 + carry_value % 10));
+            carry_value = math.floor(carry_value / 10);
+        end;
+        return table.concat(output_digits);
+    end;
+    local function decimal_add_small(decimal_text, addend_value)
+        local carry_value = addend_value;
+        local output_digits = {};
+        for digit_index = #decimal_text, 1, -1 do
+            local digit_value = string.byte(decimal_text, digit_index) - 48;
+            local sum_value = digit_value + carry_value;
+            table.insert(output_digits, 1, string.char(48 + sum_value % 10));
+            carry_value = math.floor(sum_value / 10);
+        end;
+        while carry_value > 0 do
+            table.insert(output_digits, 1, string.char(48 + carry_value % 10));
+            carry_value = math.floor(carry_value / 10);
+        end;
+        local decimal_result = table.concat(output_digits);
+        local first_non_zero = string.find(decimal_result, "[^0]");
+        return first_non_zero and string.sub(decimal_result, first_non_zero) or "0";
+    end;
+    local function read_varint_u64_decimal()
+        local varint_chunks = {};
+        local varint_byte_count = 0;
+        while true do
+            varint_byte_count = varint_byte_count + 1;
+            if varint_byte_count > 10 then
+                error("Corrupted bytecode: malformed 64-bit varint");
+            end;
+            local current_varint_byte = v_safe_readu8();
+            table.insert(varint_chunks, bit32.band(current_varint_byte, 127));
+            if bit32.band(current_varint_byte, 128) == 0 then
+                break;
+            end;
+        end;
+        local decimal_result = "0";
+        for chunk_index = #varint_chunks, 1, -1 do
+            decimal_result = decimal_mul_small(decimal_result, 128);
+            decimal_result = decimal_add_small(decimal_result, varint_chunks[chunk_index]);
+        end;
+        return decimal_result;
+    end;
     local function _()
         local read_u32_value = v_safe_readu32();
         return read_u32_value;
@@ -1159,19 +1269,23 @@ local function deserialize_luau_bytecode(bytecode_input)
         proto_data.upvalues_count = code_size;
         local code_words = v_safe_readu8();
         proto_data.is_vararg = code_words ~= 0;
-        code_size = v_safe_readu8();
-        proto_data.flags = code_size;
         local type_info_entries = {};
-        if type_info_version == 1 then
-            for type_info_index = 1, read_varint() do
-                local type_info_byte = v_safe_readu8();
-                type_info_entries[type_info_index] = type_info_byte;
+        if cached_type_info_version >= 4 then
+            code_size = v_safe_readu8();
+            proto_data.flags = code_size;
+            if type_info_version == 1 then
+                for type_info_index = 1, read_varint() do
+                    local type_info_byte = v_safe_readu8();
+                    type_info_entries[type_info_index] = type_info_byte;
+                end;
+            elseif not (type_info_version ~= 2) or type_info_version == 3 then
+                for type_info_index_modern = 1, read_varint() do
+                    local type_info_byte_modern = v_safe_readu8();
+                    type_info_entries[type_info_index_modern] = type_info_byte_modern;
+                end;
             end;
-        elseif not (type_info_version ~= 2) or type_info_version == 3 then
-            for type_info_index_modern = 1, read_varint() do
-                local type_info_byte_modern = v_safe_readu8();
-                type_info_entries[type_info_index_modern] = type_info_byte_modern;
-            end;
+        else
+            proto_data.flags = 0;
         end;
         proto_data.type_info = type_info_entries;
         table.move(type_info_entries, 1, #type_info_entries, 0, type_info_entries);
@@ -1209,13 +1323,40 @@ local function deserialize_luau_bytecode(bytecode_input)
                     value = read_varint()
                 };
             elseif cached_constant_type_or_entry == 5 then
-                constant_entry = {
+                constant_type_or_entry = {
                     type = 5,
                     value = {}
                 };
-                for _ = 1, read_varint() do
-                    read_varint();
+                for table_key_index = 1, read_varint() do
+                    table.insert(constant_type_or_entry.value, read_varint());
                 end;
+                constant_entry = constant_type_or_entry;
+            elseif cached_constant_type_or_entry == 8 and cached_type_info_version >= 7 then
+                constant_type_or_entry = {
+                    type = 8,
+                    value = {}
+                };
+                for table_initializer_index = 1, read_varint() do
+                    table.insert(constant_type_or_entry.value, {
+                        key = read_varint(),
+                        value = v_safe_readu32()
+                    });
+                end;
+                constant_entry = constant_type_or_entry;
+            elseif cached_constant_type_or_entry == 9 and cached_type_info_version >= 8 then
+                constant_type_or_entry = {
+                    type = 9
+                };
+                local integer_constant_is_negative = v_safe_readu8();
+                if integer_constant_is_negative ~= 0 and integer_constant_is_negative ~= 1 then
+                    error("Corrupted bytecode: invalid integer constant sign");
+                end;
+                local integer_constant_literal = read_varint_u64_decimal();
+                if integer_constant_is_negative == 1 and integer_constant_literal ~= "0" then
+                    integer_constant_literal = "-" .. integer_constant_literal;
+                end;
+                constant_type_or_entry.value = integer_constant_literal;
+                constant_entry = constant_type_or_entry;
             elseif cached_constant_type_or_entry == 4 then
                 constant_type_or_entry = v_safe_readu32();
                 constant_entry = {
@@ -2327,6 +2468,12 @@ local function format_constant(param_131, param_132, param_133)
             return "Vector3.new(" .. format_number_literal(param_131.value.X, true) .. ", " .. format_number_literal(param_131.value.Y, true) .. ", " .. format_number_literal(param_131.value.Z, true) .. ")";
         elseif cached_type == 4 then
             return "<IMPORT>";
+        elseif cached_type == 5 or cached_type == 8 then
+            return "<TABLE>";
+        elseif cached_type == 6 then
+            return "<FUNCTION>";
+        elseif cached_type == 9 then
+            return param_131.value;
         elseif cached_type == 0 then
             return "nil";
         elseif cached_type == 1 then
@@ -3171,7 +3318,13 @@ local function disassemble_bytecode(param_134)
                 end,
                 DUPTABLE = function(param_193, _)
                     local bit_value_100 = bit32.band(bit32.rshift(param_193, 8), 255);
-                    emit_disassembly_line("DUPTABLE " .. bit_value_100 .. ", " .. bit32.band(bit32.rshift(param_193, 16), 65535), "var" .. bit_value_100 .. " = {}");
+                    local constant_table_index = bit32.band(bit32.rshift(param_193, 16), 65535);
+                    local constant_table_template = cached_constants[constant_table_index];
+                    if constant_table_template and constant_table_template.type == 8 then
+                        emit_disassembly_line("DUPTABLE " .. bit_value_100 .. ", " .. constant_table_index, "var" .. bit_value_100 .. " = { -- prefilled constant table }");
+                    else
+                        emit_disassembly_line("DUPTABLE " .. bit_value_100 .. ", " .. constant_table_index, "var" .. bit_value_100 .. " = {}");
+                    end;
                 end,
                 SETLIST = function(param_194, _)
                     local bit_value_101 = bit32.band(bit32.rshift(param_194, 8), 255);
@@ -8452,7 +8605,27 @@ local function decompile_bytecode(param_224, param_225)
                     end,
                     DUPTABLE = function(param_567)
                         local bit_value_164 = bit32.band(bit32.rshift(param_567, 8), 255);
-                        helper_function_030(bit_value_164, helper_function_035(bit_value_164));
+                        local constant_table_index = bit32.band(bit32.rshift(param_567, 16), 65535);
+                        local constant_table_template = cached_constants_001[constant_table_index];
+                        local table_expression = helper_function_035(bit_value_164);
+                        if constant_table_template and constant_table_template.type == 8 then
+                            for _, constant_initializer in ipairs(constant_table_template.value) do
+                                local initializer_key_constant = cached_constants_001[constant_initializer.key];
+                                local initializer_value_constant = cached_constants_001[constant_initializer.value];
+                                if initializer_key_constant and initializer_value_constant then
+                                    local initializer_key = nil;
+                                    if initializer_key_constant.type == 2 then
+                                        initializer_key = initializer_key_constant.value;
+                                    else
+                                        initializer_key = helper_function_034(nil, initializer_key_constant);
+                                    end;
+                                    local initializer_value = helper_function_034(bit_value_164, initializer_value_constant);
+                                    table.insert(table_expression.initializers_order, initializer_key);
+                                    table_expression.initializers[initializer_key] = initializer_value;
+                                end;
+                            end;
+                        end;
+                        helper_function_030(bit_value_164, table_expression);
                     end,
                     SETTABLE = function(param_568)
                         local bit_value_165 = bit32.band(bit32.rshift(param_568, 8), 255);

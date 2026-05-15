@@ -46,7 +46,7 @@ synsaveinstance(Options)
 
 ---
 
-## Options Reference (see https://henrq-crdso.github.io for more details
+## Options Reference (see https://henrq-crdso.github.io for more details.)
 
 | Option | Default | Description |
 |---|---|---|

@@ -54,7 +54,7 @@ synsaveinstance(Options)
 | `SaveAsAttributes` | `false` | Save non-saveable properties as Attributes. |
 | `Crashlog` | `false` | Write detailed step-by-step logs to disk. |
 | `Decompile` | `true` | Attempt script decompilation. |
-| `decomptype` | `""` | Set to `"custom"` to force Konstant Decompiler. |
+| `decomptype` | `""` | Set to `"custom"` to use Konstant Decompiler. |
 | `SaveBytecodeIfDecompilerFails` | `false` | Fallback to bytecode if decompiler fails. |
 | `BoostFPS` | `false` | Reduce visual load during export. |
 | `IgnoreSpecialStrings` | `dynamic` | Skip problematic NotScriptable strings. |

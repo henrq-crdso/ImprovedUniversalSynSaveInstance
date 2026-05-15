@@ -72,7 +72,7 @@ The inherited property resolver now accepts optional parameters to walk only up 
 
 ```lua
 local Params = {
-    RepoURL = "https://raw.githubusercontent.com/henrq-crdso/ImprovedUniversalSynSaveInstance/main/",
+    RepoURL = "https://raw.githubusercontent.com/henrq-crdso/ImprovedUniversalSynSaveInstance/refs/heads/main/saveinstance.luau",
     SSI = "saveinstance",
 }
 

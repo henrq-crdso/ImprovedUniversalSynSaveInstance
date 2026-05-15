@@ -20,24 +20,36 @@ local vector_three_compat = Vector3 or {
         };
     end
 };
-local encode_opcode_byte = nil;
-local active_opcode_encoding = nil;
-local decoded_opcode_by_encoded_byte = {};
+local DecompilerContext = {};
+DecompilerContext.__index = DecompilerContext;
+function DecompilerContext.new()
+    return setmetatable({
+        encode_opcode_byte = nil,
+        active_opcode_encoding = nil,
+        decoded_opcode_by_encoded_byte = {},
+        current_instruction_index = 0,
+        last_multireturn_register = 0,
+        current_proto_context = nil,
+        current_function_context = nil,
+        failed_instruction_count = 0
+    }, DecompilerContext);
+end;
+local current_decompiler_context = DecompilerContext.new();
 local function rebuild_opcode_decoder()
-    if active_opcode_encoding == "vanilla" then
-        encode_opcode_byte = function(plain_opcode_byte)
+    if current_decompiler_context.active_opcode_encoding == "vanilla" then
+        current_decompiler_context.encode_opcode_byte = function(plain_opcode_byte)
             return plain_opcode_byte;
         end;
-    elseif active_opcode_encoding == "mul227" then
-        encode_opcode_byte = function(mul_encoded_opcode_byte)
+    elseif current_decompiler_context.active_opcode_encoding == "mul227" then
+        current_decompiler_context.encode_opcode_byte = function(mul_encoded_opcode_byte)
             return mul_encoded_opcode_byte * 227;
         end;
     else
         error("Invalid opcode_encoding_type");
     end;
-    table.clear(decoded_opcode_by_encoded_byte);
+    table.clear(current_decompiler_context.decoded_opcode_by_encoded_byte);
     for opcode_byte_index = 0, 255 do
-        decoded_opcode_by_encoded_byte[bit32.band(encode_opcode_byte(opcode_byte_index), 255)] = opcode_byte_index;
+        current_decompiler_context.decoded_opcode_by_encoded_byte[bit32.band(current_decompiler_context.encode_opcode_byte(opcode_byte_index), 255)] = opcode_byte_index;
     end;
 end;
 local DEFAULT_DECOMPILER_OPTIONS = {
@@ -413,6 +425,8 @@ local function _(param_047, param_048)
     end;
     return range_value_003;
 end;
+local LBC_VERSION_MIN = 3;
+local LBC_VERSION_MAX = 9;
 local opcode_defs_by_real_index = nil;
 local opcode_def_by_name = nil;
 local opcode_def_by_encoded_byte = nil;
@@ -458,9 +472,9 @@ local jump_opcode_bytes_set = nil;
 local function initialize_opcode_tables(luau_bytecode_version)
     rebuild_opcode_decoder();
     local opcode_layout_entries = nil;
-    if luau_bytecode_version >= 16 then
-        error((("Luau version %* not supported. You likely didn't input Luau bytecode, or the bytecode was encoded. No encoding is supported."):format(luau_bytecode_version)));
-    elseif luau_bytecode_version >= 3 then
+    if luau_bytecode_version > LBC_VERSION_MAX then
+        error((("Luau version %* not supported. Maximum supported Luau bytecode version is %*."):format(luau_bytecode_version, LBC_VERSION_MAX)));
+    elseif luau_bytecode_version >= LBC_VERSION_MIN then
         local deprecated_jump_equal_constant_opcode = {
             opname = "DEP_JUMPIFEQK",
             aux = false
@@ -828,7 +842,7 @@ local function initialize_opcode_tables(luau_bytecode_version)
             opcode_layout_entries[opcode_replace_index] = fastcall_three_opcode_entry;
         end;
     else
-        error((("Luau version %* not supported. Minimum supported version is 3."):format(luau_bytecode_version)));
+        error((("Luau version %* not supported. Minimum supported version is %*."):format(luau_bytecode_version, LBC_VERSION_MIN)));
     end;
     opcode_defs_by_real_index = {};
     for layout_index, layout_entry in ipairs(opcode_layout_entries) do
@@ -844,7 +858,7 @@ local function initialize_opcode_tables(luau_bytecode_version)
     for opcode_index, opcode_definition in ipairs(opcode_defs_by_real_index) do
         local real_opcode_index = opcode_index - 1;
         opcode_definition.real_opcode = real_opcode_index;
-        opcode_definition.opcode = bit32.band(encode_opcode_byte(real_opcode_index), 255);
+        opcode_definition.opcode = bit32.band(current_decompiler_context.encode_opcode_byte(real_opcode_index), 255);
     end;
     opcode_def_by_name = {};
     opcode_def_by_encoded_byte = {};
@@ -1452,10 +1466,7 @@ local function deserialize_luau_bytecode(bytecode_input)
     table.remove(parsed_protos, #parsed_protos);
     return parsed_protos[read_varint()], parsed_protos, cached_type_info_version, type_info_version;
 end;
-local current_instruction_index = 0;
-local last_multireturn_register = 0;
-local current_proto_context = nil;
-local current_function_context = nil;
+
 local analyze_register_usage = nil;
 local is_non_printable_byte = 0;
 local function escape_byte_or_noop_handler(_)
@@ -1480,7 +1491,7 @@ local register_usage_handlers_or_quote_string = {
         local instruction_value_002 = bit32.band(bit32.rshift(instruction_word_001, 16), 255) - 1;
         if instruction_value_002 == -1 then
             instruction_value_002 = 1;
-            last_multireturn_register = instruction_value_001;
+            current_decompiler_context.last_multireturn_register = instruction_value_001;
         end;
         for index_003 = instruction_value_001, instruction_value_001 + instruction_value_002 - 1 do
             table.insert(table_value_002, index_003);
@@ -1599,7 +1610,7 @@ local register_usage_handlers_or_quote_string = {
         local instruction_value_005 = bit32.band(bit32.rshift(setlist_instruction_word, 24), 255) - 1;
         local table_value_003 = {};
         local cached_instruction_value_001 = instruction_value_004;
-        local array_value_005 = if instruction_value_005 == -1 then last_multireturn_register else instruction_value_004 + instruction_value_005 - 1;
+        local array_value_005 = if instruction_value_005 == -1 then current_decompiler_context.last_multireturn_register else instruction_value_004 + instruction_value_005 - 1;
         for index_004 = cached_instruction_value_001, array_value_005 do
             table.insert(table_value_003, index_004);
         end;
@@ -1657,7 +1668,7 @@ local register_usage_handlers_or_quote_string = {
         local instruction_value_008 = bit32.band(bit32.rshift(return_instruction_word, 16), 255) - 1;
         local table_value_004 = {};
         local cached_instruction_value_002 = instruction_value_007;
-        local array_value_006 = if instruction_value_008 == -1 then last_multireturn_register else instruction_value_007 + instruction_value_008 - 1;
+        local array_value_006 = if instruction_value_008 == -1 then current_decompiler_context.last_multireturn_register else instruction_value_007 + instruction_value_008 - 1;
         for index_005 = cached_instruction_value_002, array_value_006 do
             table.insert(table_value_004, index_005);
         end;
@@ -1669,7 +1680,7 @@ local register_usage_handlers_or_quote_string = {
         local instruction_value_010 = bit32.band(bit32.rshift(call_instruction_word, 16), 255) - 1;
         local instruction_value_011 = bit32.band(bit32.rshift(call_instruction_word, 24), 255) - 1;
         if instruction_value_010 == -1 then
-            instruction_value_010 = last_multireturn_register - instruction_value_009;
+            instruction_value_010 = current_decompiler_context.last_multireturn_register - instruction_value_009;
         end;
         local table_value_005 = {
             instruction_value_009
@@ -1680,7 +1691,7 @@ local register_usage_handlers_or_quote_string = {
         end;
         if instruction_value_011 == -1 then
             instruction_value_011 = 1;
-            last_multireturn_register = instruction_value_009;
+            current_decompiler_context.last_multireturn_register = instruction_value_009;
         end;
         for index_007 = instruction_value_009, instruction_value_009 + instruction_value_011 - 1 do
             table.insert(table_value_006, index_007);
@@ -2486,11 +2497,11 @@ local function format_constant(param_131, param_132, param_133)
         end;
     end;
 end;
-local failed_instruction_count = nil;
+
 local function disassemble_bytecode(param_134)
-    failed_instruction_count = 0;
-    current_instruction_index = 0;
-    last_multireturn_register = 0;
+    current_decompiler_context.failed_instruction_count = 0;
+    current_decompiler_context.current_instruction_index = 0;
+    current_decompiler_context.last_multireturn_register = 0;
     local buffer_value_020 = nil;
     buffer_value_020 = if type(param_134) == "buffer" then param_134 else buffer.fromstring(param_134);
     local buffer_value_021, buffer_value_022, buffer_value_023, buffer_value_024 = deserialize_luau_bytecode(buffer_value_020);
@@ -3896,8 +3907,8 @@ local function disassemble_bytecode(param_134)
                         table.insert(table_value_012, string_value_011);
                         table_value_017[string_value_011] = string_value_013;
                     else
-                        table.insert(table_value_012, (("%*; Unknown opcode 0x%* (%* reversed: 0x%*)\n"):format(param_137, HEX_BYTE[bit32.band(bit_value_147, 255)], active_opcode_encoding, HEX_BYTE[decoded_opcode_by_encoded_byte[bit32.band(bit_value_147, 255)]])));
-                        failed_instruction_count = failed_instruction_count + 1;
+                        table.insert(table_value_012, (("%*; Unknown opcode 0x%* (%* reversed: 0x%*)\n"):format(param_137, HEX_BYTE[bit32.band(bit_value_147, 255)], current_decompiler_context.active_opcode_encoding, HEX_BYTE[current_decompiler_context.decoded_opcode_by_encoded_byte[bit32.band(bit_value_147, 255)]])));
+                        current_decompiler_context.failed_instruction_count = current_decompiler_context.failed_instruction_count + 1;
                     end;
                 end;
             end;
@@ -3943,16 +3954,17 @@ local v_runtime_options = {
     allow_new_type_info_fallback = true,
     allow_unknown_type_info_fallback = true,
     ignore_unsupported_debug_info = true,
-    show_decompiler_summary = true
+    show_decompiler_summary = true,
+    strict_structure_validation = true
 };
 local function decompile_bytecode(param_224, param_225)
-    current_instruction_index = 0;
-    last_multireturn_register = 0;
+    current_decompiler_context.current_instruction_index = 0;
+    current_decompiler_context.last_multireturn_register = 0;
     local local_symbol_008 = clock_ref();
     last_yield_time = local_symbol_008;
     local local_symbol_009 = create_noop_benchmark();
     local_symbol_009:start_benchmark("Global Initialization");
-    failed_instruction_count = 0;
+    current_decompiler_context.failed_instruction_count = 0;
     local condition_value_015 = param_225 or {};
     assert(condition_value_015);
     for item_012 in pairs(condition_value_015) do
@@ -3996,7 +4008,7 @@ local function decompile_bytecode(param_224, param_225)
         return (((string_value_017 .. ("-- Decompiled on %*\n"):format((os.date("%Y-%m-%d %H:%M:%S")))) .. ("-- Time taken: %* seconds\n"):format((string.format("%.6f", clock_ref() - local_symbol_008)))) .. "\n-- Target script didn't compile. Compilation error below:\n") .. "--[[\n" .. string.sub(2, #param_224) .. "\n]]";
     else
         local array_value_068, array_value_069, _, array_value_070 = deserialize_luau_bytecode(param_224);
-        current_proto_context = array_value_069;
+        current_decompiler_context.current_proto_context = array_value_069;
         local table_value_018 = {};
         local table_value_019 = {};
         local function _(param_226, param_227)
@@ -4465,7 +4477,7 @@ local function decompile_bytecode(param_224, param_225)
         end;
         local function helper_function_007()
             return {
-                global_failed_instructions_count = failed_instruction_count,
+                global_failed_instructions_count = current_decompiler_context.failed_instruction_count,
                 notices = table.clone(table_value_019),
                 lines = table.clone(table_value_022),
                 variable_mapped_long_string_constants = table.clone(table_value_031),
@@ -4479,7 +4491,7 @@ local function decompile_bytecode(param_224, param_225)
             };
         end;
         local function _(param_292)
-            failed_instruction_count = param_292.global_failed_instructions_count;
+            current_decompiler_context.failed_instruction_count = param_292.global_failed_instructions_count;
             table_value_019 = param_292.notices;
             table_value_022 = param_292.lines;
             table_value_031 = param_292.variable_mapped_long_string_constants;
@@ -4495,8 +4507,8 @@ local function decompile_bytecode(param_224, param_225)
         local function helper_function_009(param_293, param_294)
             local local_symbol_023 = create_noop_benchmark();
             local_symbol_023:start_benchmark("Initialization");
-            local cached_current_function_context = current_function_context;
-            current_function_context = param_293;
+            local cached_current_function_context = current_decompiler_context.current_function_context;
+            current_decompiler_context.current_function_context = param_293;
             local_symbol_013 = 1;
             local proto_value_006 = 0;
             local cached_constants_001 = param_293.constants;
@@ -4759,7 +4771,7 @@ local function decompile_bytecode(param_224, param_225)
                 local table_value_048 = {};
                 local condition_value_016 = helper_function_006(table_value_022, table_value_048);
                 if param_328 == -1 then
-                    for index_024 = param_327, current_instruction_index do
+                    for index_024 = param_327, current_decompiler_context.current_instruction_index do
                         local condition_value_017;
                         if table_value_044[index_024] then
                             condition_value_017 = helper_function_017(index_024, table_value_044[index_024]);
@@ -5783,7 +5795,7 @@ local function decompile_bytecode(param_224, param_225)
             end;
             if array_value_077 == 0 and not cached_code_001[0] then
                 helper_function_012((("%*: Empty proto"):format(cached_prefix_warning)));
-                current_function_context = cached_current_function_context;
+                current_decompiler_context.current_function_context = cached_current_function_context;
                 return table_value_022;
             else
                 if param_294 and param_294.args then
@@ -5874,8 +5886,8 @@ local function decompile_bytecode(param_224, param_225)
                     local_symbol_025 = #table_value_041 + 1;
                     local opcode_value_011 = opcode_def_by_encoded_byte[bit_value_152];
                     if not opcode_value_011 then
-                        local opcode_value_012 = ("Unknown opcode 0x%* (%* reversed: 0x%*)"):format(HEX_BYTE[bit32.band(bit_value_151, 255)], active_opcode_encoding, HEX_BYTE[decoded_opcode_by_encoded_byte[bit32.band(bit_value_151, 255)]]);
-                        failed_instruction_count = failed_instruction_count + 1;
+                        local opcode_value_012 = ("Unknown opcode 0x%* (%* reversed: 0x%*)"):format(HEX_BYTE[bit32.band(bit_value_151, 255)], current_decompiler_context.active_opcode_encoding, HEX_BYTE[current_decompiler_context.decoded_opcode_by_encoded_byte[bit32.band(bit_value_151, 255)]]);
+                        current_decompiler_context.failed_instruction_count = current_decompiler_context.failed_instruction_count + 1;
                         error(opcode_value_012);
                         local condition_value_029 = opcode_def_by_encoded_byte[bit_value_152];
                         if not condition_value_029 then
@@ -8541,7 +8553,7 @@ local function decompile_bytecode(param_224, param_225)
                             return;
                         else
                             if bit_value_154 == -1 then
-                                current_instruction_index = bit_value_153;
+                                current_decompiler_context.current_instruction_index = bit_value_153;
                             end;
                             helper_function_030(bit_value_153, helper_function_032(bit_value_153));
                             return;
@@ -8902,7 +8914,7 @@ local function decompile_bytecode(param_224, param_225)
                             bit_value_184 = expression_value_025;
                         end;
                         local cached_bit_value_018 = bit_value_182;
-                        local condition_value_104 = if bit_value_183 == -1 then current_instruction_index else bit_value_182 + bit_value_183 - 1;
+                        local condition_value_104 = if bit_value_183 == -1 then current_decompiler_context.current_instruction_index else bit_value_182 + bit_value_183 - 1;
                         for index_052 = cached_bit_value_018, condition_value_104 do
                             local cached_helper_function_038 = helper_function_023;
                             local cached_bit_value_019 = bit_value_181;
@@ -9116,12 +9128,12 @@ local function decompile_bytecode(param_224, param_225)
                         local bit_value_191 = bit32.band(bit32.rshift(param_582, 16), 255) - 1;
                         local bit_value_192 = bit32.band(bit32.rshift(param_582, 24), 255) - 1;
                         if bit_value_191 == -1 then
-                            bit_value_191 = current_instruction_index - bit_value_190;
+                            bit_value_191 = current_decompiler_context.current_instruction_index - bit_value_190;
                         end;
                         local condition_value_105 = helper_function_054(bit_value_190, bit_value_191, bit_value_192, local_symbol_033 and local_symbol_033.value);
                         local_symbol_033 = nil;
                         if bit_value_192 == -1 then
-                            current_instruction_index = bit_value_190;
+                            current_decompiler_context.current_instruction_index = bit_value_190;
                         end;
                         if bit_value_192 ~= 0 then
                             helper_function_030(bit_value_190, condition_value_105);
@@ -9162,7 +9174,7 @@ local function decompile_bytecode(param_224, param_225)
                         local constant_value_073 = bit32.band(bit32.rshift(param_584, 8), 255);
                         local constant_value_074 = cached_constants_001[bit32.band(bit32.rshift(param_584, 16), 65535)];
                         if constant_value_074.type ~= 6 then
-                            failed_instruction_count = failed_instruction_count + 1;
+                            current_decompiler_context.failed_instruction_count = current_decompiler_context.failed_instruction_count + 1;
                             error("Invalid DUPCLOSURE");
                         end;
                         local diagnostic_value_001 = array_value_069[constant_value_074.value];
@@ -10715,7 +10727,7 @@ local function decompile_bytecode(param_224, param_225)
                     end;
                 end;
                 local_symbol_023:end_benchmark("AST Generation");
-                current_function_context = cached_current_function_context;
+                current_decompiler_context.current_function_context = cached_current_function_context;
                 local_symbol_023:print_all_times();
                 return table_value_022;
             end;
@@ -10728,7 +10740,7 @@ local function decompile_bytecode(param_224, param_225)
             local cached_table_value_008 = table_value_036;
             if string_value_046 then
                 if local_symbol_022 > string_value_045.marked_condition_stop_points then
-                    failed_instruction_count = string_value_045.global_failed_instructions_count;
+                    current_decompiler_context.failed_instruction_count = string_value_045.global_failed_instructions_count;
                     table_value_019 = string_value_045.notices;
                     table_value_022 = string_value_045.lines;
                     table_value_031 = string_value_045.variable_mapped_long_string_constants;
@@ -10745,7 +10757,7 @@ local function decompile_bytecode(param_224, param_225)
                     return string_value_047;
                 end;
             else
-                failed_instruction_count = string_value_045.global_failed_instructions_count;
+                current_decompiler_context.failed_instruction_count = string_value_045.global_failed_instructions_count;
                 table_value_019 = string_value_045.notices;
                 table_value_022 = string_value_045.lines;
                 table_value_031 = string_value_045.variable_mapped_long_string_constants;
@@ -15345,8 +15357,10 @@ local function run_with_decompiler_lock(param_955)
         end;
     end;
     decompiler_is_running = true;
-    local diagnostic_value_003 = active_opcode_encoding;
-    local diagnostic_value_004 = failed_instruction_count;
+    local previous_decompiler_context = current_decompiler_context;
+    current_decompiler_context = DecompilerContext.new();
+    local diagnostic_value_003 = current_decompiler_context.active_opcode_encoding;
+    local diagnostic_value_004 = current_decompiler_context.failed_instruction_count;
     local diagnostic_value_005 = previous_error_prefix;
     local diagnostic_value_006 = previous_warning_prefix;
     local string_value_082 = previous_information_prefix;
@@ -15359,11 +15373,12 @@ local function run_with_decompiler_lock(param_955)
     else
         string_value_085 = previous_error_prefix .. ": After: " .. string_value_084;
     end;
-    active_opcode_encoding = diagnostic_value_003;
-    failed_instruction_count = diagnostic_value_004;
+    current_decompiler_context.active_opcode_encoding = diagnostic_value_003;
+    current_decompiler_context.failed_instruction_count = diagnostic_value_004;
     previous_error_prefix = diagnostic_value_005;
     previous_warning_prefix = diagnostic_value_006;
     previous_information_prefix = string_value_082;
+    current_decompiler_context = previous_decompiler_context;
     decompiler_is_running = false;
     return string_value_085;
 end;
@@ -15419,6 +15434,165 @@ local function v_count_plain(v_text, v_pattern)
     end;
     return v_count;
 end;
+local function v_get_bytecode_for_validation(v_target)
+    if type(v_target) == "string" then
+        return v_target;
+    else
+        assert(getscriptbytecode_ref, "getscriptbytecode was undefined");
+        return getscriptbytecode_ref(v_target);
+    end;
+end;
+local function v_signed_u16(v_value)
+    if v_value >= 32768 then
+        return v_value - 65536;
+    else
+        return v_value;
+    end;
+end;
+local function v_signed_u24(v_value)
+    if v_value >= 8388608 then
+        return v_value - 16777216;
+    else
+        return v_value;
+    end;
+end;
+local function v_validation_add(v_result, v_weight, v_message)
+    v_result.error_count = v_result.error_count + 1;
+    v_result.score = v_result.score + v_weight;
+    if #v_result.errors < 12 then
+        table.insert(v_result.errors, v_message);
+    end;
+end;
+local function v_code_size(v_code)
+    local v_size = 0;
+    while v_code and v_code[v_size] ~= nil do
+        v_size = v_size + 1;
+    end;
+    return v_size;
+end;
+local function v_has_constant(v_constants, v_index)
+    return type(v_index) == "number" and v_constants and v_index >= 0 and v_constants[v_index] ~= nil;
+end;
+local function v_validate_constant(v_result, v_proto_index, v_pc, v_constants, v_index, v_context)
+    if not v_has_constant(v_constants, v_index) then
+        v_validation_add(v_result, 750, "proto " .. tostring(v_proto_index) .. " pc " .. tostring(v_pc) .. " invalid constant " .. tostring(v_index) .. " for " .. v_context);
+    end;
+end;
+local function v_validate_jump_target(v_result, v_proto_index, v_pc, v_code_size_value, v_offset, v_context)
+    local v_target = v_pc + 1 + v_offset;
+    if v_target < 0 or v_target > v_code_size_value then
+        v_validation_add(v_result, 750, "proto " .. tostring(v_proto_index) .. " pc " .. tostring(v_pc) .. " invalid jump target " .. tostring(v_target) .. " for " .. v_context);
+    end;
+end;
+local function v_validate_bytecode_structure(v_target, v_options, v_encoding)
+    local v_result = {
+        ok = true,
+        score = 0,
+        error_count = 0,
+        errors = {}
+    };
+    if type(v_options) == "table" and v_options.strict_structure_validation == false then
+        return v_result;
+    end;
+    local v_bytecode_ok, v_bytecode = pcall(v_get_bytecode_for_validation, v_target);
+    if not v_bytecode_ok then
+        v_result.ok = false;
+        v_validation_add(v_result, 10000, tostring(v_bytecode));
+        return v_result;
+    end;
+    if type(v_bytecode) == "string" and string.byte(v_bytecode, 1, 1) == 0 then
+        return v_result;
+    end;
+    local v_previous_encoding = current_decompiler_context.active_opcode_encoding;
+    current_decompiler_context.active_opcode_encoding = v_encoding;
+    local v_parse_ok, v_root, v_protos = pcall(deserialize_luau_bytecode, v_bytecode);
+    current_decompiler_context.active_opcode_encoding = v_previous_encoding;
+    if not v_parse_ok then
+        v_result.ok = false;
+        v_validation_add(v_result, 10000, tostring(v_root));
+        return v_result;
+    end;
+    local v_seen = {};
+    local function v_walk_proto(v_proto, v_proto_index)
+        if type(v_proto) ~= "table" or v_seen[v_proto] then
+            return;
+        end;
+        v_seen[v_proto] = true;
+        local v_code = v_proto.code or {};
+        local v_constants = v_proto.constants or {};
+        local v_size = v_code_size(v_code);
+        local v_pc = 0;
+        while v_pc < v_size do
+            local v_inst = v_code[v_pc];
+            if type(v_inst) ~= "number" then
+                v_validation_add(v_result, 1000, "proto " .. tostring(v_proto_index) .. " pc " .. tostring(v_pc) .. " missing instruction word");
+                v_pc = v_pc + 1;
+            else
+                local v_opcode = bit32.band(v_inst, 255);
+                local v_def = opcode_def_by_encoded_byte[v_opcode];
+                if not v_def then
+                    local v_reversed = current_decompiler_context.decoded_opcode_by_encoded_byte[bit32.band(v_opcode, 255)];
+                    v_validation_add(v_result, 2000, "proto " .. tostring(v_proto_index) .. " pc " .. tostring(v_pc) .. " unknown opcode 0x" .. tostring(HEX_BYTE[v_opcode]) .. " reversed=" .. tostring(v_reversed));
+                    v_pc = v_pc + 1;
+                else
+                    local v_aux = nil;
+                    if v_def.aux then
+                        v_aux = v_code[v_pc + 1];
+                        if type(v_aux) ~= "number" then
+                            v_validation_add(v_result, 2000, "proto " .. tostring(v_proto_index) .. " pc " .. tostring(v_pc) .. " missing aux for " .. tostring(v_def.opname));
+                        end;
+                    end;
+                    local v_d = v_signed_u16(bit32.band(bit32.rshift(v_inst, 16), 65535));
+                    local v_e = v_signed_u24(bit32.rshift(v_inst, 8));
+                    if v_def.opname == "LOADK" then
+                        v_validate_constant(v_result, v_proto_index, v_pc, v_constants, bit32.band(bit32.rshift(v_inst, 16), 65535), "LOADK");
+                    elseif v_def.opname == "LOADKX" and type(v_aux) == "number" then
+                        v_validate_constant(v_result, v_proto_index, v_pc, v_constants, v_aux, "LOADKX");
+                    elseif (v_def.opname == "GETGLOBAL" or v_def.opname == "SETGLOBAL" or v_def.opname == "GETTABLEKS" or v_def.opname == "SETTABLEKS" or v_def.opname == "NAMECALL" or v_def.opname == "GETUDATAKS" or v_def.opname == "SETUDATAKS" or v_def.opname == "NAMECALLUDATA") and type(v_aux) == "number" then
+                        v_validate_constant(v_result, v_proto_index, v_pc, v_constants, v_aux, v_def.opname);
+                    elseif v_def.opname == "DUPCLOSURE" then
+                        v_validate_constant(v_result, v_proto_index, v_pc, v_constants, bit32.band(bit32.rshift(v_inst, 16), 65535), "DUPCLOSURE");
+                    elseif v_def.opname == "JUMP" or v_def.opname == "JUMPBACK" or v_def.opname == "FORNPREP" or v_def.opname == "FORNLOOP" or v_def.opname == "FORGLOOP" or v_def.opname == "FORGPREP" or v_def.opname == "FORGPREP_INEXT" or v_def.opname == "FORGPREP_NEXT" or v_def.opname == "DEP_FORGLOOP_INEXT" then
+                        v_validate_jump_target(v_result, v_proto_index, v_pc, v_size, v_d, v_def.opname);
+                    elseif v_def.opname == "JUMPX" then
+                        v_validate_jump_target(v_result, v_proto_index, v_pc, v_size, v_e, v_def.opname);
+                    elseif v_def.opname == "JUMPIF" or v_def.opname == "JUMPIFNOT" or v_def.opname == "JUMPIFEQ" or v_def.opname == "JUMPIFLE" or v_def.opname == "JUMPIFLT" or v_def.opname == "JUMPIFNOTEQ" or v_def.opname == "JUMPIFNOTLE" or v_def.opname == "JUMPIFNOTLT" then
+                        v_validate_jump_target(v_result, v_proto_index, v_pc, v_size, v_d, v_def.opname);
+                    end;
+                    if v_def.aux then
+                        v_pc = v_pc + 2;
+                    else
+                        v_pc = v_pc + 1;
+                    end;
+                end;
+            end;
+        end;
+        for _, v_child in pairs(v_proto.protos or {}) do
+            v_walk_proto(v_child, tostring(v_proto_index) .. ".child");
+        end;
+    end;
+    if v_root then
+        v_walk_proto(v_root, "root");
+    end;
+    if type(v_protos) == "table" then
+        for v_proto_index, v_proto in pairs(v_protos) do
+            v_walk_proto(v_proto, v_proto_index);
+        end;
+    end;
+    if v_result.error_count > 0 then
+        v_result.ok = false;
+    end;
+    return v_result;
+end;
+local function v_validation_summary(v_validation)
+    if not v_validation then
+        return "not-run";
+    elseif v_validation.ok then
+        return "ok";
+    else
+        return "bad(" .. tostring(v_validation.error_count) .. ")";
+    end;
+end;
 local function v_decompile_quality_score(v_output, v_failed_instruction_count)
     local v_score = 0;
     v_score = v_score + (v_failed_instruction_count or 0) * 1000;
@@ -15438,7 +15612,7 @@ local function v_decompile_quality_score(v_output, v_failed_instruction_count)
     end;
     return v_score;
 end;
-local function v_add_decompiler_summary(v_output, v_options, v_encoding, v_score, v_failed_instruction_count)
+local function v_add_decompiler_summary(v_output, v_options, v_encoding, v_score, v_failed_instruction_count, v_structure_validation)
     if type(v_options) == "table" and v_options.show_decompiler_summary == false then
         return v_output;
     end;
@@ -15446,7 +15620,12 @@ local function v_add_decompiler_summary(v_output, v_options, v_encoding, v_score
     local v_corrupted_aux = v_count_plain(v_output, "Corrupted aux");
     local v_nil_fallbacks = v_count_plain(v_output, "Failed to evaluate expression, replaced with nil");
     local v_reused = v_count_plain(v_output, "Expression was reused");
-    local v_header = "-- Decompiler diagnostics: encoding=" .. tostring(v_encoding) .. ", score=" .. tostring(v_score) .. ", unknown_opcodes=" .. tostring(v_unknown) .. ", corrupted_aux=" .. tostring(v_corrupted_aux) .. ", nil_fallbacks=" .. tostring(v_nil_fallbacks) .. ", reused_expressions=" .. tostring(v_reused) .. "\n";
+    local v_header = "-- Decompiler diagnostics: encoding=" .. tostring(v_encoding) .. ", score=" .. tostring(v_score) .. ", structure=" .. v_validation_summary(v_structure_validation) .. ", unknown_opcodes=" .. tostring(v_unknown) .. ", corrupted_aux=" .. tostring(v_corrupted_aux) .. ", nil_fallbacks=" .. tostring(v_nil_fallbacks) .. ", reused_expressions=" .. tostring(v_reused) .. "\n";
+    if v_structure_validation and not v_structure_validation.ok then
+        for _, v_structure_error in ipairs(v_structure_validation.errors) do
+            v_header = v_header .. "-- Structure warning: " .. tostring(v_structure_error) .. "\n";
+        end;
+    end;
     if v_nil_fallbacks > 0 or v_reused > 0 or v_unknown > 0 or v_corrupted_aux > 0 then
         v_header = v_header .. "-- Warning: this output may be semantically incomplete. Review diagnostics before using it.\n";
     end;
@@ -15455,22 +15634,24 @@ end;
 decompile_input = function(protected_decompile_target, protected_decompile_options)
     return run_with_decompiler_lock(function()
         return v_with_strict_types(protected_decompile_options, function()
-            active_opcode_encoding = "vanilla";
+            local vanilla_structure = v_validate_bytecode_structure(protected_decompile_target, protected_decompile_options, "vanilla");
+            local mul_structure = v_validate_bytecode_structure(protected_decompile_target, protected_decompile_options, "mul227");
+            current_decompiler_context.active_opcode_encoding = "vanilla";
             local vanilla_decompile_result = protected_decompile_input(protected_decompile_target, protected_decompile_options);
-            local cached_failed_instruction_count = failed_instruction_count;
-            local local_symbol_245 = v_decompile_quality_score(vanilla_decompile_result, cached_failed_instruction_count);
-            active_opcode_encoding = "mul227";
+            local cached_failed_instruction_count = current_decompiler_context.failed_instruction_count;
+            local local_symbol_245 = v_decompile_quality_score(vanilla_decompile_result, cached_failed_instruction_count) + vanilla_structure.score;
+            current_decompiler_context.active_opcode_encoding = "mul227";
             local mul_encoded_decompile_result = protected_decompile_input(protected_decompile_target, protected_decompile_options);
-            local cached_failed_instruction_count_001 = failed_instruction_count;
-            local condition_value_187 = v_decompile_quality_score(mul_encoded_decompile_result, cached_failed_instruction_count_001);
+            local cached_failed_instruction_count_001 = current_decompiler_context.failed_instruction_count;
+            local condition_value_187 = v_decompile_quality_score(mul_encoded_decompile_result, cached_failed_instruction_count_001) + mul_structure.score;
             if condition_value_187 < local_symbol_245 then
-                return v_add_decompiler_summary(mul_encoded_decompile_result, protected_decompile_options, "mul227", condition_value_187, cached_failed_instruction_count_001);
+                return v_add_decompiler_summary(mul_encoded_decompile_result, protected_decompile_options, "mul227", condition_value_187, cached_failed_instruction_count_001, mul_structure);
             elseif local_symbol_245 < condition_value_187 then
-                return v_add_decompiler_summary(vanilla_decompile_result, protected_decompile_options, "vanilla", local_symbol_245, cached_failed_instruction_count);
+                return v_add_decompiler_summary(vanilla_decompile_result, protected_decompile_options, "vanilla", local_symbol_245, cached_failed_instruction_count, vanilla_structure);
             elseif #mul_encoded_decompile_result < #vanilla_decompile_result then
-                return v_add_decompiler_summary(mul_encoded_decompile_result, protected_decompile_options, "mul227", condition_value_187, cached_failed_instruction_count_001);
+                return v_add_decompiler_summary(mul_encoded_decompile_result, protected_decompile_options, "mul227", condition_value_187, cached_failed_instruction_count_001, mul_structure);
             else
-                return v_add_decompiler_summary(vanilla_decompile_result, protected_decompile_options, "vanilla", local_symbol_245, cached_failed_instruction_count);
+                return v_add_decompiler_summary(vanilla_decompile_result, protected_decompile_options, "vanilla", local_symbol_245, cached_failed_instruction_count, vanilla_structure);
             end;
         end);
     end);
@@ -15498,14 +15679,16 @@ return {
     disassemble = function(param_958, param_959)
         return run_with_decompiler_lock(function()
             return v_with_strict_types(param_959, function()
-                active_opcode_encoding = "vanilla";
+                local vanilla_structure = v_validate_bytecode_structure(param_958, param_959, "vanilla");
+                local mul_structure = v_validate_bytecode_structure(param_958, param_959, "mul227");
+                current_decompiler_context.active_opcode_encoding = "vanilla";
                 local local_symbol_246 = protected_disassemble_input(param_958, param_959);
-                local cached_failed_instruction_count_002 = failed_instruction_count;
-                local local_symbol_247 = v_decompile_quality_score(local_symbol_246, cached_failed_instruction_count_002);
-                active_opcode_encoding = "mul227";
+                local cached_failed_instruction_count_002 = current_decompiler_context.failed_instruction_count;
+                local local_symbol_247 = v_decompile_quality_score(local_symbol_246, cached_failed_instruction_count_002) + vanilla_structure.score;
+                current_decompiler_context.active_opcode_encoding = "mul227";
                 local local_symbol_248 = protected_disassemble_input(param_958, param_959);
-                local cached_failed_instruction_count_003 = failed_instruction_count;
-                local condition_value_188 = v_decompile_quality_score(local_symbol_248, cached_failed_instruction_count_003);
+                local cached_failed_instruction_count_003 = current_decompiler_context.failed_instruction_count;
+                local condition_value_188 = v_decompile_quality_score(local_symbol_248, cached_failed_instruction_count_003) + mul_structure.score;
                 if condition_value_188 < local_symbol_247 then
                     return local_symbol_248;
                 elseif local_symbol_247 < condition_value_188 then

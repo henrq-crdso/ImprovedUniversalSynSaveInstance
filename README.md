@@ -257,8 +257,7 @@ local Options = { decomptype = "custom", DecompileTimeout = 30 }
 ## Credits
 
 - **Original Project:** [luau/UniversalSynSaveInstance](https://github.com/luau/UniversalSynSaveInstance) — The foundation of this revival tool.
-- **Decompiler Support:** Special thanks to **plugiant5** for providing essential decompiler logic.
-- **Konstant Decompiler:** Credits to **daily3014** and **XoifaiI** for the Base64 implementation, and the Konstant team.
+- **Konstant Decompiler:** Special thanks to **plugiant5** for providing essential decompiler logic.
 - **Fork Maintainer:** henrq-crdso — Focused on performance optimization, API refinement, and executor compatibility.
 
 ---

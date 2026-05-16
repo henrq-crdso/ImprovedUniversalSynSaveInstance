@@ -2701,8 +2701,8 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 			local s, bytecode = getbytecode(script)
 
 			if s and bytecode and bytecode ~= "" then
-				if string.byte(bytecode, 1, 1) == 0 then -- in scripts that failed to compile, byte 1, the version header (which is 6 is all other cases) is replaced with a null byte. Look a konstant source code for proof.
-					return("-- The script has a compilation error:\n-- "..string.sub(bytecode, 2)) -- the formatted string for a compilation error. String.sub is to cut off the heading byte.
+				if string.byte(bytecode, 1, 1) == 0 then 
+					return("-- The script has a compilation error:\n-- "..string.sub(bytecode, 2))
 				end
 			end		
 		end	
@@ -2719,11 +2719,11 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 	end
 	if getscriptbytecode then
 		if (decompile == nil and OPTIONS.decomptype == "") or OPTIONS.decomptype == "custom" then
-			if __DEBUG_MODE then __DEBUG_MODE("Attempting to load Konstant Decompiler. If there is an error/crash after this, set the option decomptype to any string other than custom") end
-			local url = "https://raw.githubusercontent.com/henrq-crdso/ImprovedUniversalSynSaveInstance/refs/heads/main/Dependencies/KonstantV2.1.luau"
-			local konstant = loadstring(game:HttpGet(url, true))()
-			GLOBAL_ENV.decompile = konstant.decompile
-			if __DEBUG_MODE then __DEBUG_MODE("Konstant Decompiler loaded") end
+			if __DEBUG_MODE then __DEBUG_MODE("Attempting to load Decripton. If there is an error/crash after this, set the option decomptype to any string other than custom") end
+			local url = "https://raw.githubusercontent.com/henrq-crdso/ImprovedUniversalSynSaveInstance/refs/heads/main/Dependencies/Decripton.luau"
+			local decripton = loadstring(game:HttpGet(url, true))()
+			GLOBAL_ENV.decompile = decripton.decompile
+			if __DEBUG_MODE then __DEBUG_MODE("Decripton Decompiler loaded") end
 		end
 	end
 	do
@@ -3494,7 +3494,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 													value = ldecompile(instance)
 												end
 												
-												local DecompilerFailedMessages = {"Failed to decompile", "Something went wrong when decompiling", "Decompilation failed", "Update the decompiling script", "Check decompiling options for errors", "Failed to generate AST"} -- Some from Konstant, Oracle and USSI. If you have anymore decompiler errors please submit them.
+												local DecompilerFailedMessages = {"Failed to decompile", "Something went wrong when decompiling", "Decompilation failed", "Update the decompiling script", "Check decompiling options for errors", "Failed to generate AST"} 
 												if OPTIONS.SaveBytecodeIfDecompilerFails and SaveBytecode and not IsCompilationError then
 													for _, v in DecompilerFailedMessages do
 														if string.find(value, v, 1, true) then

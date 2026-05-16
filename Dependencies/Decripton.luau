@@ -76,9 +76,9 @@ local DEFAULT_DECOMPILER_OPTIONS = {
     mark_reads_and_writes = false,
     minify_if_statements = true,
     assume_if_else = true,
-    prefix_error = "KONSTANTERROR",
-    prefix_warning = "KONSTANTWARNING",
-    prefix_information = "KONSTANTINFO"
+    prefix_error = "ERROR",
+    prefix_warning = "WARNING",
+    prefix_information = "INFO"
 };
 local task_wait_ref = if task then task.wait else nil;
 local CONSTANT_TYPE_NAMES = {
@@ -3927,7 +3927,7 @@ local function disassemble_bytecode(param_134)
         end;
     end;
     format_import_path(buffer_value_021, "");
-    table.insert(table_value_012, 1, (("-- Disassembled with Konstant V%*'s disassembler, made by plusgiant5\n\t\t-- Disassembled on %*\n\t\t-- Luau version %*%*\n\t\t-- Time taken: %* seconds\n\n"):format("2.1", os.date("%Y-%m-%d %H:%M:%S"), buffer_value_023, if buffer_value_024 then (", Types version %*"):format(buffer_value_024) else "", (string.format("%.6f", clock_ref() - buffer_value_025)))));
+    table.insert(table_value_012, 1, (("-- Disassembled with Decripton V%*'s\n\t\t-- Disassembled on %*\n\t\t-- Luau version %*%*\n\t\t-- Time taken: %* seconds\n\n"):format("2.1", os.date("%Y-%m-%d %H:%M:%S"), buffer_value_023, if buffer_value_024 then (", Types version %*"):format(buffer_value_024) else "", (string.format("%.6f", clock_ref() - buffer_value_025)))));
     string_value_011 = "";
     local buffer_value_078 = 0;
     for _, item_010 in ipairs(table_value_012) do
@@ -4001,7 +4001,7 @@ local function decompile_bytecode(param_224, param_225)
     end;
     previous_information_prefix = cached_prefix_information;
     if string.byte(param_224, 1, 1) == 0 then
-        local string_value_017 = ("-- Decompiled with Konstant%*, a fast Luau decompiler made in Luau by plusgiant5\n"):format("2.1");
+        local string_value_017 = ("-- Decompiled with Decripton%* made by henrq-crdso\n"):format("2.1");
         if type(param_224) ~= "string" and getscripthash_ref then
             string_value_017 = string_value_017 .. ("-- Script hash: %*\n"):format((string.upper(getscripthash_ref(param_224))));
         end;
@@ -5109,7 +5109,7 @@ local function decompile_bytecode(param_224, param_225)
             end;
             local function helper_function_034(param_341, param_342)
                 if not param_342 then
-                    error("Bad Konstant");
+                    error("Bad Decripton");
                 end;
                 if param_342.type == 3 then
                     local cached_value_002 = param_342.value;
@@ -13959,7 +13959,7 @@ local function decompile_bytecode(param_224, param_225)
         end;
         local_symbol_009:end_benchmark("Smart Naming");
         local_symbol_009:start_benchmark("Global AST To String");
-        local string_value_071 = ("-- Decompiled with Konstant V%*, a fast Luau decompiler made in Luau by plusgiant5\n"):format("2.1");
+        local string_value_071 = ("-- Decompiled with Decripton V%*, made by henrq-crdso\n"):format("2.1");
         if type(param_224) ~= "string" and getscripthash_ref then
             string_value_071 = string_value_071 .. ("-- Script hash: %*\n"):format((string.upper(getscripthash_ref(param_224))));
         end;

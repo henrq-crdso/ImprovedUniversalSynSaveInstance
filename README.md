@@ -56,7 +56,6 @@ synsaveinstance(Options)
 | `Decompile` | `true` | Attempt script decompilation. |
 | `decomptype` | `""` | Set to `"custom"` to use Decripton. |
 | `SaveBytecodeIfDecompilerFails` | `false` | Fallback to bytecode if decompiler fails. |
-| `BoostFPS` | `false` | Reduce visual load during export. |
 | `IgnoreSpecialStrings` | `dynamic` | Skip problematic NotScriptable strings. |
 | `FilePath` | `false` | Custom output filename (no extension). |
 

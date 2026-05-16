@@ -15,7 +15,7 @@ This fork significantly extends the original project with advanced features and 
 |---|---|
 | **SaveAsAttributes** | Saves non-serializable properties as Roblox Attributes, making them visible in Studio. |
 | **Crashlog** | Writes a per-step log to disk using `appendfile` for easier debugging. |
-| **Konstant Integration** | Use decomptype = "custom" if your executor don't have an native decompiler. |
+| **Decripton Decompiler** | Use decomptype = "custom" if your executor don't have an native decompiler. |
 | **Bytecode Fallback** | `SaveBytecodeIfDecompilerFails` ensures script data is preserved as raw bytecode when decompilation fails. |
 | **Custom Mode** | The `mode` option now accepts a table of service names for precise control. |
 
@@ -54,7 +54,7 @@ synsaveinstance(Options)
 | `SaveAsAttributes` | `false` | Save non-saveable properties as Attributes. |
 | `Crashlog` | `false` | Write detailed step-by-step logs to disk. |
 | `Decompile` | `true` | Attempt script decompilation. |
-| `decomptype` | `""` | Set to `"custom"` to use Konstant Decompiler. |
+| `decomptype` | `""` | Set to `"custom"` to use Decripton. |
 | `SaveBytecodeIfDecompilerFails` | `false` | Fallback to bytecode if decompiler fails. |
 | `BoostFPS` | `false` | Reduce visual load during export. |
 | `IgnoreSpecialStrings` | `dynamic` | Skip problematic NotScriptable strings. |
@@ -75,7 +75,6 @@ Convenient shortcuts that resolve before options:
 ## Credits
 
 - **Original Project:** [luau/UniversalSynSaveInstance](https://github.com/luau/UniversalSynSaveInstance) — The foundation of this revival tool.
-- **Konstant Decompiler:** Special thanks to **plugiant5** for providing essential decompiler logic.
 - **Fork Maintainer:** henrq-crdso — Focused on performance optimization, API refinement, and executor compatibility.
 
 ---
